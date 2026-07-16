@@ -1,0 +1,17 @@
+connector_key: indeed
+selectors:
+  resume_upload: "input[type='file']"
+  cover_letter_upload: "input[type='file'][data-testid*='cover']"
+  email_field: "textarea[name*='message'], textarea"
+  text_fields:
+    name: "input[name*='name']"
+    phone: "input[name*='phone']"
+  validation_error: "[data-testid*='error'], .ia-Error"
+  submit_button: "button[type='submit']"
+captcha:
+  iframe_selectors:
+    - "iframe[src*='recaptcha']"
+    - "iframe[title*='challenge']"
+  text_indicators:
+    - "captcha"
+    - "security check"

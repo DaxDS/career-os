@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0.0",
+  "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/provincial-nominees.html",
+  "last_verified": "2025-07-05",
+  "description": "Provincial Nominee Program in-demand NOC lists by province/stream. Sample entries — expand per official provincial publications.",
+  "disclaimer": "Informational only. PNP criteria change frequently. Verify against each province's current demand lists.",
+  "streams": [
+    {
+      "id": "bc_pnp_tech",
+      "province": "BC",
+      "label": "BC PNP Tech",
+      "source_url": "https://www.welcomebc.ca/Immigrate-to-B-C/BC-PNP-Tech",
+      "noc_codes": ["21211", "21220", "21221", "21222", "21223", "21230", "21231", "21232", "21233", "21234", "21311", "22220", "22221", "22222"],
+      "min_teer": 0,
+      "max_teer": 2,
+      "notes": "29 eligible tech occupations; employer must be in BC tech sector."
+    },
+    {
+      "id": "oinp_tech",
+      "province": "ON",
+      "label": "OINP Human Capital — Tech draws",
+      "source_url": "https://www.ontario.ca/page/oinp-express-entry-skilled-trades-stream",
+      "noc_codes": ["21211", "21220", "21221", "21222", "21223", "21230", "21231", "21232", "21233", "21234", "21311"],
+      "min_teer": 0,
+      "max_teer": 2
+    },
+    {
+      "id": "oinp_in_demand_skills",
+      "province": "ON",
+      "label": "OINP In-Demand Skills",
+      "source_url": "https://www.ontario.ca/page/oinp-employer-job-offer-foreign-worker-stream",
+      "noc_codes": ["33102", "65200", "65201", "65202", "65203", "65204", "65205", "65210", "65211", "65220", "65229", "65310", "65311", "65312", "75110", "75119", "84120", "85100", "85101", "85102", "85103", "85104", "85110", "85111", "85120", "85121", "85122", "85123", "85130"],
+      "min_teer": 4,
+      "max_teer": 5,
+      "notes": "Lower-skilled in-demand occupations in specific sectors."
+    },
+    {
+      "id": "aaip_tech",
+      "province": "AB",
+      "label": "AAIP Accelerated Tech Pathway",
+      "source_url": "https://www.alberta.ca/alberta-advantage-immigration-program",
+      "noc_codes": ["20012", "21211", "21220", "21221", "21222", "21223", "21230", "21231", "21232", "21233", "21234", "21311", "22220", "22221", "22222"],
+      "min_teer": 0,
+      "max_teer": 2
+    },
+    {
+      "id": "sinp_tech",
+      "province": "SK",
+      "label": "SINP Tech Talent Pathway",
+      "source_url": "https://www.saskatchewan.ca/residents/moving-to-saskatchewan/live-in-saskatchewan/by-immigrating/saskatchewan-immigrant-nominee-program",
+      "noc_codes": ["21211", "21220", "21221", "21222", "21223", "21230", "21231", "21232", "21233", "21234", "21311"],
+      "min_teer": 0,
+      "max_teer": 2
+    },
+    {
+      "id": "nsnp_physician",
+      "province": "NS",
+      "label": "NSNP Physician Stream",
+      "source_url": "https://novascotiaimmigration.com/move-here/streams/",
+      "noc_codes": ["31100", "31101", "31102"],
+      "min_teer": 1,
+      "max_teer": 1
+    },
+    {
+      "id": "nsnp_in_demand",
+      "province": "NS",
+      "label": "NSNP Occupations in Demand",
+      "source_url": "https://novascotiaimmigration.com/move-here/streams/nsnp-skilled-worker/",
+      "noc_codes": ["21231", "21220", "31301", "32101", "72106", "75110"],
+      "min_teer": 1,
+      "max_teer": 3,
+      "notes": "Sample in-demand list — verify current NS publication."
+    },
+    {
+      "id": "peipnp_workforce",
+      "province": "PE",
+      "label": "PEI PNP Workforce",
+      "source_url": "https://www.princeedwardisland.ca/en/information/office-of-immigration/pei-provincial-nominee-program",
+      "noc_codes": ["21231", "31301", "63200", "72106"],
+      "min_teer": 2,
+      "max_teer": 3
+    },
+    {
+      "id": "aip",
+      "province": "ATL",
+      "label": "Atlantic Immigration Program",
+      "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/atlantic-immigration.html",
+      "provinces": ["NB", "NL", "NS", "PE"],
+      "noc_codes": [],
+      "min_teer": 0,
+      "max_teer": 4,
+      "requires_designated_employer": true,
+      "notes": "TEER 0–4 with job offer from designated Atlantic employer. Not NOC-list restricted."
+    }
+  ]
+}

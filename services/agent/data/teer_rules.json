@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/eligibility/find-national-occupation-code.html",
+  "last_verified": "2025-07-05",
+  "description": "TEER (Training, Education, Experience and Responsibilities) category definitions for NOC 2021.",
+  "teer_levels": [
+    {
+      "teer": 0,
+      "label": "Management occupations",
+      "description": "Management occupations across all industries and sectors.",
+      "ee_fsw_eligible": true,
+      "ee_cec_note": "Management experience may qualify for CEC if TEER 0-3 in Canada."
+    },
+    {
+      "teer": 1,
+      "label": "Occupations usually requiring a university degree",
+      "description": "Completion of a university degree (bachelor's, master's or doctorate) or several years of experience in a related occupation from TEER 2.",
+      "ee_fsw_eligible": true
+    },
+    {
+      "teer": 2,
+      "label": "Occupations usually requiring college diploma or apprenticeship",
+      "description": "Completion of a post-secondary education program of two to three years at community college, CEGEP, or apprenticeship training of two to five years; or occupations with supervisory or significant safety responsibilities.",
+      "ee_fsw_eligible": true
+    },
+    {
+      "teer": 3,
+      "label": "Occupations usually requiring college, apprenticeship or >6 months training",
+      "description": "Completion of post-secondary program of less than two years, apprenticeship less than two years, or more than six months of on-the-job training.",
+      "ee_fsw_eligible": true
+    },
+    {
+      "teer": 4,
+      "label": "Occupations usually requiring secondary school and/or occupation-specific training",
+      "description": "Completion of secondary school, or several weeks of on-the-job training with some secondary school education.",
+      "ee_fsw_eligible": false,
+      "note": "Not eligible for FSW; may qualify for some PNPs or pilot programs."
+    },
+    {
+      "teer": 5,
+      "label": "Occupations usually requiring short-term work demonstration",
+      "description": "Short work demonstration and no formal educational requirements.",
+      "ee_fsw_eligible": false,
+      "note": "Not eligible for FSW Express Entry."
+    }
+  ],
+  "ee_teer_eligible_range": [0, 1, 2, 3]
+}

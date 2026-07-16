@@ -1,0 +1,15 @@
+connector_key: workpei
+selectors:
+  resume_upload: "input[type='file']"
+  cover_letter_upload: "input[type='file'][name*='cover'], input[type='file']:nth-of-type(2)"
+  email_field: "textarea, input[type='email']"
+  text_fields:
+    name: "input[name*='name']"
+    phone: "input[type='tel']"
+  validation_error: ".error, .alert-danger"
+  submit_button: "button[type='submit']"
+captcha:
+  iframe_selectors:
+    - "iframe[src*='recaptcha']"
+  text_indicators:
+    - "captcha"

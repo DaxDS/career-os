@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "source_url": "https://www.jobbank.gc.ca/trend-analysis",
+  "last_verified": "2025-07-05",
+  "description": "Job Bank median hourly wages by NOC unit group and region. Sample data — refresh from official Job Bank wage reports.",
+  "currency": "CAD",
+  "wage_unit": "hourly",
+  "entries": [
+    { "noc_code": "21231", "region": "ON", "region_label": "Ontario", "median_hourly": 48.08, "low_hourly": 28.85, "high_hourly": 67.31 },
+    { "noc_code": "21231", "region": "BC", "region_label": "British Columbia", "median_hourly": 45.67, "low_hourly": 27.50, "high_hourly": 65.00 },
+    { "noc_code": "21231", "region": "AB", "region_label": "Alberta", "median_hourly": 44.23, "low_hourly": 26.44, "high_hourly": 62.50 },
+    { "noc_code": "21231", "region": "NS", "region_label": "Nova Scotia", "median_hourly": 38.46, "low_hourly": 23.08, "high_hourly": 55.29 },
+    { "noc_code": "21231", "region": "QC", "region_label": "Quebec", "median_hourly": 42.31, "low_hourly": 25.00, "high_hourly": 58.65 },
+    { "noc_code": "21220", "region": "ON", "region_label": "Ontario", "median_hourly": 46.15, "low_hourly": 28.00, "high_hourly": 63.46 },
+    { "noc_code": "21220", "region": "NS", "region_label": "Nova Scotia", "median_hourly": 36.54, "low_hourly": 22.00, "high_hourly": 52.88 },
+    { "noc_code": "21232", "region": "ON", "region_label": "Ontario", "median_hourly": 42.31, "low_hourly": 25.00, "high_hourly": 58.65 },
+    { "noc_code": "21232", "region": "BC", "region_label": "British Columbia", "median_hourly": 41.35, "low_hourly": 24.52, "high_hourly": 57.69 },
+    { "noc_code": "31301", "region": "ON", "region_label": "Ontario", "median_hourly": 38.46, "low_hourly": 28.85, "high_hourly": 48.08 },
+    { "noc_code": "31301", "region": "NS", "region_label": "Nova Scotia", "median_hourly": 36.06, "low_hourly": 27.00, "high_hourly": 44.23 },
+    { "noc_code": "72106", "region": "AB", "region_label": "Alberta", "median_hourly": 32.69, "low_hourly": 22.00, "high_hourly": 42.31 },
+    { "noc_code": "72106", "region": "ON", "region_label": "Ontario", "median_hourly": 28.85, "low_hourly": 20.00, "high_hourly": 38.46 },
+    { "noc_code": "75110", "region": "ON", "region_label": "Ontario", "median_hourly": 24.04, "low_hourly": 18.00, "high_hourly": 32.69 },
+    { "noc_code": "75110", "region": "AB", "region_label": "Alberta", "median_hourly": 26.44, "low_hourly": 19.23, "high_hourly": 34.62 },
+    { "noc_code": "63200", "region": "ON", "region_label": "Ontario", "median_hourly": 18.00, "low_hourly": 15.50, "high_hourly": 24.04 },
+    { "noc_code": "10010", "region": "ON", "region_label": "Ontario", "median_hourly": 57.69, "low_hourly": 38.46, "high_hourly": 86.54 },
+    { "noc_code": "21300", "region": "ON", "region_label": "Ontario", "median_hourly": 48.08, "low_hourly": 32.69, "high_hourly": 67.31 },
+    { "noc_code": "21300", "region": "BC", "region_label": "British Columbia", "median_hourly": 46.15, "low_hourly": 31.25, "high_hourly": 65.38 }
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "common": {
+    "appName": "CareerOS",
+    "tagline": "Le copilote de recherche d'emploi conçu pour le Canada",
+    "continue": "Continuer",
+    "back": "Retour",
+    "save": "Enregistrer",
+    "loading": "Chargement…"
+  },
+  "auth": {
+    "login": "Connexion",
+    "signup": "Créer un compte",
+    "email": "Courriel",
+    "password": "Mot de passe",
+    "fullName": "Nom complet",
+    "continueWithGoogle": "Continuer avec Google",
+    "noAccount": "Pas de compte?",
+    "hasAccount": "Déjà un compte?",
+    "loginTitle": "Connexion à CareerOS",
+    "loginDescription": "Vos données restent au Canada.",
+    "signupTitle": "Créer votre compte CareerOS",
+    "signupDescription": "Conçu pour le marché du travail canadien.",
+    "signingIn": "Connexion…",
+    "creatingAccount": "Création du compte…",
+    "dev": {
+      "hint": "Compte démo (prérempli) — profil PTPD avec 5 correspondances",
+      "orEmail": "Ou",
+      "notConfigured": "Supabase n'est pas configuré. Ajoutez NEXT_PUBLIC_SUPABASE_URL et NEXT_PUBLIC_SUPABASE_ANON_KEY dans .env.local (local) ou les variables Vercel (production).",
+      "confirmEmail": "Vérifiez votre courriel pour confirmer le compte, puis continuez l'intégration. Si la confirmation est désactivée dans Supabase, connectez-vous directement."
+    }
+  },
+  "billing": {
+    "title": "Forfait et facturation",
+    "description": "Gratuit ou Pro (24 $ CAD/mois). Les limites se réinitialisent chaque mois.",
+    "currentPlan": "Forfait actuel",
+    "freePlan": "Gratuit",
+    "proPlan": "Pro",
+    "pricePerMonth": "{price} $ CAD/mois",
+    "renewalDate": "Renouvellement le {date}",
+    "noRenewal": "Aucun abonnement actif",
+    "statusActive": "Actif",
+    "statusPastDue": "Paiement en retard",
+    "statusCanceled": "Annulé",
+    "tailoredUsage": "Candidatures personnalisées ce mois-ci",
+    "tailoredUnlimited": "Illimité",
+    "dailySendCap": "Limite d'envoi quotidienne",
+    "sendsPerDay": "{count} envois/jour",
+    "upgradeToPro": "Passer à Pro — 24 $ CAD/mois",
+    "manageBilling": "Gérer la facturation",
+    "redirecting": "Redirection…",
+    "checkoutSuccess": "Bienvenue sur Pro! Votre forfait sera mis à jour sous peu.",
+    "checkoutCancel": "Paiement annulé — aucun frais n'a été facturé.",
+    "stripeNotConfigured": "Paiement pas encore actif. Configuration du mode test en cours.",
+    "stripeTestModeHint": "Mode test — carte 4242 4242 4242 4242. Aucun frais réel.",
+    "checkoutFailed": "Échec du paiement. Réessayez ou contactez le support.",
+    "noBillingAccount": "Abonnez-vous à Pro d'abord pour gérer la facturation.",
+    "limitReached": "Le forfait gratuit inclut {limit} candidatures personnalisées par mois.",
+    "upgradeCta": "Passez à Pro pour un nombre illimité de personnalisations.",
+    "upgradeAtSettings": "Mettez à niveau dans Paramètres → Forfait et facturation"
+  },
+  "landing": {
+    "hero": {
+      "title": "La seule plateforme d'emploi qui évalue chaque offre pour votre parcours Entrée express.",
+      "subtitle": "Pipeline IA qui adapte votre CV, rédige votre lettre de motivation et soumet automatiquement — avec score RP/CNP canadien sur chaque emploi.",
+      "ctaDemo": "Essayer la démo",
+      "ctaPrimary": "Commencer gratuitement",
+      "ctaSecondary": "Rejoindre la liste d'attente",
+      "ctaPlans": "Voir les forfaits",
+      "tagline": "Le seul outil qui fait une candidature autonome de qualité, pas du spam en volume."
+    },
+    "scoreDemo": {
+      "title": "Ingénieur IA senior",
+      "meta": "Bell Canada · Toronto, ON",
+      "prBadge": "🇨🇦 92 % adéquation RP",
+      "overallScore": "87 %",
+      "overallLabel": "Correspondance globale",
+      "atsScore": "84 %",
+      "atsLabel": "Score ATS",
+      "nocCode": "CNP 21231",
+      "nocLabel": "Admissible Entrée express",
+      "caption": "Chaque emploi importé est évalué ainsi — adéquation RP, code CNP et correspondance ATS — avant qu'un document ne soit généré."
+    },
+    "differentiators": {
+      "reviewQueue": {
+        "title": "Rien ne s'envoie automatiquement",
+        "body": "Les CV et lettres personnalisés arrivent dans votre file de révision. Vous approuvez ou modifiez chaque envoi. Une limite quotidienne contrôle le nombre de candidatures qui quittent votre compte par jour."
+      },
+      "pathwayScoring": {
+        "title": "Indicateurs de parcours sur chaque correspondance",
+        "body": "Chaque emploi reçoit un code CNP, un niveau FÉER, un salaire comparé à la médiane régionale, et des indicateurs pour Entrée express, les volets provinciaux et le programme de l'Atlantique — calculés selon votre expérience et votre statut de permis."
+      },
+      "permitFilters": {
+        "title": "Conçu pour les titulaires de permis de travail",
+        "body": "Vous indiquez votre type de permis et sa date d'expiration lors de l'intégration. Les emplois exigeant une EIMT, une cote de sécurité ou la citoyenneté que vous n'avez pas sont filtrés avant d'apparaître dans votre fil."
+      }
+    },
+    "howItWorks": {
+      "title": "Comment ça fonctionne",
+      "subtitle": "Quatre étapes, de la découverte à l'envoi — vous gardez le contrôle à la fin.",
+      "steps": {
+        "discover": {
+          "title": "Découvrir",
+          "body": "Lancez la découverte sur la Guiche-Emplois et d'autres sources. Les emplois qui échouent à vos filtres d'autorisation de travail ou de permis n'entrent jamais dans votre fil."
+        },
+        "score": {
+          "title": "Évaluer pour votre parcours",
+          "body": "Chaque correspondance affiche CNP/FÉER, salaire vs médiane régionale, et indicateurs de parcours (EE, PNP, PIA) d'après les critères publiés et votre profil."
+        },
+        "tailor": {
+          "title": "Personnaliser",
+          "body": "Générez un CV et une lettre au format canadien pour un poste. Pas de photo, pas de NAS — les règles de formatage sont appliquées automatiquement."
+        },
+        "approve": {
+          "title": "Vous approuvez",
+          "body": "Révisez le brouillon dans votre file. Ce n'est qu'après votre approbation qu'une candidature avance vers l'envoi — selon la limite quotidienne de votre forfait."
+        }
+      }
+    },
+    "jobExample": {
+      "title": "À quoi ressemble une correspondance",
+      "subtitle": "Les mêmes badges que dans le fil d'emplois — CNP, FÉER, salaire vs médiane, et indicateurs de parcours.",
+      "label": "Exemple de correspondance",
+      "matchScore": "score de correspondance"
+    },
+    "pricing": {
+      "title": "Gratuit pour commencer, Pro pour plus d'envois",
+      "subtitle": "Les deux forfaits utilisent la même file de révision. Pro augmente la limite d'envoi quotidienne et supprime la limite mensuelle de personnalisation.",
+      "freePrice": "0 $",
+      "proPrice": "{price} $ CAD",
+      "perMonth": "/ mois",
+      "freeSends": "{count} envois de candidature par jour",
+      "freeTailored": "{count} candidatures personnalisées par mois",
+      "reviewQueue": "File de révision humaine pour chaque envoi",
+      "proSends": "{count} envois de candidature par jour",
+      "proTailored": "Candidatures personnalisées illimitées",
+      "proPathway": "Actualisation du rapport de parcours",
+      "getStarted": "Commencer gratuitement",
+      "viewPricing": "Voir tous les tarifs"
+    }
+  },
+  "marketing": {
+    "nav": {
+      "pricing": "Tarifs",
+      "privacy": "Confidentialité",
+      "demo": "Essayer la démo",
+      "login": "Connexion",
+      "signup": "S'inscrire"
+    },
+    "footer": {
+      "tagline": "Recherche d'emploi au Canada avec correspondance CNP, indicateurs de parcours et file de révision humaine avant tout envoi.",
+      "hosting": "Données hébergées au Canada (ca-central-1)",
+      "product": "Produit",
+      "legal": "Mentions légales",
+      "privacy": "Confidentialité (LPRPDE)",
+      "terms": "Conditions d'utilisation"
+    }
+  },
+  "waitlist": {
+    "title": "Rejoindre la liste d'attente",
+    "description": "Accès anticipé pour les étudiants internationaux et les nouveaux arrivants visant des emplois au Canada.",
+    "emailLabel": "Courriel",
+    "emailPlaceholder": "vous@courriel.com",
+    "provinceLabel": "Province ou territoire",
+    "provinceOptional": "Choisir une province (facultatif)",
+    "submit": "Rejoindre la liste",
+    "successTitle": "Vous êtes inscrit!",
+    "successMessage": "Nous vous écrirons lorsque l'accès anticipé ouvrira dans votre région.",
+    "errorGeneric": "Une erreur s'est produite. Veuillez réessayer.",
+    "provinces": {
+      "AB": "Alberta",
+      "BC": "Colombie-Britannique",
+      "MB": "Manitoba",
+      "NB": "Nouveau-Brunswick",
+      "NL": "Terre-Neuve-et-Labrador",
+      "NS": "Nouvelle-Écosse",
+      "NT": "Territoires du Nord-Ouest",
+      "NU": "Nunavut",
+      "ON": "Ontario",
+      "PE": "Île-du-Prince-Édouard",
+      "QC": "Québec",
+      "SK": "Saskatchewan",
+      "YT": "Yukon"
+    }
+  },
+  "pricing": {
+    "title": "Tarification simple en CAD",
+    "subtitle": "Recherche d'emploi de qualité — pas de spam, pas de bannissement LinkedIn.",
+    "mostPopular": "Le plus populaire",
+    "getStarted": "Commencer",
+    "upgradeToPro": "Passer à Pro",
+    "signupForPro": "S'inscrire pour Pro",
+    "loginHint": "Connectez-vous d'abord si vous avez déjà un compte.",
+    "checkoutCancelled": "Paiement annulé — aucun frais n'a été facturé."
+  },
+  "settings": {
+    "title": "Paramètres",
+    "activityTitle": "Journal d'activité",
+    "activityDescription": "Toutes les actions de l'agent sont enregistrées ici.",
+    "viewActivity": "Voir l'activité",
+    "accountTitle": "Compte",
+    "accountDescription": "LPRPDE : exportez ou supprimez vos données à tout moment.",
+    "exportData": "Exporter mes données",
+    "deleteAccount": "Supprimer le compte",
+    "signOut": "Déconnexion",
+    "themeTitle": "Apparence",
+    "themeDescription": "Choisissez clair, sombre ou le réglage système.",
+    "theme": {
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    }
+  },
+  "onboarding": {
+    "title": "Configurez votre profil",
+    "steps": {
+      "resume": "Téléverser le CV",
+      "workHistory": "Expérience professionnelle",
+      "nocMapping": "Correspondance CNP",
+      "permitStatus": "Autorisation de travail",
+      "languages": "Langues et préférences"
+    },
+    "resume": {
+      "title": "Téléversez votre CV",
+      "description": "Nous analyserons votre expérience et suggérerons des codes CNP 2021 pour chaque poste.",
+      "uploadHint": "PDF ou DOCX, max 10 Mo"
+    },
+    "workHistory": {
+      "title": "Confirmez votre expérience",
+      "description": "Vérifiez les postes extraits de votre CV."
+    },
+    "nocMapping": {
+      "title": "Associer les postes au CNP 2021",
+      "description": "Chaque poste nécessite un code CNP et un niveau FÉER.",
+      "confirm": "Confirmer le code CNP"
+    },
+    "permitStatus": {
+      "title": "Autorisation de travail au Canada",
+      "description": "Nous filtrons les emplois pour lesquels vous êtes admissible.",
+      "statusLabel": "Statut actuel",
+      "expiryLabel": "Date d'expiration du permis"
+    },
+    "languages": {
+      "title": "Langues et préférences",
+      "description": "La maîtrise du français alimente la logique Entrée express.",
+      "english": "Maîtrise de l'anglais",
+      "french": "Maîtrise du français",
+      "targetTitles": "Titres d'emploi visés",
+      "province": "Province préférée"
+    }
+  },
+  "jobs": {
+    "prepareApplication": "Préparer la candidature",
+    "viewInQueue": "Voir dans la file de révision"
+  },
+  "activity": {
+    "title": "Journal d'activité",
+    "description": "Chaque action, filtre, blocage et omission de l'agent est enregistré ici — y compris les échecs.",
+    "emptyTitle": "Aucune activité pour l'instant",
+    "emptyDescription": "Lancez une découverte d'emplois, personnalisez une candidature ou générez un rapport de parcours. Vous verrez ici les recherches par source, classifications CNP, emplois filtrés et événements de la file de révision.",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "showDetails": "Afficher les détails",
+    "hideDetails": "Masquer les détails",
+    "prevPage": "Précédent",
+    "nextPage": "Suivant",
+    "pageOf": "Page {page} sur {total}",
+    "recentTitle": "Activité récente de l'agent",
+    "recentDescription": "5 dernières actions enregistrées",
+    "viewAll": "Voir toute l'activité",
+    "actions": {
+      "discovery_started": "Découverte démarrée",
+      "discovery_completed": "Découverte terminée",
+      "source_searched": "Source consultée",
+      "noc_classified": "CNP classifié",
+      "jobs_filtered": "Emplois filtrés",
+      "matches_below_threshold": "Emplois sous le seuil de correspondance",
+      "jobs_skipped_dedup": "Doublons ignorés",
+      "tailoring_started": "Personnalisation démarrée",
+      "tailoring_completed": "Candidature préparée",
+      "tailoring_blocked": "Personnalisation bloquée",
+      "tailoring_failed": "Personnalisation échouée",
+      "pathway_report_generated": "Rapport de parcours généré",
+      "pathway_report_blocked": "Rapport de parcours bloqué",
+      "application_dispatched": "Candidature marquée envoyée",
+      "dispatch_blocked": "Envoi bloqué",
+      "dispatch_failed": "Envoi échoué",
+      "application_approved": "Candidature approuvée",
+      "application_rejected": "Candidature rejetée"
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "subtitle": "Correspondances admissibles au Canada selon votre permis — notées, pas spammées.",
+    "matchedJobs": "Emplois correspondants",
+    "matchedJobsHint": "Au-dessus de votre seuil",
+    "reviewQueue": "File de révision",
+    "reviewQueueHint": "En attente de votre approbation",
+    "applicationsSent": "Candidatures envoyées",
+    "applicationsSentHint": "Marquées envoyées (candidature assistée)",
+    "topMatchesTitle": "Meilleures correspondances",
+    "topMatchesDescription": "Postes CNP qui ont passé vos filtres de permis de travail.",
+    "pathwayPreviewTitle": "Aperçu du parcours",
+    "pathwayPreviewDescription": "Indicateurs Entrée express, PNP et PIA pour votre profil.",
+    "viewPathwayReport": "Rapport complet",
+    "quickLinks": "Liens rapides",
+    "browseJobs": "Parcourir les emplois",
+    "pathwayReport": "Rapport de parcours",
+    "editProfile": "Modifier le profil"
+  },
+  "pathways": {
+    "proFeature": "Fonctionnalité Pro"
+  },
+  "disclaimer": {
+    "pathway": "Ceci est informatif seulement, basé sur les critères publiés, et ne constitue pas un conseil en immigration. Consultez un CRCIC ou un avocat en immigration."
+  }
+}

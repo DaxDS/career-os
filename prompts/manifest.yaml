@@ -1,0 +1,36 @@
+# Prompt registry manifest — maps logical names to files under /prompts
+# Versioning is tracked in the prompt_versions database table.
+# The `capability` field must match an AICapability enum value in capabilities.yaml.
+
+prompts:
+  resume_selection:
+    file: resume_selection.md
+    capability: resume_selection
+
+  resume_tailoring:
+    file: resume_tailoring.md
+    capability: resume_tailoring
+
+  cover_letter:
+    file: cover_letter.md
+    capability: cover_letter_generation
+
+  email_generation:
+    file: email_generation.md
+    capability: email_generation
+
+  ats_analysis:
+    file: ats_analysis.md
+    capability: ats_analysis
+
+  job_scoring:
+    file: job_scoring.md
+    capability: job_scoring
+
+  job_classification:
+    file: job_classification.md
+    capability: job_classification
+
+  immigration_scoring:
+    file: immigration_scoring.md
+    capability: immigration_scoring

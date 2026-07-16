@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build
+.next/
+out/
+dist/
+build/
+*.egg-info/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Env & secrets
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Supabase
+supabase/.temp/
+supabase/.branches/
+
+# Playwright
+playwright-report/
+test-results/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Storage (local dev uploads)
+storage/
+
+# Legacy project artifacts (pre-monorepo)
+web/node_modules/
+backend/.pytest_cache/
+.vercel
+.env*
+
+# Test browser profile (may contain session data)
+backend/_test_browser_profile/

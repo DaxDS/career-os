@@ -1,0 +1,89 @@
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.pricing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card.highlighted {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), var(--shadow);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -0.65rem;
+  right: 1rem;
+  background: var(--accent);
+  color: #042f2e;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+
+.pricing-card h2 {
+  margin: 0 0 0.5rem;
+}
+
+.pricing-price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+}
+
+.pricing-price span {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-family: var(--font);
+}
+
+.pricing-card ul {
+  flex: 1;
+  margin: 1rem 0;
+  padding-left: 1.2rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.current-plan {
+  text-align: center;
+  pointer-events: none;
+}
+
+.pricing-note {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.usage-meters {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.usage-meter-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: 0.35rem;
+}
+
+.usage-bar {
+  height: 8px;
+  background: var(--bg-elevated);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.usage-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+}

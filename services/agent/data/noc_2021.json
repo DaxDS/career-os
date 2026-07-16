@@ -1,0 +1,230 @@
+{
+  "schema_version": "1.0.0",
+  "noc_version": "2021",
+  "source_url": "https://www.statcan.gc.ca/en/subjects/standard/noc/2021/indexV1",
+  "last_verified": "2025-07-05",
+  "description": "Statistics Canada NOC 2021 hierarchy. Sample of 20 unit groups — replace with full dataset.",
+  "hierarchy_levels": ["broad_category", "major_group", "sub_major_group", "minor_group", "unit_group"],
+  "unit_groups": [
+    {
+      "code": "10010",
+      "title": "Financial managers",
+      "teer": 0,
+      "broad_category": "0 Legislative and senior management occupations",
+      "major_group": "10 Specialized middle management occupations in administrative services, financial and business services and communication (except broadcasting)",
+      "sub_major_group": "100 Specialized middle management occupations in administrative services, financial and business services and communication (except broadcasting)",
+      "minor_group": "1001 Administrative services managers",
+      "lead_statement": "Financial managers plan, organize, direct, control and evaluate the operation of financial and accounting departments.",
+      "example_titles": ["Controller", "Director of finance", "Treasurer"]
+    },
+    {
+      "code": "20010",
+      "title": "Engineering managers",
+      "teer": 0,
+      "broad_category": "2 Natural and applied sciences and related occupations",
+      "major_group": "20 Specialized middle management occupations in engineering, architecture, science and information systems",
+      "sub_major_group": "200 Specialized middle management occupations in engineering, architecture, science and information systems",
+      "minor_group": "2001 Engineering managers",
+      "lead_statement": "Engineering managers plan, organize, direct, control and evaluate the activities of an engineering department.",
+      "example_titles": ["Engineering director", "Plant engineering manager"]
+    },
+    {
+      "code": "21220",
+      "title": "Cybersecurity specialists",
+      "teer": 1,
+      "broad_category": "2 Natural and applied sciences and related occupations",
+      "major_group": "21 Professional occupations in natural and applied sciences",
+      "sub_major_group": "212 Professional occupations in applied sciences (except engineering)",
+      "minor_group": "2122 Computer and information systems professionals",
+      "lead_statement": "Cybersecurity specialists develop, plan, recommend, implement, upgrade and monitor security measures for the protection of computer networks and information.",
+      "example_titles": ["Information security analyst", "SOC analyst", "Cybersecurity consultant"]
+    },
+    {
+      "code": "21222",
+      "title": "Information systems testing technicians",
+      "teer": 2,
+      "broad_category": "2 Natural and applied sciences and related occupations",
+      "major_group": "21 Professional occupations in natural and applied sciences",
+      "sub_major_group": "212 Professional occupations in applied sciences (except engineering)",
+      "minor_group": "2122 Computer and information systems professionals",
+      "lead_statement": "Information systems testing technicians develop and implement software and information system testing policies, procedures and scripts.",
+      "example_titles": ["QA analyst", "Software tester", "Test automation specialist"]
+    },
+    {
+      "code": "21223",
+      "title": "Database analysts and data administrators",
+      "teer": 1,
+      "broad_category": "2 Natural and applied sciences and related occupations",
+      "major_group": "21 Professional occupations in natural and applied sciences",
+      "sub_major_group": "212 Professional occupations in applied sciences (except engineering)",
+      "minor_group": "2122 Computer and information systems professionals",
+      "lead_statement": "Database analysts design, develop and administer data management solutions using database management software.",
+      "example_titles": ["Database administrator", "DBA", "Data administrator"]
+    },
+    {
+      "code": "21230",
+      "title": "Computer systems developers and programmers",
+      "teer": 2,
+      "broad_category": "2 Natural and applied sciences and related occupations",
+      "major_group": "21 Professional occupations in natural and applied sciences",
+      "sub_major_group": "212 Professional occupations in applied sciences (except engineering)",
+      "minor_group": "2123 Computer, software and Web designers and developers",
+      "lead_statement": "Computer systems developers and programmers write, modify, integrate and test computer code for software applications, data processing applications, operating systems-level software and communications software.",
+      "example_titles": ["Software developer", "Programmer analyst", "Application developer"]
+    },
+    {
+      "code": "21231",
+      "title": "Software engineers and designers",
+      "teer": 1,
+      "broad_category": "2 Natural and applied sciences and related occupations",
+      "major_group": "21 Professional occupations in natural and applied sciences",
+      "sub_major_group": "212 Professional occupations in applied sciences (except engineering)",
+      "minor_group": "2123 Computer, software and Web designers and developers",
+      "lead_statement": "Software engineers and designers research, design, evaluate, integrate and maintain software applications, technical environments, operating systems, embedded software, information warehouses and telecommunications software.",
+      "example_titles": ["Software engineer", "Backend developer", "Full-stack developer"]
+    },
+    {
+      "code": "21232",
+      "title": "Software developers and programmers",
+      "teer": 2,
+      "broad_category": "2 Natural and applied sciences and related occupations",
+      "major_group": "21 Professional occupations in natural and applied sciences",
+      "sub_major_group": "212 Professional occupations in applied sciences (except engineering)",
+      "minor_group": "2123 Computer, software and Web designers and developers",
+      "lead_statement": "Software developers and programmers research, design, write, modify, integrate and test computer code for software applications, data processing applications, operating systems-level software and communications software.",
+      "example_titles": ["Software developer", "Web developer", "Mobile app developer"]
+    },
+    {
+      "code": "21233",
+      "title": "Web designers",
+      "teer": 2,
+      "broad_category": "2 Natural and applied sciences and related occupations",
+      "major_group": "21 Professional occupations in natural and applied sciences",
+      "sub_major_group": "212 Professional occupations in applied sciences (except engineering)",
+      "minor_group": "2123 Computer, software and Web designers and developers",
+      "lead_statement": "Web designers research, design and develop Web and Internet sites and Web content.",
+      "example_titles": ["UI designer", "Front-end developer", "Web designer"]
+    },
+    {
+      "code": "21234",
+      "title": "Web developers and programmers",
+      "teer": 2,
+      "broad_category": "2 Natural and applied sciences and related occupations",
+      "major_group": "21 Professional occupations in natural and applied sciences",
+      "sub_major_group": "212 Professional occupations in applied sciences (except engineering)",
+      "minor_group": "2123 Computer, software and Web designers and developers",
+      "lead_statement": "Web developers and programmers research, design, develop and write computer code for Internet and intranet sites, Web servers and Web applications.",
+      "example_titles": ["Web developer", "Full-stack web developer"]
+    },
+    {
+      "code": "21300",
+      "title": "Civil engineers",
+      "teer": 1,
+      "broad_category": "2 Natural and applied sciences and related occupations",
+      "major_group": "21 Professional occupations in natural and applied sciences",
+      "sub_major_group": "213 Professional occupations in engineering",
+      "minor_group": "2130 Civil, mechanical, electrical and chemical engineers",
+      "lead_statement": "Civil engineers plan, design, develop and manage projects for the construction or repair of buildings, earth structures, powerhouses, roads, airports, railways, rapid transit facilities, bridges, tunnels, canals, dams, ports and coastal installations.",
+      "example_titles": ["Structural engineer", "Transportation engineer"]
+    },
+    {
+      "code": "21310",
+      "title": "Electrical and electronics engineers",
+      "teer": 1,
+      "broad_category": "2 Natural and applied sciences and related occupations",
+      "major_group": "21 Professional occupations in natural and applied sciences",
+      "sub_major_group": "213 Professional occupations in engineering",
+      "minor_group": "2131 Civil, mechanical, electrical and chemical engineers",
+      "lead_statement": "Electrical and electronics engineers design, plan, research, evaluate and test electrical and electronic equipment and systems.",
+      "example_titles": ["Electrical engineer", "Electronics engineer", "Power systems engineer"]
+    },
+    {
+      "code": "31100",
+      "title": "Specialists in clinical and laboratory medicine",
+      "teer": 1,
+      "broad_category": "3 Health occupations",
+      "major_group": "31 Professional occupations in health",
+      "sub_major_group": "311 Physicians, dentists and veterinarians",
+      "minor_group": "3110 Physicians",
+      "lead_statement": "Specialists in clinical and laboratory medicine diagnose and treat diseases and physiological or psychiatric disorders and act as consultants to other physicians.",
+      "example_titles": ["Cardiologist", "Radiologist", "Psychiatrist"]
+    },
+    {
+      "code": "31301",
+      "title": "Registered nurses and registered psychiatric nurses",
+      "teer": 1,
+      "broad_category": "3 Health occupations",
+      "major_group": "31 Professional occupations in health",
+      "sub_major_group": "313 Nursing and allied health professionals",
+      "minor_group": "3130 Nursing and allied health professionals",
+      "lead_statement": "Registered nurses and registered psychiatric nurses provide direct nursing care to patients, deliver health education programs and provide consultative services.",
+      "example_titles": ["RN", "Registered nurse", "ICU nurse"]
+    },
+    {
+      "code": "32101",
+      "title": "Licensed practical nurses",
+      "teer": 2,
+      "broad_category": "3 Health occupations",
+      "major_group": "32 Technical occupations in health",
+      "sub_major_group": "321 Technical occupations in health (except practitioners of natural healing)",
+      "minor_group": "3210 Technical occupations in therapy and assessment",
+      "lead_statement": "Licensed practical nurses provide nursing care usually under the direction of medical practitioners, registered nurses or other health team members.",
+      "example_titles": ["LPN", "Licensed practical nurse"]
+    },
+    {
+      "code": "41200",
+      "title": "University professors and lecturers",
+      "teer": 1,
+      "broad_category": "4 Occupations in education, law and social, community and government services",
+      "major_group": "41 Professional occupations in law, education, social, community and government services",
+      "sub_major_group": "412 Professional occupations in education services",
+      "minor_group": "4120 University professors and lecturers",
+      "lead_statement": "University professors and lecturers teach courses to undergraduate and graduate students and conduct research in their field of specialization.",
+      "example_titles": ["Professor", "Lecturer", "Assistant professor"]
+    },
+    {
+      "code": "62020",
+      "title": "Food service supervisors",
+      "teer": 2,
+      "broad_category": "6 Sales and service occupations",
+      "major_group": "62 Retail sales supervisors and specialized sales occupations",
+      "sub_major_group": "620 Retail sales supervisors and specialized sales occupations",
+      "minor_group": "6202 Food service supervisors",
+      "lead_statement": "Food service supervisors supervise, direct and co-ordinate the activities of workers who prepare, portion and serve food.",
+      "example_titles": ["Restaurant supervisor", "Kitchen supervisor"]
+    },
+    {
+      "code": "63200",
+      "title": "Cooks",
+      "teer": 3,
+      "broad_category": "6 Sales and service occupations",
+      "major_group": "63 Occupations in food and beverage service",
+      "sub_major_group": "632 Cooks and bakers",
+      "minor_group": "6320 Cooks",
+      "lead_statement": "Cooks prepare and cook complete meals or individual dishes and foods, and prepare and cook special dishes for customers.",
+      "example_titles": ["Line cook", "Prep cook", "Sous chef"]
+    },
+    {
+      "code": "72106",
+      "title": "Welders and related machine operators",
+      "teer": 2,
+      "broad_category": "7 Trades, transport and equipment operators and related occupations",
+      "major_group": "72 Industrial, electrical and construction trades",
+      "sub_major_group": "721 Construction trades",
+      "minor_group": "7210 Construction trades",
+      "lead_statement": "Welders operate welding equipment to weld ferrous and non-ferrous metals.",
+      "example_titles": ["Welder", "Production welder", "Structural welder"]
+    },
+    {
+      "code": "75110",
+      "title": "Transport truck drivers",
+      "teer": 3,
+      "broad_category": "7 Trades, transport and equipment operators and related occupations",
+      "major_group": "75 Transport and heavy equipment operation and related maintenance occupations",
+      "sub_major_group": "751 Motor vehicle and transit drivers",
+      "minor_group": "7511 Transport truck drivers",
+      "lead_statement": "Transport truck drivers operate heavy trucks to transport goods and materials over urban, interurban, provincial and international routes.",
+      "example_titles": ["Long-haul truck driver", "Delivery driver"]
+    }
+  ]
+}

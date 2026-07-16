@@ -1,0 +1,316 @@
+{
+  "common": {
+    "appName": "CareerOS",
+    "tagline": "The job-search copilot built for Canada",
+    "continue": "Continue",
+    "back": "Back",
+    "save": "Save",
+    "loading": "Loading…"
+  },
+  "auth": {
+    "login": "Log in",
+    "signup": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full name",
+    "continueWithGoogle": "Continue with Google",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginTitle": "Log in to CareerOS",
+    "loginDescription": "Your data stays in Canada.",
+    "signupTitle": "Create your CareerOS account",
+    "signupDescription": "Built for the Canadian job market.",
+    "signingIn": "Signing in…",
+    "creatingAccount": "Creating account…",
+    "dev": {
+      "hint": "Demo account (prefilled) — PGWP profile with 5 sample matches",
+      "orEmail": "Or",
+      "notConfigured": "Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local (local) or Vercel env vars (production).",
+      "confirmEmail": "Check your email to confirm your account, then continue to onboarding. If confirmation is disabled in Supabase, try logging in directly."
+    }
+  },
+  "billing": {
+    "title": "Plan & billing",
+    "description": "Free or Pro ($24 CAD/mo). Limits reset monthly.",
+    "currentPlan": "Current plan",
+    "freePlan": "Free",
+    "proPlan": "Pro",
+    "pricePerMonth": "{price} CAD/mo",
+    "renewalDate": "Renews on {date}",
+    "noRenewal": "No active subscription",
+    "statusActive": "Active",
+    "statusPastDue": "Past due",
+    "statusCanceled": "Canceled",
+    "tailoredUsage": "Tailored applications this month",
+    "tailoredUnlimited": "Unlimited",
+    "dailySendCap": "Daily send cap",
+    "sendsPerDay": "{count} sends/day",
+    "upgradeToPro": "Upgrade to Pro — $24 CAD/mo",
+    "manageBilling": "Manage billing",
+    "redirecting": "Redirecting…",
+    "checkoutSuccess": "Welcome to Pro! Your plan will update shortly.",
+    "checkoutCancel": "Checkout cancelled — no charge was made.",
+    "stripeNotConfigured": "Payments aren't live yet. We're setting up test checkout — check back soon.",
+    "stripeTestModeHint": "Test mode — use card 4242 4242 4242 4242. No real charge.",
+    "checkoutFailed": "Checkout failed. Please try again or contact support.",
+    "noBillingAccount": "Subscribe to Pro first to manage billing.",
+    "limitReached": "Free plan includes {limit} tailored applications per month.",
+    "upgradeCta": "Upgrade to Pro for unlimited tailoring.",
+    "upgradeAtSettings": "Upgrade in Settings → Plan & billing"
+  },
+  "landing": {
+    "hero": {
+      "title": "The only job platform that scores every posting for your Express Entry pathway.",
+      "subtitle": "AI pipeline that tailors your resume, writes your cover letter, and auto-submits — with Canadian PR/NOC scoring on every job.",
+      "ctaDemo": "Try the demo",
+      "ctaPrimary": "Start free",
+      "ctaSecondary": "Join the waitlist",
+      "ctaPlans": "View plans",
+      "tagline": "The only tool that does quality-tailored autonomous apply, not volume spam."
+    },
+    "scoreDemo": {
+      "title": "Senior AI Engineer",
+      "meta": "Bell Canada · Toronto, ON",
+      "prBadge": "🇨🇦 92% PR fit",
+      "overallScore": "87%",
+      "overallLabel": "Overall match",
+      "atsScore": "84%",
+      "atsLabel": "ATS score",
+      "nocCode": "NOC 21231",
+      "nocLabel": "Express Entry eligible",
+      "caption": "Every imported job is scored like this — PR pathway fit, NOC code, and ATS match — before a single document is generated."
+    },
+    "differentiators": {
+      "reviewQueue": {
+        "title": "Nothing auto-submits",
+        "body": "Tailored resumes and cover letters land in your review queue. You approve or edit each one. A daily send cap limits how many applications leave your account per day."
+      },
+      "pathwayScoring": {
+        "title": "Pathway flags on every match",
+        "body": "Each job gets a NOC unit-group code, TEER level, wage vs regional median, and flags for Express Entry categories, provincial streams, and Atlantic program relevance — scored against your work history and permit status."
+      },
+      "permitFilters": {
+        "title": "Built for work-permit holders",
+        "body": "You set your permit type and expiry during onboarding. Jobs requiring LMIA, security clearance, or citizenship you do not hold are filtered out before they appear in your feed."
+      }
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "subtitle": "Four steps from discovery to send — with you in control at the end.",
+      "steps": {
+        "discover": {
+          "title": "Discover",
+          "body": "Run discovery against Job Bank and other sources. Jobs that fail your work-authorization or permit filters never enter your feed."
+        },
+        "score": {
+          "title": "Score for your pathway",
+          "body": "Each match shows NOC/TEER, wage vs regional median, and pathway flags (EE, PNP, AIP) derived from published program criteria and your profile."
+        },
+        "tailor": {
+          "title": "Tailor",
+          "body": "Generate a Canadian-format resume and cover letter for a role. No photo, no SIN — formatting rules are enforced automatically."
+        },
+        "approve": {
+          "title": "You approve",
+          "body": "Review the draft in your queue. Only after you approve does an application move toward send — subject to your plan's daily cap."
+        }
+      }
+    },
+    "jobExample": {
+      "title": "What a match looks like",
+      "subtitle": "The same badges you see on the jobs feed — NOC, TEER, wage vs median, and pathway flags.",
+      "label": "Example match",
+      "matchScore": "match score"
+    },
+    "pricing": {
+      "title": "Free to start, Pro when you need more sends",
+      "subtitle": "Both plans use the same review queue. Pro raises your daily send cap and removes the monthly tailoring limit.",
+      "freePrice": "$0",
+      "proPrice": "{price} CAD",
+      "perMonth": "/ month",
+      "freeSends": "{count} application sends per day",
+      "freeTailored": "{count} tailored applications per month",
+      "reviewQueue": "Human review queue on every send",
+      "proSends": "{count} application sends per day",
+      "proTailored": "Unlimited tailored applications",
+      "proPathway": "Pathway report refresh",
+      "getStarted": "Get started free",
+      "viewPricing": "View full pricing"
+    }
+  },
+  "marketing": {
+    "nav": {
+      "pricing": "Pricing",
+      "privacy": "Privacy",
+      "demo": "Try demo",
+      "login": "Log in",
+      "signup": "Sign up"
+    },
+    "footer": {
+      "tagline": "Canadian job search with NOC mapping, pathway flags, and a human review queue before anything is sent.",
+      "hosting": "Data hosted in Canada (ca-central-1)",
+      "product": "Product",
+      "legal": "Legal",
+      "privacy": "Privacy (PIPEDA)",
+      "terms": "Terms of service"
+    }
+  },
+  "waitlist": {
+    "title": "Join the waitlist",
+    "description": "Early access for international students and newcomers targeting Canadian roles.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "provinceLabel": "Province or territory",
+    "provinceOptional": "Select province (optional)",
+    "submit": "Join waitlist",
+    "successTitle": "You're on the list!",
+    "successMessage": "We'll email you when early access opens in your region.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "provinces": {
+      "AB": "Alberta",
+      "BC": "British Columbia",
+      "MB": "Manitoba",
+      "NB": "New Brunswick",
+      "NL": "Newfoundland and Labrador",
+      "NS": "Nova Scotia",
+      "NT": "Northwest Territories",
+      "NU": "Nunavut",
+      "ON": "Ontario",
+      "PE": "Prince Edward Island",
+      "QC": "Quebec",
+      "SK": "Saskatchewan",
+      "YT": "Yukon"
+    }
+  },
+  "pricing": {
+    "title": "Simple pricing in CAD",
+    "subtitle": "Quality-first job search — no auto-apply spam, no LinkedIn bans.",
+    "mostPopular": "Most popular",
+    "getStarted": "Get started",
+    "upgradeToPro": "Upgrade to Pro",
+    "signupForPro": "Sign up for Pro",
+    "loginHint": "Log in first if you already have an account.",
+    "checkoutCancelled": "Checkout cancelled — no charge was made."
+  },
+  "settings": {
+    "title": "Settings",
+    "activityTitle": "Activity log",
+    "activityDescription": "See everything the agent does on your behalf.",
+    "viewActivity": "View activity",
+    "accountTitle": "Account",
+    "accountDescription": "PIPEDA: export or delete your data at any time.",
+    "exportData": "Export my data",
+    "deleteAccount": "Delete account",
+    "signOut": "Sign out",
+    "themeTitle": "Appearance",
+    "themeDescription": "Choose light, dark, or match your system preference.",
+    "theme": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  },
+  "onboarding": {
+    "title": "Set up your profile",
+    "steps": {
+      "resume": "Upload resume",
+      "workHistory": "Work history",
+      "nocMapping": "NOC mapping",
+      "permitStatus": "Work authorization",
+      "languages": "Languages & preferences"
+    },
+    "resume": {
+      "title": "Upload your resume",
+      "description": "We'll parse your work history and suggest NOC 2021 codes for each role. You confirm every mapping.",
+      "uploadHint": "PDF or DOCX, max 10 MB"
+    },
+    "workHistory": {
+      "title": "Confirm your work history",
+      "description": "Review roles we extracted from your resume. Add or edit anything that's missing."
+    },
+    "nocMapping": {
+      "title": "Map roles to NOC 2021",
+      "description": "Each role needs a NOC unit-group code and TEER level. We suggest codes — you confirm or edit.",
+      "confirm": "Confirm NOC code"
+    },
+    "permitStatus": {
+      "title": "Work authorization in Canada",
+      "description": "We use this to filter jobs you're actually eligible for — before scoring.",
+      "statusLabel": "Current status",
+      "expiryLabel": "Permit expiry date (if applicable)"
+    },
+    "languages": {
+      "title": "Languages & job preferences",
+      "description": "French proficiency also feeds Express Entry category-based draw logic.",
+      "english": "English proficiency",
+      "french": "French proficiency",
+      "targetTitles": "Target job titles",
+      "province": "Preferred province"
+    }
+  },
+  "jobs": {
+    "prepareApplication": "Prepare application",
+    "viewInQueue": "View in review queue"
+  },
+  "activity": {
+    "title": "Activity log",
+    "description": "Every agent action, filter, block, and skip is recorded here — including failures.",
+    "emptyTitle": "No activity yet",
+    "emptyDescription": "Run job discovery, tailor an application, or generate a pathway report. You'll see source searches, NOC classifications, filtered jobs, and review-queue events here.",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "showDetails": "Show details",
+    "hideDetails": "Hide details",
+    "prevPage": "Previous",
+    "nextPage": "Next",
+    "pageOf": "Page {page} of {total}",
+    "recentTitle": "Recent agent activity",
+    "recentDescription": "Last 5 logged actions",
+    "viewAll": "View all activity",
+    "actions": {
+      "discovery_started": "Discovery started",
+      "discovery_completed": "Discovery completed",
+      "source_searched": "Source searched",
+      "noc_classified": "NOC classified",
+      "jobs_filtered": "Jobs filtered out",
+      "matches_below_threshold": "Jobs below match threshold",
+      "jobs_skipped_dedup": "Duplicate jobs skipped",
+      "tailoring_started": "Tailoring started",
+      "tailoring_completed": "Application prepared",
+      "tailoring_blocked": "Tailoring blocked",
+      "tailoring_failed": "Tailoring failed",
+      "pathway_report_generated": "Pathway report generated",
+      "pathway_report_blocked": "Pathway report blocked",
+      "application_dispatched": "Application marked sent",
+      "dispatch_blocked": "Dispatch blocked",
+      "dispatch_failed": "Dispatch failed",
+      "application_approved": "Application approved",
+      "application_rejected": "Application rejected"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Eligible Canadian matches for your permit status — scored, not spammed.",
+    "matchedJobs": "Matched jobs",
+    "matchedJobsHint": "Above your score threshold",
+    "reviewQueue": "Review queue",
+    "reviewQueueHint": "Awaiting your approval",
+    "applicationsSent": "Applications sent",
+    "applicationsSentHint": "Marked sent (assisted apply)",
+    "topMatchesTitle": "Top matches",
+    "topMatchesDescription": "NOC-mapped roles that passed your work-authorization filters.",
+    "pathwayPreviewTitle": "Pathway snapshot",
+    "pathwayPreviewDescription": "Express Entry, PNP, and AIP flags for your profile.",
+    "viewPathwayReport": "Full report",
+    "quickLinks": "Quick links",
+    "browseJobs": "Browse jobs",
+    "pathwayReport": "Pathway report",
+    "editProfile": "Edit profile"
+  },
+  "pathways": {
+    "proFeature": "Pro feature"
+  },
+  "disclaimer": {
+    "pathway": "This is informational only, based on published program criteria, and is not immigration advice. Consult a licensed RCIC or immigration lawyer for decisions."
+  }
+}

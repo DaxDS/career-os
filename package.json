@@ -1,0 +1,22 @@
+{
+  "name": "careeros",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@careeros/web",
+    "build": "npm run build --workspace=@careeros/web",
+    "lint": "npm run lint --workspace=@careeros/web",
+    "db:types": "supabase gen types typescript --local > packages/shared/src/database.types.ts",
+    "seed:demo-user": "node scripts/seed-demo-data.mjs",
+    "seed:demo-data": "node scripts/seed-demo-data.mjs",
+    "setup:supabase": "node scripts/setup-supabase-production.mjs",
+    "setup:stripe": "node scripts/setup-stripe-production.mjs",
+    "sync:vercel-secrets": "node scripts/sync-vercel-secrets.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

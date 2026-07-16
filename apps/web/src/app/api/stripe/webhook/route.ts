@@ -1,0 +1,120 @@
+import { NextResponse } from "next/server";
+import type Stripe from "stripe";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { getStripe } from "@/lib/stripe";
+import { PLANS } from "@careeros/shared";
+
+export const runtime = "nodejs";
+
+function mapSubscriptionStatus(status: Stripe.Subscription.Status): string | null {
+  if (status === "active" || status === "trialing") return "active";
+  if (status === "past_due" || status === "unpaid") return "past_due";
+  if (status === "canceled" || status === "incomplete_expired") return "canceled";
+  return status;
+}
+
+async function setProPlan(userId: string, customerId: string | null, subscriptionId: string | null) {
+  const admin = createAdminClient();
+  await admin
+    .from("profiles")
+    .update({
+      plan: "pro",
+      stripe_customer_id: customerId,
+      stripe_subscription_id: subscriptionId,
+      plan_status: "active",
+      daily_send_cap: PLANS.pro.dailySendCap,
+    })
+    .eq("id", userId);
+}
+
+async function setFreePlanBySubscriptionId(subscriptionId: string) {
+  const admin = createAdminClient();
+  await admin
+    .from("profiles")
+    .update({
+      plan: "free",
+      plan_status: "canceled",
+      stripe_subscription_id: null,
+      daily_send_cap: PLANS.free.dailySendCap,
+    })
+    .eq("stripe_subscription_id", subscriptionId);
+}
+
+function subscriptionRenewsAt(subscription: Stripe.Subscription): string | null {
+  const periodEnd = subscription.items?.data?.[0]?.current_period_end;
+  return periodEnd ? new Date(periodEnd * 1000).toISOString() : null;
+}
+
+async function syncSubscription(subscription: Stripe.Subscription) {
+  const admin = createAdminClient();
+  const renewsAt = subscriptionRenewsAt(subscription);
+  const planStatus = mapSubscriptionStatus(subscription.status);
+  const isActive = planStatus === "active";
+
+  await admin
+    .from("profiles")
+    .update({
+      plan: isActive ? "pro" : "free",
+      plan_status: planStatus,
+      plan_renews_at: renewsAt,
+      stripe_customer_id:
+        typeof subscription.customer === "string" ? subscription.customer : subscription.customer?.id,
+      stripe_subscription_id: subscription.id,
+      daily_send_cap: isActive ? PLANS.pro.dailySendCap : PLANS.free.dailySendCap,
+    })
+    .eq("stripe_subscription_id", subscription.id);
+}
+
+export async function POST(request: Request) {
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!webhookSecret) {
+    return NextResponse.json({ error: "Webhook not configured" }, { status: 503 });
+  }
+
+  const body = await request.text();
+  const signature = request.headers.get("stripe-signature");
+  if (!signature) {
+    return NextResponse.json({ error: "Missing signature" }, { status: 400 });
+  }
+
+  let event: Stripe.Event;
+  try {
+    event = getStripe().webhooks.constructEvent(body, signature, webhookSecret);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Invalid signature";
+    return NextResponse.json({ error: message }, { status: 400 });
+  }
+
+  switch (event.type) {
+    case "checkout.session.completed": {
+      const session = event.data.object as Stripe.Checkout.Session;
+      const userId = session.client_reference_id;
+      if (userId) {
+        await setProPlan(
+          userId,
+          typeof session.customer === "string" ? session.customer : session.customer?.id ?? null,
+          typeof session.subscription === "string" ? session.subscription : session.subscription?.id ?? null
+        );
+        if (session.subscription && typeof session.subscription === "string") {
+          const sub = await getStripe().subscriptions.retrieve(session.subscription);
+          await syncSubscription(sub);
+        }
+      }
+      break;
+    }
+    case "customer.subscription.updated": {
+      const subscription = event.data.object as Stripe.Subscription;
+      await syncSubscription(subscription);
+      break;
+    }
+    case "customer.subscription.deleted": {
+      const subscription = event.data.object as Stripe.Subscription;
+      await setFreePlanBySubscriptionId(subscription.id);
+      break;
+    }
+    default:
+      break;
+  }
+
+  return NextResponse.json({ received: true });
+}

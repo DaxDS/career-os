@@ -1,0 +1,16 @@
+from app.infrastructure.db.models import (  # noqa: F401
+    AgentRun,
+    ApplicationDocument,
+    ApplicationScreenshot,
+    AuditLog,
+    JobApplication,
+    JobPosting,
+    JobScore,
+    JobSource,
+    MasterResume,
+    PromptVersion,
+    ResumeVersion,
+    SystemMetadata,
+    User,
+    UserProfile,
+)

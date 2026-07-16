@@ -1,0 +1,74 @@
+[
+  {
+    "id": "lmia_flagged",
+    "title": "Warehouse Associate",
+    "company": "Logistics Co",
+    "description": "Must have valid LMIA-supported work authorization. Labour Market Impact Assessment required. Full-time onsite in Mississauga, ON."
+  },
+  {
+    "id": "clearance_required",
+    "title": "IT Security Analyst",
+    "company": "Federal Contractor",
+    "description": "Secret clearance required. Must hold active Secret security clearance. Design and monitor classified systems. Ottawa, ON."
+  },
+  {
+    "id": "bilingual_required",
+    "title": "Customer Service Representative",
+    "company": "Service Canada Partner",
+    "description": "Bilingual position — must be fluent in English and French. Bilingual essential. Montreal, QC."
+  },
+  {
+    "id": "wage_stated_hourly",
+    "title": "Software Developer",
+    "company": "TechCorp",
+    "description": "Build APIs in Python and SQL. $45.00/hr. 3+ years experience. Eligible to work in Canada required. Toronto, ON."
+  },
+  {
+    "id": "wage_stated_annual",
+    "title": "Data Analyst",
+    "company": "Analytics Inc",
+    "description": "Excel, SQL, Power BI. Salary $75,000 per year. Hybrid remote. Vancouver, BC."
+  },
+  {
+    "id": "teer_4_role",
+    "title": "Retail Sales Associate",
+    "company": "Mall Retailer",
+    "description": "Greet customers, process transactions, stock shelves. Secondary school diploma. No experience required. Calgary, AB."
+  },
+  {
+    "id": "teer_5_role",
+    "title": "Kitchen Helper",
+    "company": "Restaurant Group",
+    "description": "Wash dishes, clean kitchen, assist cooks. On-the-job training. Part-time. Halifax, NS."
+  },
+  {
+    "id": "ambiguous_it_specialist",
+    "title": "IT Specialist",
+    "company": "Generic Corp",
+    "description": "Support users, troubleshoot hardware and software, maintain systems. Various duties as assigned. Edmonton, AB."
+  },
+  {
+    "id": "citizenship_required",
+    "title": "Policy Advisor",
+    "company": "Government Agency",
+    "description": "Canadian citizenship required. Reliability status clearance. Develop policy briefs. Gatineau, QC."
+  },
+  {
+    "id": "pgwp_friendly",
+    "title": "Junior Developer",
+    "company": "Startup",
+    "description": "Open to PGWP holders. Python, React, AWS. Eligible to work in Canada. Toronto, ON. $38/hr."
+  },
+  {
+    "id": "remote_hybrid",
+    "title": "DevOps Engineer",
+    "company": "Cloud Co",
+    "description": "Kubernetes, Terraform, CI/CD. Remote work from anywhere in Canada. $52/hr."
+  },
+  {
+    "id": "healthcare_rn",
+    "title": "Registered Nurse",
+    "company": "Regional Health",
+    "description": "RN license required. Patient care in ICU. 2+ years experience. Nova Scotia Health Authority. Halifax, NS."
+  }
+]

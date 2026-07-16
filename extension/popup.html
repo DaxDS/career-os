@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <h1>Career OS Autofill</h1>
+    <p class="hint">
+      Paste an API token from your Career OS account. Get one by logging in at your Career OS
+      instance and copying the access token (see extension README).
+    </p>
+
+    <label for="apiUrl">Backend URL</label>
+    <input id="apiUrl" type="url" placeholder="http://localhost:8000" />
+
+    <label for="apiToken">API token (JWT)</label>
+    <textarea id="apiToken" rows="4" placeholder="eyJhbGciOi…"></textarea>
+
+    <button id="save" type="button">Save</button>
+    <button id="test" type="button" class="secondary">Test connection</button>
+
+    <p id="status" class="status"></p>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

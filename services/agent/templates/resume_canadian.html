@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8" />
+  <title>{{ full_name }} — Resume</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Calibri, "Segoe UI", Arial, sans-serif;
+      font-size: 11pt;
+      line-height: 1.35;
+      color: #1a1a1a;
+      max-width: 8.5in;
+      margin: 0 auto;
+      padding: 0.55in 0.6in;
+    }
+    h1 { font-size: 18pt; font-weight: 700; margin-bottom: 4px; }
+    .contact { font-size: 10pt; color: #444; margin-bottom: 14px; }
+    h2 {
+      font-size: 11pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid #333;
+      margin: 14px 0 6px;
+      padding-bottom: 2px;
+    }
+    .role { margin-bottom: 10px; }
+    .role-header { display: flex; justify-content: space-between; font-weight: 600; }
+    .role-sub { font-size: 10pt; color: #444; margin-bottom: 4px; }
+    ul { margin-left: 18px; }
+    li { margin-bottom: 3px; }
+    .skills { line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <h1>{{ full_name }}</h1>
+  <p class="contact">
+    {% if contact.city or contact.province %}
+      {{ contact.city }}{% if contact.city and contact.province %}, {% endif %}{{ contact.province }}
+    {% endif %}
+    {% if contact.email %} · {{ contact.email }}{% endif %}
+    {% if contact.phone %} · {{ contact.phone }}{% endif %}
+  </p>
+
+  {% if summary %}
+  <h2>Professional Summary</h2>
+  <p>{{ summary }}</p>
+  {% endif %}
+
+  {% if experience %}
+  <h2>Professional Experience</h2>
+  {% for role in experience %}
+  <div class="role">
+    <div class="role-header">
+      <span>{{ role.title }}</span>
+      <span>{{ role.dates }}</span>
+    </div>
+    <div class="role-sub">{{ role.employer }}{% if role.location %} · {{ role.location }}{% endif %}</div>
+    <ul>
+      {% for bullet in role.bullets %}
+      <li>{{ bullet }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  {% if skills %}
+  <h2>Skills</h2>
+  <p class="skills">{{ skills | join(' · ') }}</p>
+  {% endif %}
+
+  {% if education %}
+  <h2>Education</h2>
+  {% for ed in education %}
+  <p><strong>{{ ed.degree }}</strong>, {{ ed.institution }} · {{ ed.dates }}</p>
+  {% endfor %}
+  {% endif %}
+</body>
+</html>

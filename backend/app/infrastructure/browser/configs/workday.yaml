@@ -1,0 +1,26 @@
+connector_key: workday
+# Workday tenant sites (*.myworkdayjobs.com) render stable data-automation-id
+# attributes across employers — the de-facto selector contract used by the
+# Playwright/Selenium automation community.
+selectors:
+  apply_button: "a[data-automation-id='adventureButton'], div[data-automation-id='applyButton'] button, button:has-text('Apply')"
+  apply_manually: "a[data-automation-id='applyManually'], button[data-automation-id='applyManually']"
+  sign_in_form: "[data-automation-id='signInFormOkButton'], [data-automation-id='createAccountLink'], [data-automation-id='signInLink']"
+  first_name_field: "input[data-automation-id='legalNameSection_firstName']"
+  last_name_field: "input[data-automation-id='legalNameSection_lastName']"
+  resume_upload: "input[data-automation-id='file-upload-input-ref'], input[type='file']"
+  cover_letter_upload: "input[data-automation-id='file-upload-input-ref']"
+  text_fields:
+    email: "input[data-automation-id='email'], input[type='email']"
+    phone: "input[data-automation-id='phone-number']"
+    city: "input[data-automation-id='addressSection_city']"
+  validation_error: "[data-automation-id='errorMessage'], [data-automation-id='inlineErrorMessage'], [role='alert']"
+  submit_button: "button[data-automation-id='pageFooterNextButton'], button[data-automation-id='bottom-navigation-next-button']"
+captcha:
+  iframe_selectors:
+    - "iframe[src*='recaptcha']"
+    - "iframe[src*='hcaptcha']"
+    - "iframe[title*='challenge']"
+  text_indicators:
+    - "captcha"
+    - "verify you are human"

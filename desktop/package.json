@@ -1,0 +1,35 @@
+{
+  "name": "career-os-desktop",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Career OS Windows desktop shell (Tauri)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "icons": "node scripts/create-icons.mjs"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.2.0",
+    "@tauri-apps/plugin-autostart": "^2.2.0",
+    "@tauri-apps/plugin-notification": "^2.2.0",
+    "@tauri-apps/plugin-store": "^2.2.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.2.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0"
+  }
+}

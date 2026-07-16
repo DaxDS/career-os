@@ -1,0 +1,115 @@
+capabilities:
+  resume_selection:
+    primary:
+      provider: openai
+      model: gpt-4o-mini
+    fallback:
+      provider: openai
+      model: gpt-4o
+    params:
+      temperature: 0.1
+      max_tokens: 2048
+
+  resume_tailoring:
+    primary:
+      provider: anthropic
+      model: claude-sonnet-4-20250514
+    fallback:
+      provider: openai
+      model: gpt-4o
+    params:
+      temperature: 0.3
+      max_tokens: 4096
+
+  cover_letter_generation:
+    primary:
+      provider: anthropic
+      model: claude-sonnet-4-20250514
+    params:
+      temperature: 0.4
+      max_tokens: 2048
+
+  email_generation:
+    primary:
+      provider: anthropic
+      model: claude-sonnet-4-20250514
+    params:
+      temperature: 0.4
+      max_tokens: 1024
+
+  job_classification:
+    primary:
+      provider: openai
+      model: gpt-4o-mini
+    params:
+      temperature: 0.0
+      max_tokens: 2048
+
+  ats_analysis:
+    primary:
+      provider: openai
+      model: gpt-4o
+    params:
+      temperature: 0.0
+      max_tokens: 4096
+
+  job_scoring:
+    primary:
+      provider: openai
+      model: gpt-4o
+    params:
+      temperature: 0.1
+      max_tokens: 2048
+
+  immigration_scoring:
+    primary:
+      provider: openai
+      model: gpt-4o-mini
+    params:
+      temperature: 0.0
+      max_tokens: 2048
+
+  resume_classification:
+    primary:
+      provider: openai
+      model: gpt-4o-mini
+    params:
+      temperature: 0.0
+      max_tokens: 1024
+
+  embedding:
+    primary:
+      provider: openai
+      model: text-embedding-3-small
+    params:
+      dimensions: 1536
+
+  structured_output:
+    primary:
+      provider: openai
+      model: gpt-4o-mini
+    params:
+      temperature: 0.0
+      max_tokens: 2048
+
+  linkedin_optimization:
+    primary:
+      provider: anthropic
+      model: claude-sonnet-4-20250514
+    fallback:
+      provider: openai
+      model: gpt-4o
+    params:
+      temperature: 0.3
+      max_tokens: 3072
+
+  interview_coaching:
+    primary:
+      provider: anthropic
+      model: claude-sonnet-4-20250514
+    fallback:
+      provider: openai
+      model: gpt-4o
+    params:
+      temperature: 0.4
+      max_tokens: 3072

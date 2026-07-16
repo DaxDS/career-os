@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations/category-based-selection.html",
+  "last_verified": "2025-07-05",
+  "description": "Express Entry category-based draw NOC lists. Versioned — update when IRCC publishes changes.",
+  "disclaimer": "Informational only. Not immigration advice. Verify against current IRCC publications.",
+  "categories": [
+    {
+      "id": "stem",
+      "label": "STEM",
+      "description": "Science, Technology, Engineering and Mathematics occupations",
+      "noc_codes": [
+        "20010", "20011", "20012", "21100", "21101", "21102", "21103", "21109",
+        "21110", "21111", "21112", "21120", "21200", "21201", "21202", "21203",
+        "21210", "21211", "21220", "21221", "21222", "21223", "21230", "21231",
+        "21232", "21233", "21234", "21300", "21301", "21310", "21311", "21320",
+        "21321", "21322", "21330", "21331", "21332", "21390", "21399"
+      ],
+      "min_teer": 0,
+      "max_teer": 3
+    },
+    {
+      "id": "healthcare",
+      "label": "Healthcare",
+      "description": "Healthcare occupations",
+      "noc_codes": [
+        "30010", "31100", "31101", "31102", "31103", "31110", "31111", "31112",
+        "31120", "31121", "31200", "31201", "31202", "31203", "31204", "31209",
+        "31300", "31301", "31302", "31303", "32100", "32101", "32102", "32103",
+        "32104", "32109", "32110", "32111", "32112", "32120", "32121", "32122",
+        "32123", "32124", "32129", "32200", "32201", "32209", "33100", "33101",
+        "33102", "33103", "33109"
+      ],
+      "min_teer": 0,
+      "max_teer": 3
+    },
+    {
+      "id": "trades",
+      "label": "Trades",
+      "description": "Trade occupations (subset of NOC major group 72–73)",
+      "noc_codes": [
+        "72010", "72011", "72013", "72014", "72020", "72021", "72022", "72023",
+        "72024", "72025", "72100", "72101", "72102", "72103", "72104", "72105",
+        "72106", "72200", "72201", "72300", "72301", "72302", "72310", "72311",
+        "72320", "72400", "72401", "72402", "72403", "72404", "72405", "72406",
+        "72410", "72411", "72420", "72421", "72422", "72423", "72500", "72501",
+        "72600", "72601", "72604", "72999", "73100", "73101", "73102", "73110",
+        "73111", "73112", "73113", "73200", "73201", "73202", "73209", "73300",
+        "73301", "73310", "73311", "73400", "73401", "73402"
+      ],
+      "min_teer": 2,
+      "max_teer": 3
+    },
+    {
+      "id": "transport",
+      "label": "Transport",
+      "description": "Transport occupations",
+      "noc_codes": [
+        "73300", "73301", "73310", "73311", "73400", "73401", "73402",
+        "75100", "75101", "75110", "75119", "75200", "75201", "75210", "75211",
+        "75212", "75300", "75301", "75310", "75311", "75320", "75321"
+      ],
+      "min_teer": 3,
+      "max_teer": 3
+    },
+    {
+      "id": "agriculture",
+      "label": "Agriculture and agri-food",
+      "description": "Agriculture and agri-food occupations",
+      "noc_codes": [
+        "82030", "82031", "84120", "85100", "85101", "85102", "85103",
+        "85104", "85110", "85111", "85120", "85121", "85122", "85123",
+        "85130", "85190", "85191", "85192", "85193", "85199"
+      ],
+      "min_teer": 3,
+      "max_teer": 4
+    },
+    {
+      "id": "french_proficiency",
+      "label": "French-language proficiency",
+      "description": "All TEER 0–3 NOCs when candidate has strong French proficiency (NCLC 7+). Not NOC-list restricted.",
+      "noc_codes": [],
+      "requires_french_nclc_min": 7,
+      "all_teer_0_3": true
+    }
+  ]
+}

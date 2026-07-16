@@ -1,0 +1,19 @@
+connector_key: job_bank_canada
+selectors:
+  apply_button: "a[href*='apply'], button:has-text('Apply'), a:has-text('Apply now'), a:has-text('Show how to apply')"
+  resume_upload: "input[type='file'][name*='resume'], input[type='file'][id*='resume']"
+  cover_letter_upload: "input[type='file'][name*='cover'], input[type='file'][id*='cover']"
+  email_field: "textarea[name*='email'], textarea[id*='email'], input[type='email']"
+  text_fields:
+    name: "input[name*='name'], input[id*='name']"
+    phone: "input[name*='phone'], input[type='tel']"
+    city: "input[name*='city']"
+  validation_error: ".error, .validation-error, [role='alert']"
+  submit_button: "button[type='submit'], input[type='submit']"
+captcha:
+  iframe_selectors:
+    - "iframe[src*='recaptcha']"
+    - "iframe[src*='hcaptcha']"
+  text_indicators:
+    - "captcha"
+    - "verify you are human"

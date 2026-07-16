@@ -1,0 +1,42 @@
+# Production compose — immutable API image, persistent volumes, secrets via .env
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-careeros}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD required}
+      POSTGRES_DB: ${POSTGRES_DB:-careeros}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-careeros} -d ${POSTGRES_DB:-careeros}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    ports:
+      - "${API_PORT:-8000}:8000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-careeros}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-careeros}
+      ENVIRONMENT: production
+      LOG_JSON: "true"
+      STORAGE_PATH: /data/storage
+      PROMPTS_PATH: /data/prompts
+    volumes:
+      - storage_data:/data/storage
+      - ./prompts:/data/prompts:ro
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  storage_data:
