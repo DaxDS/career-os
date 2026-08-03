@@ -49,8 +49,11 @@ export async function DashboardPathwayPreview({
 
   if (!report) return null;
 
-  const flags = report.pathway_flags;
-  const recs = report.recommendations?.slice(0, 2) ?? [];
+  // Lead with the score and the routes actually open to this candidate. Eligibility
+  // badges without a score were the old preview's problem: they implied progress
+  // toward an invitation that the numbers did not support.
+  const eligibleRoutes = (report.gap_analysis ?? []).filter((g) => g.eligible).slice(0, 3);
+  const moves = report.next_moves?.slice(0, 2) ?? [];
 
   return (
     <Card>
@@ -64,26 +67,30 @@ export async function DashboardPathwayPreview({
         </Button>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="flex flex-wrap gap-2">
-          {flags?.ee_eligible && <Badge variant="secondary">Express Entry eligible</Badge>}
-          {flags?.aip_relevant && <Badge variant="secondary">AIP relevant</Badge>}
-          {flags?.ee_categories?.map((c) => (
-            <Badge key={c} variant="outline">
-              EE {c}
-            </Badge>
-          ))}
-          {flags?.pnp_streams?.slice(0, 2).map((s) => (
-            <Badge key={s} variant="outline">
-              PNP {s.replace(/_/g, " ")}
-            </Badge>
-          ))}
-        </div>
-        {recs.length > 0 && (
+        {report.headline && (
+          <div>
+            <p className="text-3xl font-bold tabular-nums">{report.headline.crs}</p>
+            <p className="text-sm text-muted-foreground">{report.headline.text}</p>
+          </div>
+        )}
+        {eligibleRoutes.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {eligibleRoutes.map((g) => (
+              <Badge key={g.id} variant={g.clears ? "default" : "outline"}>
+                {g.route} {g.gap >= 0 ? `+${g.gap}` : g.gap}
+              </Badge>
+            ))}
+          </div>
+        )}
+        {moves.length > 0 && (
           <ul className="space-y-2 text-sm text-muted-foreground">
-            {recs.map((rec) => (
-              <li key={rec} className="flex gap-2">
+            {moves.map((move) => (
+              <li key={move.action} className="flex gap-2">
                 <span className="text-primary">•</span>
-                <span>{rec}</span>
+                <span>
+                  {move.action}{" "}
+                  <span className="whitespace-nowrap text-foreground">(up to +{move.points})</span>
+                </span>
               </li>
             ))}
           </ul>

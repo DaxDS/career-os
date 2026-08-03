@@ -3,19 +3,18 @@
 import { useTranslations } from "next-intl";
 import { PLANS } from "@careeros/shared";
 import { MarketingFooter, MarketingHeader } from "@/components/marketing/marketing-chrome";
+import { DrawBoard } from "@/components/marketing/draw-board";
 import { LandingJobExample } from "@/components/marketing/landing-job-example";
 import { LandingScoreDemo } from "@/components/marketing/landing-score-demo";
-import { WaitlistForm } from "@/components/marketing/waitlist-form";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
-const HOW_IT_WORKS_STEPS = ["discover", "score", "tailor", "approve"] as const;
+const HOW_IT_WORKS_STEPS = ["discover", "score", "routes", "approve"] as const;
 const DIFFERENTIATORS = ["reviewQueue", "pathwayScoring", "permitFilters"] as const;
 
 export default function LandingPage() {
   const t = useTranslations("landing");
-  const tw = useTranslations("waitlist");
   const td = useTranslations("disclaimer");
 
   return (
@@ -27,32 +26,33 @@ export default function LandingPage() {
           <h1 className="font-display mx-auto mb-6 max-w-3xl text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl md:leading-tight">
             {t("hero.title")}
           </h1>
-          <p className="mx-auto mb-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
+          <p className="mx-auto mb-6 max-w-2xl text-base text-muted-foreground sm:text-lg">
             {t("hero.subtitle")}
           </p>
-          <p className="mx-auto mb-8 max-w-xl text-sm font-medium italic text-foreground/90 sm:text-base">
-            {t("hero.tagline")}
-          </p>
-          <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-            <Link href="/login" className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}>
-              {t("hero.ctaDemo")}
-            </Link>
+          {/* One primary action. The secondary link is a preview, not a competing
+              destination — a second "start" button splits intent and costs signups. */}
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               href="/signup"
-              className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full sm:w-auto")}
+              className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}
             >
               {t("hero.ctaPrimary")}
             </Link>
             <Link
-              href="/pricing"
+              href="/login"
               className={cn(buttonVariants({ variant: "ghost", size: "lg" }), "w-full sm:w-auto")}
             >
-              {t("hero.ctaPlans")}
+              {t("hero.ctaDemo")}
             </Link>
           </div>
+          <p className="mx-auto mt-6 max-w-xl text-sm text-muted-foreground">
+            {t("hero.tagline")}
+          </p>
         </section>
 
         <LandingScoreDemo />
+
+        <DrawBoard />
 
         <section className="border-y border-border/60 bg-card/30 py-12 sm:py-16">
           <div className="mx-auto max-w-6xl px-4">
@@ -120,16 +120,11 @@ export default function LandingPage() {
                 </span>
               </p>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <li>{t("pricing.freeSends", { count: PLANS.free.dailySendCap })}</li>
-                <li>
-                  {t("pricing.freeTailored", { count: PLANS.free.tailoredApplicationsPerMonth ?? 10 })}
-                </li>
+                <li>{t("pricing.freeSends")}</li>
+                <li>{t("pricing.freeTailored")}</li>
                 <li>{t("pricing.reviewQueue")}</li>
               </ul>
-              <Link
-                href="/signup"
-                className={cn(buttonVariants({ variant: "outline" }), "mt-6 w-full")}
-              >
+              <Link href="/signup" className={cn(buttonVariants(), "mt-6 w-full")}>
                 {t("pricing.getStarted")}
               </Link>
             </div>
@@ -143,23 +138,16 @@ export default function LandingPage() {
                 </span>
               </p>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                <li>{t("pricing.proSends", { count: PLANS.pro.dailySendCap })}</li>
+                <li>{t("pricing.proSends")}</li>
                 <li>{t("pricing.proTailored")}</li>
                 <li>{t("pricing.proPathway")}</li>
               </ul>
-              <Link href="/pricing" className={cn(buttonVariants(), "mt-6 w-full")}>
+              <Link
+                href="/pricing"
+                className={cn(buttonVariants({ variant: "outline" }), "mt-6 w-full")}
+              >
                 {t("pricing.viewPricing")}
               </Link>
-            </div>
-          </div>
-        </section>
-
-        <section id="waitlist" className="border-t border-border/60 bg-primary/5 py-16 scroll-mt-16">
-          <div className="mx-auto max-w-xl px-4 text-center">
-            <h2 className="text-2xl font-bold">{tw("title")}</h2>
-            <p className="mt-2 text-sm text-muted-foreground sm:text-base">{tw("description")}</p>
-            <div className="relative mt-6">
-              <WaitlistForm />
             </div>
           </div>
         </section>

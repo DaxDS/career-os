@@ -40,6 +40,33 @@ async function setFreePlanBySubscriptionId(subscriptionId: string) {
     .eq("stripe_subscription_id", subscriptionId);
 }
 
+/**
+ * Record a one-time report purchase and grant exactly one credit.
+ *
+ * Stripe redelivers webhooks on any non-2xx response, so this must be idempotent.
+ * The RPC inserts against a unique session id and only increments the credit when
+ * that insert actually created a row, making replays no-ops.
+ */
+async function grantReportCredit(userId: string, session: Stripe.Checkout.Session) {
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("grant_report_credit", {
+    p_user_id: userId,
+    p_session_id: session.id,
+    p_payment_intent:
+      typeof session.payment_intent === "string"
+        ? session.payment_intent
+        : session.payment_intent?.id ?? null,
+    p_amount_total: session.amount_total ?? null,
+    p_currency: session.currency ?? null,
+  });
+
+  if (error) {
+    // Surface the failure so Stripe retries rather than silently losing a paid credit.
+    console.error("[stripe/webhook] grant_report_credit failed", error.message);
+    throw new Error(`Failed to grant report credit: ${error.message}`);
+  }
+}
+
 function subscriptionRenewsAt(subscription: Stripe.Subscription): string | null {
   const periodEnd = subscription.items?.data?.[0]?.current_period_end;
   return periodEnd ? new Date(periodEnd * 1000).toISOString() : null;
@@ -89,7 +116,17 @@ export async function POST(request: Request) {
     case "checkout.session.completed": {
       const session = event.data.object as Stripe.Checkout.Session;
       const userId = session.client_reference_id;
-      if (userId) {
+      if (!userId) break;
+
+      // Branch on mode. A one-time report purchase must NOT grant the Pro plan —
+      // without this check any completed session upgraded the buyer to a full
+      // subscription for the price of a single report.
+      if (session.mode === "payment") {
+        await grantReportCredit(userId, session);
+        break;
+      }
+
+      if (session.mode === "subscription") {
         await setProPlan(
           userId,
           typeof session.customer === "string" ? session.customer : session.customer?.id ?? null,

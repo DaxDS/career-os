@@ -1,0 +1,130 @@
+{
+  "_generated_by": "scripts/gen_draw_snapshot.py \u2014 do not edit by hand",
+  "asOf": "2026-08-03",
+  "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations.html",
+  "windowMonths": 12,
+  "live": [
+    {
+      "id": "cec",
+      "label": "Canadian Experience Class",
+      "rounds": 12,
+      "itas": 45250,
+      "lastDrawn": "2026-07-21",
+      "typicalCutoff": 516
+    },
+    {
+      "id": "french",
+      "label": "French-language proficiency",
+      "rounds": 8,
+      "itas": 40500,
+      "lastDrawn": "2026-07-22",
+      "typicalCutoff": 409
+    },
+    {
+      "id": "healthcare",
+      "label": "Health care and social services",
+      "rounds": 2,
+      "itas": 8000,
+      "lastDrawn": "2026-06-25",
+      "typicalCutoff": 471
+    },
+    {
+      "id": "pnp",
+      "label": "Provincial Nominee Program",
+      "rounds": 14,
+      "itas": 6450,
+      "lastDrawn": "2026-07-20",
+      "typicalCutoff": 730
+    },
+    {
+      "id": "trades",
+      "label": "Trades",
+      "rounds": 1,
+      "itas": 3000,
+      "lastDrawn": "2026-04-02",
+      "typicalCutoff": 477
+    },
+    {
+      "id": "senior_managers",
+      "label": "Senior managers with Canadian work experience",
+      "rounds": 2,
+      "itas": 750,
+      "lastDrawn": "2026-07-10",
+      "typicalCutoff": 410
+    },
+    {
+      "id": "physicians",
+      "label": "Physicians with Canadian work experience",
+      "rounds": 2,
+      "itas": 662,
+      "lastDrawn": "2026-06-24",
+      "typicalCutoff": 196
+    },
+    {
+      "id": "military",
+      "label": "Skilled military recruits",
+      "rounds": 1,
+      "itas": 4,
+      "lastDrawn": "2026-07-23",
+      "typicalCutoff": 368
+    }
+  ],
+  "dormant": [
+    {
+      "id": "education",
+      "label": "Education",
+      "rounds": 0,
+      "itas": 0,
+      "lastDrawn": null,
+      "typicalCutoff": null
+    },
+    {
+      "id": "fst",
+      "label": "Federal Skilled Trades",
+      "rounds": 0,
+      "itas": 0,
+      "lastDrawn": null,
+      "typicalCutoff": null
+    },
+    {
+      "id": "fsw",
+      "label": "Federal Skilled Worker",
+      "rounds": 0,
+      "itas": 0,
+      "lastDrawn": null,
+      "typicalCutoff": null
+    },
+    {
+      "id": "general",
+      "label": "General round",
+      "rounds": 0,
+      "itas": 0,
+      "lastDrawn": null,
+      "typicalCutoff": null
+    },
+    {
+      "id": "researchers",
+      "label": "Researchers with Canadian work experience",
+      "rounds": 0,
+      "itas": 0,
+      "lastDrawn": null,
+      "typicalCutoff": null
+    },
+    {
+      "id": "stem",
+      "label": "STEM",
+      "rounds": 0,
+      "itas": 0,
+      "lastDrawn": null,
+      "typicalCutoff": null
+    },
+    {
+      "id": "transport",
+      "label": "Transport",
+      "rounds": 0,
+      "itas": 0,
+      "lastDrawn": null,
+      "typicalCutoff": null
+    }
+  ]
+}

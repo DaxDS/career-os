@@ -60,81 +60,89 @@
   },
   "landing": {
     "hero": {
-      "title": "La seule plateforme d'emploi qui évalue chaque offre pour votre parcours Entrée express.",
-      "subtitle": "Pipeline IA qui adapte votre CV, rédige votre lettre de motivation et soumet automatiquement — avec score RP/CNP canadien sur chaque emploi.",
-      "ctaDemo": "Essayer la démo",
-      "ctaPrimary": "Commencer gratuitement",
-      "ctaSecondary": "Rejoindre la liste d'attente",
-      "ctaPlans": "Voir les forfaits",
-      "tagline": "Le seul outil qui fait une candidature autonome de qualité, pas du spam en volume."
+      "title": "Sachez quel emploi canadien vous rapproche vraiment de la résidence permanente.",
+      "subtitle": "Depuis mars 2025, une offre d'emploi ne vaut aucun point CRS. Ce qui compte encore : l'expérience canadienne qu'un poste vous donne, les catégories de rondes qu'il ouvre et les volets provinciaux qu'il débloque. Nous évaluons chaque emploi exactement là-dessus.",
+      "tagline": "Fondé sur l'historique réel des rondes d'IRCC — pas sur la liste publiée des catégories.",
+      "ctaPrimary": "Voir mon CRS et mes voies ouvertes",
+      "ctaDemo": "Voir un exemple de rapport",
+      "ctaSecondary": "Voir un exemple de rapport",
+      "ctaPlans": "Voir les tarifs"
     },
     "scoreDemo": {
-      "title": "Ingénieur IA senior",
+      "title": "Ingénieur IA principal",
       "meta": "Bell Canada · Toronto, ON",
-      "prBadge": "🇨🇦 92 % adéquation RP",
-      "overallScore": "87 %",
-      "overallLabel": "Correspondance globale",
-      "atsScore": "84 %",
-      "atsLabel": "Score ATS",
-      "nocCode": "CNP 21231",
-      "nocLabel": "Admissible Entrée express",
-      "caption": "Chaque emploi importé est évalué ainsi — adéquation RP, code CNP et correspondance ATS — avant qu'un document ne soit généré."
+      "prBadge": "CRS 522 après 12 mois",
+      "overallScore": "+40",
+      "overallLabel": "Points CRS après 12 mois ici",
+      "atsScore": "+6",
+      "atsLabel": "Marge sur le seuil CEC récent",
+      "nocCode": "CNP 21231 · FEER 1",
+      "nocLabel": "Ouvre la Catégorie de l'expérience canadienne",
+      "caption": "Un chiffre et une raison. Douze mois dans ce poste font passer votre CRS de 482 à 522, ce qui dépasse de 6 points le seuil récent de 516 de la Catégorie de l'expérience canadienne."
+    },
+    "drawBoard": {
+      "title": "Être admissible ne veut pas dire être invité.",
+      "subtitle": "IRCC répertorie dix catégories pour 2026. Seules certaines font réellement l'objet de rondes. Nous suivons chaque ronde pour que vous visiez des portes qui s'ouvrent.",
+      "liveLabel": "Rondes actives",
+      "dormantLabel": "Répertoriée par IRCC, mais dormante",
+      "stemNote": "STIM en est l'exemple le plus clair. Cette catégorie figure toujours sur la liste 2026 d'IRCC, alors tous les outils qui lisent cette liste disent aux ingénieurs logiciels qu'ils sont admissibles. Aucune ronde STIM n'a eu lieu depuis plus de 27 mois. Nous vous le disons, au lieu d'afficher une coche verte.",
+      "sourceNote": "Les seuils correspondent à la médiane des rondes les plus récentes de chaque catégorie. Les rondes passées ne préjugent pas des rondes futures."
     },
     "differentiators": {
       "reviewQueue": {
-        "title": "Rien ne s'envoie automatiquement",
-        "body": "Les CV et lettres personnalisés arrivent dans votre file de révision. Vous approuvez ou modifiez chaque envoi. Une limite quotidienne contrôle le nombre de candidatures qui quittent votre compte par jour."
+        "title": "Un vrai score CRS, pas un pourcentage de correspondance",
+        "body": "Nous appliquons la grille officielle complète du Système de classement global — âge, études, compétences linguistiques, expérience canadienne et étrangère, facteurs du conjoint, transférabilité des compétences. Vous obtenez un chiffre comparable aux seuils réels, avec chaque composante détaillée."
       },
       "pathwayScoring": {
-        "title": "Indicateurs de parcours sur chaque correspondance",
-        "body": "Chaque emploi reçoit un code CNP, un niveau FÉER, un salaire comparé à la médiane régionale, et des indicateurs pour Entrée express, les volets provinciaux et le programme de l'Atlantique — calculés selon votre expérience et votre statut de permis."
+        "title": "Évalué selon les rondes réellement tenues",
+        "body": "Chaque voie est mesurée avec l'historique réel des rondes d'IRCC : nombre d'invitations émises, date de la dernière ronde et niveau des seuils. Une catégorie d'où personne n'a été invité est signalée comme dormante, pas comme une occasion."
       },
       "permitFilters": {
-        "title": "Conçu pour les titulaires de permis de travail",
-        "body": "Vous indiquez votre type de permis et sa date d'expiration lors de l'intégration. Les emplois exigeant une EIMT, une cote de sécurité ou la citoyenneté que vous n'avez pas sont filtrés avant d'apparaître dans votre fil."
+        "title": "On vous dit ce qui est fermé, et pourquoi",
+        "body": "Si vous n'êtes pas admissible à une voie, nous le disons et nommons l'élément manquant : les douze mois d'expérience, le NCLC 7 en français, la nomination. Lorsque notre liste de professions n'a pas été vérifiée auprès d'IRCC, nous le signalons au lieu de deviner."
       }
     },
     "howItWorks": {
       "title": "Comment ça fonctionne",
-      "subtitle": "Quatre étapes, de la découverte à l'envoi — vous gardez le contrôle à la fin.",
+      "subtitle": "Quatre étapes, de votre profil à un emploi qui change vos chances.",
       "steps": {
         "discover": {
-          "title": "Découvrir",
-          "body": "Lancez la découverte sur la Guiche-Emplois et d'autres sources. Les emplois qui échouent à vos filtres d'autorisation de travail ou de permis n'entrent jamais dans votre fil."
+          "title": "Créez votre profil",
+          "body": "Âge, études, résultats des tests linguistiques, parcours professionnel, type et expiration du permis. Les mêmes éléments qu'IRCC évalue."
         },
         "score": {
-          "title": "Évaluer pour votre parcours",
-          "body": "Chaque correspondance affiche CNP/FÉER, salaire vs médiane régionale, et indicateurs de parcours (EE, PNP, PIA) d'après les critères publiés et votre profil."
+          "title": "Obtenez votre vrai CRS",
+          "body": "La grille officielle complète, chaque composante détaillée pour voir d'où viennent vos points et ce qui vous manque."
         },
-        "tailor": {
-          "title": "Personnaliser",
-          "body": "Générez un CV et une lettre au format canadien pour un poste. Pas de photo, pas de NAS — les règles de formatage sont appliquées automatiquement."
+        "routes": {
+          "title": "Voyez quelles voies sont ouvertes",
+          "body": "Votre score face au seuil récent de chaque catégorie active — et une mention claire de celles auxquelles vous n'êtes pas encore admissible."
         },
         "approve": {
-          "title": "Vous approuvez",
-          "body": "Révisez le brouillon dans votre file. Ce n'est qu'après votre approbation qu'une candidature avance vers l'envoi — selon la limite quotidienne de votre forfait."
+          "title": "Ciblez les emplois qui comblent l'écart",
+          "body": "Les emplois classés selon l'effet de douze mois dans le poste sur votre CRS et les voies que cela ouvre. Pas selon des mots-clés."
         }
       }
     },
     "jobExample": {
-      "title": "À quoi ressemble une correspondance",
-      "subtitle": "Les mêmes badges que dans le fil d'emplois — CNP, FÉER, salaire vs médiane, et indicateurs de parcours.",
-      "label": "Exemple de correspondance",
-      "matchScore": "score de correspondance"
+      "title": "À quoi ressemble un emploi évalué",
+      "subtitle": "La projection, la voie ouverte et la marge par rapport au seuil le plus récent.",
+      "label": "Exemple",
+      "matchScore": "CRS après 12 mois"
     },
     "pricing": {
-      "title": "Gratuit pour commencer, Pro pour plus d'envois",
-      "subtitle": "Les deux forfaits utilisent la même file de révision. Pro augmente la limite d'envoi quotidienne et supprime la limite mensuelle de personnalisation.",
+      "title": "Un rapport, ou un suivi continu",
+      "subtitle": "Commencez par un seul rapport. Passez à l'abonnement seulement si vous voulez un score recalculé à chaque nouvelle ronde publiée.",
       "freePrice": "0 $",
-      "proPrice": "{price} $ CAD",
+      "proPrice": "{price} CAD",
       "perMonth": "/ mois",
-      "freeSends": "{count} envois de candidature par jour",
-      "freeTailored": "{count} candidatures personnalisées par mois",
-      "reviewQueue": "File de révision humaine pour chaque envoi",
-      "proSends": "{count} envois de candidature par jour",
-      "proTailored": "Candidatures personnalisées illimitées",
-      "proPathway": "Actualisation du rapport de parcours",
-      "getStarted": "Commencer gratuitement",
+      "freeSends": "Votre score CRS avec le détail complet des composantes",
+      "freeTailored": "Chaque voie actuellement active, avec votre écart",
+      "reviewQueue": "Prochaines actions classées, avec les points que chacune vaut",
+      "proSends": "Tout ce que contient le rapport gratuit",
+      "proTailored": "Recalculé automatiquement à chaque nouvelle ronde",
+      "proPathway": "Emplois classés par delta CRS, avec candidatures personnalisées",
+      "getStarted": "Obtenir mon rapport CRS gratuit",
       "viewPricing": "Voir tous les tarifs"
     }
   },

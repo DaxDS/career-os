@@ -60,81 +60,89 @@
   },
   "landing": {
     "hero": {
-      "title": "The only job platform that scores every posting for your Express Entry pathway.",
-      "subtitle": "AI pipeline that tailors your resume, writes your cover letter, and auto-submits — with Canadian PR/NOC scoring on every job.",
-      "ctaDemo": "Try the demo",
-      "ctaPrimary": "Start free",
-      "ctaSecondary": "Join the waitlist",
-      "ctaPlans": "View plans",
-      "tagline": "The only tool that does quality-tailored autonomous apply, not volume spam."
+      "title": "Know which Canadian job actually moves you toward PR.",
+      "subtitle": "Since March 2025 a job offer has been worth zero CRS points. What still counts is the Canadian experience a role builds, the draw categories it opens, and the provincial streams it unlocks. We score every job on exactly that.",
+      "tagline": "Built on IRCC's actual round history — not the published category list.",
+      "ctaPrimary": "See my CRS and open routes",
+      "ctaDemo": "See a sample report",
+      "ctaSecondary": "See a sample report",
+      "ctaPlans": "View pricing"
     },
     "scoreDemo": {
       "title": "Senior AI Engineer",
       "meta": "Bell Canada · Toronto, ON",
-      "prBadge": "🇨🇦 92% PR fit",
-      "overallScore": "87%",
-      "overallLabel": "Overall match",
-      "atsScore": "84%",
-      "atsLabel": "ATS score",
-      "nocCode": "NOC 21231",
-      "nocLabel": "Express Entry eligible",
-      "caption": "Every imported job is scored like this — PR pathway fit, NOC code, and ATS match — before a single document is generated."
+      "prBadge": "CRS 522 after 12 months",
+      "overallScore": "+40",
+      "overallLabel": "CRS points from 12 months here",
+      "atsScore": "+6",
+      "atsLabel": "Margin over recent CEC cut-off",
+      "nocCode": "NOC 21231 · TEER 1",
+      "nocLabel": "Opens Canadian Experience Class",
+      "caption": "One number and one reason. Twelve months in this role takes your CRS from 482 to 522, which clears the recent Canadian Experience Class cut-off of 516 by 6 points."
+    },
+    "drawBoard": {
+      "title": "Being eligible is not the same as being invited.",
+      "subtitle": "IRCC lists ten categories for 2026. Only some are actually being drawn. We track every round, so you aim at doors that open.",
+      "liveLabel": "Actively being drawn",
+      "dormantLabel": "Listed by IRCC, but dormant",
+      "stemNote": "STEM is the clearest example. It is still on IRCC's 2026 category list, so every tool that reads that list tells software engineers they qualify. No STEM round has been held in over 27 months. We show you that instead of a green checkmark.",
+      "sourceNote": "Cut-offs are the median of the most recent rounds in each category. Past rounds do not predict future ones."
     },
     "differentiators": {
       "reviewQueue": {
-        "title": "Nothing auto-submits",
-        "body": "Tailored resumes and cover letters land in your review queue. You approve or edit each one. A daily send cap limits how many applications leave your account per day."
+        "title": "A real CRS score, not a match percentage",
+        "body": "We run the full official Comprehensive Ranking System grid — age, education, language ability, Canadian and foreign experience, spouse factors, skill transferability. You get a number you can compare against actual cut-offs, with every component shown."
       },
       "pathwayScoring": {
-        "title": "Pathway flags on every match",
-        "body": "Each job gets a NOC unit-group code, TEER level, wage vs regional median, and flags for Express Entry categories, provincial streams, and Atlantic program relevance — scored against your work history and permit status."
+        "title": "Scored against rounds that actually happened",
+        "body": "Every route is measured against IRCC's real round history: how many invitations it issued, when it last ran, and where its cut-off has sat. A category nobody has been invited from is reported as dormant, not as an opportunity."
       },
       "permitFilters": {
-        "title": "Built for work-permit holders",
-        "body": "You set your permit type and expiry during onboarding. Jobs requiring LMIA, security clearance, or citizenship you do not hold are filtered out before they appear in your feed."
+        "title": "Told what is closed, and why",
+        "body": "If you do not qualify for a route, we say so and name the missing piece — the twelve months of experience, the NCLC 7 in French, the nomination. Where our occupation list has not been verified against IRCC, we flag it rather than guess."
       }
     },
     "howItWorks": {
       "title": "How it works",
-      "subtitle": "Four steps from discovery to send — with you in control at the end.",
+      "subtitle": "Four steps from your profile to a job that changes your odds.",
       "steps": {
         "discover": {
-          "title": "Discover",
-          "body": "Run discovery against Job Bank and other sources. Jobs that fail your work-authorization or permit filters never enter your feed."
+          "title": "Build your profile",
+          "body": "Age, education, language test scores, work history, permit type and expiry. The same inputs IRCC scores you on."
         },
         "score": {
-          "title": "Score for your pathway",
-          "body": "Each match shows NOC/TEER, wage vs regional median, and pathway flags (EE, PNP, AIP) derived from published program criteria and your profile."
+          "title": "Get your real CRS",
+          "body": "The full official grid, with every component itemised so you can see exactly where your points come from and where they are missing."
         },
-        "tailor": {
-          "title": "Tailor",
-          "body": "Generate a Canadian-format resume and cover letter for a role. No photo, no SIN — formatting rules are enforced automatically."
+        "routes": {
+          "title": "See which routes are open",
+          "body": "Your score against the recent cut-off for every category currently being drawn — and a plain statement of which ones you do not qualify for yet."
         },
         "approve": {
-          "title": "You approve",
-          "body": "Review the draft in your queue. Only after you approve does an application move toward send — subject to your plan's daily cap."
+          "title": "Target the jobs that close the gap",
+          "body": "Jobs ranked by how far twelve months in the role moves your CRS and which routes it opens. Not by keyword overlap."
         }
       }
     },
     "jobExample": {
-      "title": "What a match looks like",
-      "subtitle": "The same badges you see on the jobs feed — NOC, TEER, wage vs median, and pathway flags.",
-      "label": "Example match",
-      "matchScore": "match score"
+      "title": "What a scored job looks like",
+      "subtitle": "The projection, the route it opens, and the margin against the most recent cut-off.",
+      "label": "Example",
+      "matchScore": "CRS after 12 months"
     },
     "pricing": {
-      "title": "Free to start, Pro when you need more sends",
-      "subtitle": "Both plans use the same review queue. Pro raises your daily send cap and removes the monthly tailoring limit.",
+      "title": "One report, or ongoing tracking",
+      "subtitle": "Start with a single report. Move to a subscription only if you want your score re-checked as new rounds are published.",
       "freePrice": "$0",
       "proPrice": "{price} CAD",
       "perMonth": "/ month",
-      "freeSends": "{count} application sends per day",
-      "freeTailored": "{count} tailored applications per month",
-      "reviewQueue": "Human review queue on every send",
-      "proSends": "{count} application sends per day",
-      "proTailored": "Unlimited tailored applications",
-      "proPathway": "Pathway report refresh",
-      "getStarted": "Get started free",
+      "freeSends": "Your CRS score with full component breakdown",
+      "freeTailored": "Every currently-drawn route, with your gap to each",
+      "reviewQueue": "Ranked next moves, with the points each is worth",
+      "proSends": "Everything in the free report",
+      "proTailored": "Re-scored automatically as new rounds are published",
+      "proPathway": "Jobs ranked by CRS delta, with tailored applications",
+      "getStarted": "Get my free CRS report",
       "viewPricing": "View full pricing"
     }
   },
