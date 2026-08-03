@@ -1,5 +1,9 @@
 /**
- * Sync server secrets from backend/.env to Vercel production.
+ * Sync server secrets from .env.server to Vercel production.
+ *
+ * Previously read backend/.env. That directory held an undeployed parallel
+ * implementation and was removed; the secrets file moved to the repo root, where
+ * `.env*` keeps it gitignored.
  *
  * Usage:
  *   npm run sync:vercel-secrets
@@ -10,17 +14,17 @@ import { fileURLToPath } from "node:url";
 import { syncVercelEnv } from "./vercel-env-sync.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const BACKEND_ENV = join(ROOT, "backend", ".env");
+const SERVER_ENV = join(ROOT, ".env.server");
 
 const SYNC_KEYS = ["ANTHROPIC_API_KEY", "STRIPE_SECRET_KEY", "STRIPE_PRICE_PRO", "STRIPE_WEBHOOK_SECRET"];
 
-function loadBackendEnv() {
-  if (!existsSync(BACKEND_ENV)) {
-    console.error("backend/.env not found");
+function loadServerEnv() {
+  if (!existsSync(SERVER_ENV)) {
+    console.error(".env.server not found at the repo root");
     process.exit(1);
   }
   const values = {};
-  for (const line of readFileSync(BACKEND_ENV, "utf8").split("\n")) {
+  for (const line of readFileSync(SERVER_ENV, "utf8").split("\n")) {
     const trimmed = line.trim();
     if (!trimmed || trimmed.startsWith("#")) continue;
     const eq = trimmed.indexOf("=");
@@ -38,7 +42,7 @@ function loadBackendEnv() {
   return values;
 }
 
-const env = loadBackendEnv();
+const env = loadServerEnv();
 console.log("Syncing secrets to Vercel production…");
 for (const key of SYNC_KEYS) {
   syncVercelEnv(key, env[key]);

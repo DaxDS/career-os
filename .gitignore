@@ -52,3 +52,6 @@ backend/.pytest_cache/
 
 # Test browser profile (may contain session data)
 backend/_test_browser_profile/
+
+# TypeScript incremental build cache
+*.tsbuildinfo
