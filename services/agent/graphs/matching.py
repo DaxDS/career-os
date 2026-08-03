@@ -5,11 +5,81 @@ from __future__ import annotations
 import re
 from typing import Any
 
+from lib.crs import EDUCATION_ORDER
 from lib.data_loaders import wage_median
+
+#: Phrases in a posting that imply a minimum credential, most specific first.
+_EDUCATION_SIGNALS: list[tuple[str, str]] = [
+    ("phd", "doctoral"),
+    ("ph.d", "doctoral"),
+    ("doctorate", "doctoral"),
+    ("doctoral", "doctoral"),
+    ("master's", "masters_or_professional"),
+    ("masters", "masters_or_professional"),
+    ("msc", "masters_or_professional"),
+    ("mba", "masters_or_professional"),
+    ("bachelor", "bachelors_or_three_year"),
+    ("undergraduate degree", "bachelors_or_three_year"),
+    ("bsc", "bachelors_or_three_year"),
+    ("b.eng", "bachelors_or_three_year"),
+    ("degree", "bachelors_or_three_year"),
+    ("diploma", "two_year_post_secondary"),
+    ("college certificate", "one_year_post_secondary"),
+    ("certificate", "one_year_post_secondary"),
+    ("high school", "secondary"),
+    ("secondary school", "secondary"),
+]
 
 
 def _tokenize(text: str) -> set[str]:
     return {t for t in re.findall(r"[a-z0-9+#]+", text.lower()) if len(t) > 2}
+
+
+def _required_education(parsed: dict[str, Any], job: dict[str, Any]) -> str | None:
+    """Infer the credential a posting asks for. Returns None when nothing is stated."""
+    explicit = parsed.get("education_required")
+    if explicit in EDUCATION_ORDER:
+        return explicit
+
+    haystack = " ".join(
+        [
+            " ".join(parsed.get("requirements") or []),
+            parsed.get("education_text") or "",
+            (job.get("raw_jd") or "")[:2000],
+        ]
+    ).lower()
+
+    for phrase, level in _EDUCATION_SIGNALS:
+        if phrase in haystack:
+            return level
+    return None
+
+
+def _education_fit(profile: dict[str, Any], required: str | None) -> tuple[float, str | None]:
+    """Score the candidate's credential against the posting's stated requirement.
+
+    Returns (score, gap_message). A posting that states no requirement scores neutral
+    rather than penalising or rewarding — absence of a signal is not evidence.
+    """
+    candidate = profile.get("education_level")
+    if candidate not in EDUCATION_ORDER:
+        return 50.0, "Education level not set on your profile — add it for accurate scoring."
+    if required is None:
+        return 50.0, None
+
+    have = EDUCATION_ORDER.index(candidate)
+    need = EDUCATION_ORDER.index(required)
+
+    if have >= need:
+        # Slight taper for heavy over-qualification, which can work against a candidate.
+        return (100.0 if have - need <= 2 else 85.0), None
+
+    shortfall = need - have
+    score = max(0.0, 100.0 - shortfall * 30)
+    return score, (
+        f"Posting implies {required.replace('_', ' ')}; your profile lists "
+        f"{candidate.replace('_', ' ')}."
+    )
 
 
 def score_match(
@@ -74,17 +144,24 @@ def score_match(
         if annual_equiv >= salary_min:
             wage_fit = max(wage_fit, 80.0)
 
+    required_education = _required_education(parsed, job)
+    education_fit, education_gap = _education_fit(profile, required_education)
+
+    # Education carries real weight: it gates both the role and the CRS grid, and was
+    # previously absent from this formula entirely.
     weights = {
-        "noc_alignment": 0.35,
-        "skills_overlap": 0.30,
+        "noc_alignment": 0.30,
+        "skills_overlap": 0.25,
         "experience_fit": 0.15,
-        "location_ok": 0.10,
-        "wage_fit": 0.10,
+        "education_fit": 0.15,
+        "location_ok": 0.08,
+        "wage_fit": 0.07,
     }
     components = {
         "noc_alignment": round(noc_alignment, 1),
         "skills_overlap": round(skills_overlap, 1),
         "experience_fit": round(experience_fit, 1),
+        "education_fit": round(education_fit, 1),
         "location_ok": round(location_ok, 1),
         "wage_fit": round(wage_fit, 1),
     }
@@ -101,6 +178,8 @@ def score_match(
         gaps.append(f"TEER {job_teer} role — your experience averages TEER {sum(user_teer)/len(user_teer):.0f}." if user_teer else f"TEER {job_teer} role — confirm experience level fit.")
     if location_ok < 60:
         gaps.append(f"Location: {job_prov or 'unknown'} vs your target {pref or 'any'}.")
+    if education_gap:
+        gaps.append(education_gap)
     if wage_fit < 50 and median and wage_offered:
         gaps.append(f"Offered wage may be below regional median (${median:.2f}/hr) for NOC {noc_code}.")
 
