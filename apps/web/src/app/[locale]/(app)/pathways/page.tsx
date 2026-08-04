@@ -1,7 +1,10 @@
 import { redirect } from "@/i18n/routing";
 import { CrsProfileForm } from "@/components/pathways/crs-profile-form";
 import { PathwayReportView, type PathwayReportData } from "@/components/pathways/pathway-report";
+import { buildPathwayReport } from "@/lib/crs/build";
 import { createClient } from "@/lib/supabase/server";
+
+export const dynamic = "force-dynamic";
 
 export default async function PathwaysPage() {
   const supabase = await createClient();
@@ -10,19 +13,20 @@ export default async function PathwaysPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [profileResult, { data: reports }] = await Promise.all([
-    supabase.from("profiles").select("*").eq("id", user.id).single(),
-    supabase
-      .from("pathway_reports")
-      .select("report_json, generated_at")
-      .eq("user_id", user.id)
-      .order("generated_at", { ascending: false })
-      .limit(1),
-  ]);
-
-  const profile = (profileResult.data ?? {}) as Record<string, unknown>;
-  const report = (reports?.[0]?.report_json as PathwayReportData | undefined) ?? null;
+  const { data: profileRow } = await supabase.from("profiles").select("*").eq("id", user.id).single();
+  const profile = (profileRow ?? {}) as Record<string, unknown>;
   const completed = Boolean(profile.crs_profile_completed);
+
+  // Computed on every load rather than read back from pathway_reports. The score is
+  // pure computation over the profile, so making it depend on a prior successful write
+  // is what previously left a fully-filled profile staring at "No pathway report yet."
+  let report: PathwayReportData | null = null;
+  let buildError: string | null = null;
+  if (completed) {
+    const built = await buildPathwayReport(supabase, user.id);
+    report = (built.report as PathwayReportData | null) ?? null;
+    buildError = built.error;
+  }
 
   return (
     <div className="space-y-6">
@@ -35,15 +39,19 @@ export default async function PathwaysPage() {
 
       <CrsProfileForm initial={profile as never} completed={completed} />
 
-      {/* Until the CRS inputs exist, a report would score near zero and read as
-          authoritative. Better to show nothing than a confidently wrong number. */}
-      {completed ? (
-        <PathwayReportView report={report} />
-      ) : (
+      {!completed && (
         <p className="rounded-xl border border-dashed p-8 text-center text-sm text-muted-foreground">
           Fill in the details above to see your score, the routes open to you, and your gap to each.
         </p>
       )}
+
+      {completed && buildError && (
+        <p className="rounded-xl border border-destructive/40 bg-destructive/10 p-6 text-sm text-destructive">
+          {buildError}
+        </p>
+      )}
+
+      {completed && report && <PathwayReportView report={report} />}
     </div>
   );
 }
