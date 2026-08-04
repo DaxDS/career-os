@@ -45,7 +45,10 @@ SECURITY DEFINER
 SET search_path = public
 AS $$
 DECLARE
-  inserted BOOLEAN := FALSE;
+  -- GET DIAGNOSTICS returns an integer. Assigning it straight to a BOOLEAN fails,
+  -- because int -> bool is an explicit-only cast and PL/pgSQL assignment does not
+  -- apply explicit casts.
+  rows_inserted INTEGER := 0;
 BEGIN
   INSERT INTO report_purchases (
     user_id, stripe_session_id, stripe_payment_intent, amount_total, currency
@@ -53,12 +56,12 @@ BEGIN
   VALUES (p_user_id, p_session_id, p_payment_intent, p_amount_total, p_currency)
   ON CONFLICT (stripe_session_id) DO NOTHING;
 
-  GET DIAGNOSTICS inserted = ROW_COUNT;
+  GET DIAGNOSTICS rows_inserted = ROW_COUNT;
 
-  IF inserted THEN
+  IF rows_inserted > 0 THEN
     UPDATE profiles SET report_credits = report_credits + 1 WHERE id = p_user_id;
   END IF;
 
-  RETURN inserted;
+  RETURN rows_inserted > 0;
 END;
 $$;
