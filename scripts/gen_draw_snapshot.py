@@ -23,6 +23,10 @@ from lib.data_loaders import load_json  # noqa: E402
 from lib.draws import all_category_activity, draws_metadata  # noqa: E402
 
 OUT = ROOT / "apps" / "web" / "src" / "lib" / "draw-snapshot.json"
+#: Full reference data for the in-app CRS engine. The scoring runs inside Next.js on
+#: Vercel rather than in a separate Python service, so the data has to live where the
+#: web app can import it — but services/agent/data stays the single source of truth.
+ENGINE_OUT = ROOT / "apps" / "web" / "src" / "lib" / "crs" / "reference-data.json"
 
 PROGRAM_LABELS = {
     "general": "General round",
@@ -67,6 +71,21 @@ def main() -> None:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}  ({len(live)} live, {len(dormant)} dormant)")
+
+    draws_raw = load_json("draws.json")
+    engine_payload = {
+        "_generated_by": "scripts/gen_draw_snapshot.py — do not edit by hand",
+        "draws": draws_raw.get("draws", []),
+        "categoryIds": draws_raw.get("category_ids", []),
+        "categories": load_json("ee_categories.json").get("categories", []),
+        "metadata": draws_metadata(),
+    }
+    ENGINE_OUT.parent.mkdir(parents=True, exist_ok=True)
+    ENGINE_OUT.write_text(json.dumps(engine_payload, indent=2) + "\n", encoding="utf-8")
+    print(
+        f"wrote {ENGINE_OUT.relative_to(ROOT)}  "
+        f"({len(engine_payload['draws'])} draws, {len(engine_payload['categories'])} categories)"
+    )
 
 
 if __name__ == "__main__":

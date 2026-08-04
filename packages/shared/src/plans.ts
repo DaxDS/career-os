@@ -16,11 +16,10 @@ export const PLANS: Record<PlanTier, PlanDefinition> = {
     dailySendCap: 5,
     tailoredApplicationsPerMonth: 10,
     features: [
-      "Full jobs feed with NOC/TEER/wage badges",
-      "Basic pathway flags on matches",
-      "5 application sends per day",
-      "10 tailored applications per month",
-      "Human-in-the-loop review queue",
+      "Your CRS score with full component breakdown",
+      "Every Express Entry route currently being drawn, with your gap to each",
+      "Ranked next moves, with the points each is worth",
+      "Dormant categories flagged so you don't chase closed doors",
     ],
   },
   pro: {

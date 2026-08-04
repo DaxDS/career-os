@@ -1,4 +1,5 @@
 import { redirect } from "@/i18n/routing";
+import { CrsProfileForm } from "@/components/pathways/crs-profile-form";
 import { PathwayReportView, type PathwayReportData } from "@/components/pathways/pathway-report";
 import { createClient } from "@/lib/supabase/server";
 
@@ -9,24 +10,40 @@ export default async function PathwaysPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const { data: reports } = await supabase
-    .from("pathway_reports")
-    .select("report_json, generated_at")
-    .eq("user_id", user.id)
-    .order("generated_at", { ascending: false })
-    .limit(1);
+  const [profileResult, { data: reports }] = await Promise.all([
+    supabase.from("profiles").select("*").eq("id", user.id).single(),
+    supabase
+      .from("pathway_reports")
+      .select("report_json, generated_at")
+      .eq("user_id", user.id)
+      .order("generated_at", { ascending: false })
+      .limit(1),
+  ]);
 
+  const profile = (profileResult.data ?? {}) as Record<string, unknown>;
   const report = (reports?.[0]?.report_json as PathwayReportData | undefined) ?? null;
+  const completed = Boolean(profile.crs_profile_completed);
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Immigration pathway report</h1>
+        <h1 className="text-2xl font-bold">Your PR pathway report</h1>
         <p className="text-muted-foreground">
-          Situational analysis based on your profile, NOC-mapped experience, and published program criteria.
+          Your CRS score against the Express Entry rounds actually being held — and what would move it.
         </p>
       </div>
-      <PathwayReportView report={report} />
+
+      <CrsProfileForm initial={profile as never} completed={completed} />
+
+      {/* Until the CRS inputs exist, a report would score near zero and read as
+          authoritative. Better to show nothing than a confidently wrong number. */}
+      {completed ? (
+        <PathwayReportView report={report} />
+      ) : (
+        <p className="rounded-xl border border-dashed p-8 text-center text-sm text-muted-foreground">
+          Fill in the details above to see your score, the routes open to you, and your gap to each.
+        </p>
+      )}
     </div>
   );
 }

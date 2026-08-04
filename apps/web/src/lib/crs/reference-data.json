@@ -1,0 +1,591 @@
+{
+  "_generated_by": "scripts/gen_draw_snapshot.py \u2014 do not edit by hand",
+  "draws": [
+    {
+      "round": 430,
+      "date": "2026-07-23",
+      "category": "military",
+      "itas": 4,
+      "crs_cutoff": 368
+    },
+    {
+      "round": 429,
+      "date": "2026-07-22",
+      "category": "french",
+      "itas": 5000,
+      "crs_cutoff": 399
+    },
+    {
+      "round": 428,
+      "date": "2026-07-21",
+      "category": "cec",
+      "itas": 2000,
+      "crs_cutoff": 516
+    },
+    {
+      "round": 427,
+      "date": "2026-07-20",
+      "category": "pnp",
+      "itas": 511,
+      "crs_cutoff": 744
+    },
+    {
+      "round": 426,
+      "date": "2026-07-10",
+      "category": "senior_managers",
+      "itas": 500,
+      "crs_cutoff": 392
+    },
+    {
+      "round": 425,
+      "date": "2026-07-09",
+      "category": "french",
+      "itas": 5000,
+      "crs_cutoff": 420
+    },
+    {
+      "round": 424,
+      "date": "2026-07-07",
+      "category": "cec",
+      "itas": 2000,
+      "crs_cutoff": 517
+    },
+    {
+      "round": 423,
+      "date": "2026-07-06",
+      "category": "pnp",
+      "itas": 534,
+      "crs_cutoff": 708
+    },
+    {
+      "round": 422,
+      "date": "2026-06-25",
+      "category": "healthcare",
+      "itas": 4000,
+      "crs_cutoff": 475
+    },
+    {
+      "round": 421,
+      "date": "2026-06-24",
+      "category": "physicians",
+      "itas": 271,
+      "crs_cutoff": 223
+    },
+    {
+      "round": 420,
+      "date": "2026-06-23",
+      "category": "cec",
+      "itas": 4000,
+      "crs_cutoff": 516
+    },
+    {
+      "round": 419,
+      "date": "2026-06-22",
+      "category": "pnp",
+      "itas": 955,
+      "crs_cutoff": 730
+    },
+    {
+      "round": 418,
+      "date": "2026-05-28",
+      "category": "french",
+      "itas": 4500,
+      "crs_cutoff": 409
+    },
+    {
+      "round": 417,
+      "date": "2026-05-27",
+      "category": "cec",
+      "itas": 3000,
+      "crs_cutoff": 518
+    },
+    {
+      "round": 416,
+      "date": "2026-05-25",
+      "category": "pnp",
+      "itas": 334,
+      "crs_cutoff": 805
+    },
+    {
+      "round": 415,
+      "date": "2026-05-11",
+      "category": "pnp",
+      "itas": 380,
+      "crs_cutoff": 798
+    },
+    {
+      "round": 414,
+      "date": "2026-04-29",
+      "category": "french",
+      "itas": 4000,
+      "crs_cutoff": 400
+    },
+    {
+      "round": 413,
+      "date": "2026-04-28",
+      "category": "cec",
+      "itas": 2000,
+      "crs_cutoff": 514
+    },
+    {
+      "round": 412,
+      "date": "2026-04-27",
+      "category": "pnp",
+      "itas": 473,
+      "crs_cutoff": 795
+    },
+    {
+      "round": 411,
+      "date": "2026-04-15",
+      "category": "french",
+      "itas": 4000,
+      "crs_cutoff": 419
+    },
+    {
+      "round": 410,
+      "date": "2026-04-14",
+      "category": "cec",
+      "itas": 2000,
+      "crs_cutoff": 515
+    },
+    {
+      "round": 409,
+      "date": "2026-04-13",
+      "category": "pnp",
+      "itas": 324,
+      "crs_cutoff": 786
+    },
+    {
+      "round": 408,
+      "date": "2026-04-02",
+      "category": "trades",
+      "itas": 3000,
+      "crs_cutoff": 477
+    },
+    {
+      "round": 407,
+      "date": "2026-03-31",
+      "category": "cec",
+      "itas": 2250,
+      "crs_cutoff": 509
+    },
+    {
+      "round": 406,
+      "date": "2026-03-30",
+      "category": "pnp",
+      "itas": 356,
+      "crs_cutoff": 802
+    },
+    {
+      "round": 405,
+      "date": "2026-03-18",
+      "category": "french",
+      "itas": 4000,
+      "crs_cutoff": 393
+    },
+    {
+      "round": 404,
+      "date": "2026-03-17",
+      "category": "cec",
+      "itas": 4000,
+      "crs_cutoff": 507
+    },
+    {
+      "round": 403,
+      "date": "2026-03-16",
+      "category": "pnp",
+      "itas": 362,
+      "crs_cutoff": 742
+    },
+    {
+      "round": 402,
+      "date": "2026-03-05",
+      "category": "senior_managers",
+      "itas": 250,
+      "crs_cutoff": 429
+    },
+    {
+      "round": 401,
+      "date": "2026-03-04",
+      "category": "french",
+      "itas": 5500,
+      "crs_cutoff": 397
+    },
+    {
+      "round": 400,
+      "date": "2026-03-03",
+      "category": "cec",
+      "itas": 4000,
+      "crs_cutoff": 508
+    },
+    {
+      "round": 399,
+      "date": "2026-03-02",
+      "category": "pnp",
+      "itas": 264,
+      "crs_cutoff": 710
+    },
+    {
+      "round": 398,
+      "date": "2026-02-20",
+      "category": "healthcare",
+      "itas": 4000,
+      "crs_cutoff": 467
+    },
+    {
+      "round": 397,
+      "date": "2026-02-19",
+      "category": "physicians",
+      "itas": 391,
+      "crs_cutoff": 169
+    },
+    {
+      "round": 396,
+      "date": "2026-02-17",
+      "category": "cec",
+      "itas": 6000,
+      "crs_cutoff": 508
+    },
+    {
+      "round": 395,
+      "date": "2026-02-16",
+      "category": "pnp",
+      "itas": 279,
+      "crs_cutoff": 789
+    },
+    {
+      "round": 394,
+      "date": "2026-02-06",
+      "category": "french",
+      "itas": 8500,
+      "crs_cutoff": 400
+    },
+    {
+      "round": 393,
+      "date": "2026-02-03",
+      "category": "pnp",
+      "itas": 423,
+      "crs_cutoff": 749
+    },
+    {
+      "round": 392,
+      "date": "2026-01-21",
+      "category": "cec",
+      "itas": 6000,
+      "crs_cutoff": 509
+    },
+    {
+      "round": 391,
+      "date": "2026-01-20",
+      "category": "pnp",
+      "itas": 681,
+      "crs_cutoff": 746
+    },
+    {
+      "round": 390,
+      "date": "2026-01-07",
+      "category": "cec",
+      "itas": 8000,
+      "crs_cutoff": 511
+    },
+    {
+      "round": 389,
+      "date": "2026-01-05",
+      "category": "pnp",
+      "itas": 574,
+      "crs_cutoff": 711
+    }
+  ],
+  "categoryIds": [
+    "general",
+    "cec",
+    "fsw",
+    "fst",
+    "pnp",
+    "french",
+    "healthcare",
+    "stem",
+    "trades",
+    "education",
+    "transport",
+    "physicians",
+    "senior_managers",
+    "researchers",
+    "military"
+  ],
+  "categories": [
+    {
+      "id": "stem",
+      "label": "STEM",
+      "description": "Science, Technology, Engineering and Mathematics occupations",
+      "verification_status": "verified",
+      "requires_canadian_experience": false,
+      "noc_codes": [
+        "20010",
+        "20011",
+        "20012",
+        "21100",
+        "21101",
+        "21102",
+        "21103",
+        "21109",
+        "21110",
+        "21111",
+        "21112",
+        "21120",
+        "21200",
+        "21201",
+        "21202",
+        "21203",
+        "21210",
+        "21211",
+        "21220",
+        "21221",
+        "21222",
+        "21223",
+        "21230",
+        "21231",
+        "21232",
+        "21233",
+        "21234",
+        "21300",
+        "21301",
+        "21310",
+        "21311",
+        "21320",
+        "21321",
+        "21322",
+        "21330",
+        "21331",
+        "21332",
+        "21390",
+        "21399"
+      ],
+      "min_teer": 0,
+      "max_teer": 3
+    },
+    {
+      "id": "healthcare",
+      "label": "Health care and social services",
+      "description": "Health care and social services occupations",
+      "verification_status": "verified",
+      "requires_canadian_experience": false,
+      "noc_codes": [
+        "30010",
+        "31100",
+        "31101",
+        "31102",
+        "31103",
+        "31110",
+        "31111",
+        "31112",
+        "31120",
+        "31121",
+        "31200",
+        "31201",
+        "31202",
+        "31203",
+        "31204",
+        "31209",
+        "31300",
+        "31301",
+        "31302",
+        "31303",
+        "32100",
+        "32101",
+        "32102",
+        "32103",
+        "32104",
+        "32109",
+        "32110",
+        "32111",
+        "32112",
+        "32120",
+        "32121",
+        "32122",
+        "32123",
+        "32124",
+        "32129",
+        "32200",
+        "32201",
+        "32209",
+        "33100",
+        "33101",
+        "33102",
+        "33103",
+        "33109"
+      ],
+      "min_teer": 0,
+      "max_teer": 3
+    },
+    {
+      "id": "trades",
+      "label": "Trades",
+      "description": "Trade occupations",
+      "verification_status": "verified",
+      "requires_canadian_experience": false,
+      "noc_codes": [
+        "72010",
+        "72011",
+        "72013",
+        "72014",
+        "72020",
+        "72021",
+        "72022",
+        "72023",
+        "72024",
+        "72025",
+        "72100",
+        "72101",
+        "72102",
+        "72103",
+        "72104",
+        "72105",
+        "72106",
+        "72200",
+        "72201",
+        "72300",
+        "72301",
+        "72302",
+        "72310",
+        "72311",
+        "72320",
+        "72400",
+        "72401",
+        "72402",
+        "72403",
+        "72404",
+        "72405",
+        "72406",
+        "72410",
+        "72411",
+        "72420",
+        "72421",
+        "72422",
+        "72423",
+        "72500",
+        "72501",
+        "72600",
+        "72601",
+        "72604",
+        "72999",
+        "73100",
+        "73101",
+        "73102",
+        "73110",
+        "73111",
+        "73112",
+        "73113",
+        "73200",
+        "73201",
+        "73202",
+        "73209",
+        "73300",
+        "73301",
+        "73310",
+        "73311",
+        "73400",
+        "73401",
+        "73402"
+      ],
+      "min_teer": 2,
+      "max_teer": 3
+    },
+    {
+      "id": "education",
+      "label": "Education",
+      "description": "Education occupations. Includes university professors and lecturers, post-secondary teaching and research assistants, and school teachers.",
+      "verification_status": "unverified",
+      "requires_canadian_experience": false,
+      "noc_codes": [
+        "41200",
+        "41201",
+        "41210",
+        "41220",
+        "41221",
+        "42202",
+        "43100"
+      ],
+      "min_teer": 0,
+      "max_teer": 3,
+      "verification_note": "Confirmed as a renewed 2026 category. Re-check the exact NOC list against IRCC before asserting eligibility."
+    },
+    {
+      "id": "transport",
+      "label": "Transport",
+      "description": "Transport occupations. Newly introduced for 2026.",
+      "verification_status": "unverified",
+      "requires_canadian_experience": false,
+      "noc_codes": [],
+      "min_teer": 0,
+      "max_teer": 3,
+      "verification_note": "Confirmed as a new 2026 category. The 2025 transport NOC list was retired with the category redesign; do not reuse it. Needs the published 2026 list."
+    },
+    {
+      "id": "physicians",
+      "label": "Physicians with Canadian work experience",
+      "description": "Medical doctors with Canadian work experience. Newly introduced for 2026.",
+      "verification_status": "unverified",
+      "requires_canadian_experience": true,
+      "noc_codes": [
+        "31100",
+        "31101",
+        "31102"
+      ],
+      "min_teer": 0,
+      "max_teer": 1,
+      "verification_note": "Confirmed as a new 2026 category requiring Canadian work experience. Re-check the exact NOC list against IRCC."
+    },
+    {
+      "id": "senior_managers",
+      "label": "Senior managers with Canadian work experience",
+      "description": "Senior managers in construction, transportation, production, utilities, financial, communications and other business services, with Canadian work experience.",
+      "verification_status": "unverified",
+      "requires_canadian_experience": true,
+      "noc_codes": [],
+      "min_teer": 0,
+      "max_teer": 0,
+      "verification_note": "Confirmed as a new 2026 category requiring Canadian work experience. Needs the published NOC 00-series list."
+    },
+    {
+      "id": "researchers",
+      "label": "Researchers with Canadian work experience",
+      "description": "Researchers with Canadian work experience. Newly introduced for 2026.",
+      "verification_status": "unverified",
+      "requires_canadian_experience": true,
+      "noc_codes": [],
+      "min_teer": 0,
+      "max_teer": 1,
+      "verification_note": "Confirmed as a new 2026 category requiring Canadian work experience. Needs the published NOC list."
+    },
+    {
+      "id": "military",
+      "label": "Skilled military recruits",
+      "description": "Skilled military recruits with a Canadian Armed Forces job offer.",
+      "verification_status": "unverified",
+      "requires_canadian_experience": false,
+      "noc_codes": [],
+      "min_teer": 0,
+      "max_teer": 5,
+      "verification_note": "Eligibility is driven by a Canadian Armed Forces job offer rather than by NOC alone. Not inferable from a job posting; exclude from job-level scoring.",
+      "exclude_from_job_scoring": true
+    },
+    {
+      "id": "french_proficiency",
+      "draw_category_id": "french",
+      "label": "French-language proficiency",
+      "description": "All TEER 0-3 NOCs when the candidate has strong French proficiency (NCLC 7+). Not NOC-list restricted.",
+      "verification_status": "verified",
+      "requires_canadian_experience": false,
+      "noc_codes": [],
+      "requires_french_nclc_min": 7,
+      "all_teer_0_3": true
+    }
+  ],
+  "metadata": {
+    "last_verified": "2026-08-03",
+    "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations.html",
+    "seed_provenance": "Seeded from published round-of-invitation tables cross-checked across two independent trackers (moving2canada.com, ansariimmigration.com) on 2026-08-03. Refresh with scrapers/ircc_draws.py, which reads IRCC's official JSON feed. Treat any row older than the last refresh_attempted_at as needing re-verification.",
+    "disclaimer": "Informational only. Not immigration advice. Cut-off scores describe past rounds and do not predict future rounds."
+  }
+}

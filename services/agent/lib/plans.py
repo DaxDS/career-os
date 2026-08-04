@@ -9,7 +9,9 @@ PLANS = {
         "daily_send_cap": 5,
         "limits": {
             "tailored_applications_per_month": 10,
-            "full_pathway_reports": False,
+            # The CRS report is the product's core promise and is free. Gating it made
+            # the landing page advertise something the code refused to produce.
+            "full_pathway_reports": True,
         },
     },
     "pro": {
