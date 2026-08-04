@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:redirect": "tsx scripts/test-safe-redirect.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.110.0",
