@@ -84,6 +84,14 @@ export async function buildPathwayReport(
     foreignMonths = profile.foreign_experience_months;
   }
 
+  // An explicit Canadian figure wins over the dated history. Canadian experience is
+  // worth up to 80 core points and gates CEC and every category round, so the user
+  // must be able to state it directly rather than depend on complete date entry.
+  const declaredCanadian = profile.canadian_experience_months;
+  if (typeof declaredCanadian === "number" && declaredCanadian > 0) {
+    canadianMonths = declaredCanadian;
+  }
+
   let primaryNoc: string | null = null;
   let primaryTeer: number | null = null;
   const nocEntries = Object.entries(canadianMonthsByNoc);

@@ -12,6 +12,7 @@ import { EDUCATION_LABELS, EDUCATION_ORDER } from "@/lib/crs/grid";
 export interface CrsProfileValues {
   date_of_birth: string;
   education_level: string;
+  canadian_experience_months: number;
   clb_en_reading: number;
   clb_en_writing: number;
   clb_en_listening: number;
@@ -90,6 +91,7 @@ export function CrsProfileForm({
   const [values, setValues] = useState<Record<string, unknown>>({
     date_of_birth: initial.date_of_birth ?? "",
     education_level: initial.education_level ?? "",
+    canadian_experience_months: initial.canadian_experience_months ?? 0,
     foreign_experience_months: initial.foreign_experience_months ?? 0,
     has_accompanying_spouse: initial.has_accompanying_spouse ?? false,
     spouse_education_level: initial.spouse_education_level ?? "",
@@ -215,6 +217,20 @@ export function CrsProfileForm({
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
+            <Label htmlFor="canadian_experience_months">Canadian skilled work experience (months)</Label>
+            <Input
+              id="canadian_experience_months"
+              type="number"
+              min={0}
+              value={Number(values.canadian_experience_months ?? 0)}
+              onChange={(e) => set("canadian_experience_months", Number(e.target.value))}
+            />
+            <p className="mt-1 text-xs text-muted-foreground">
+              The single biggest lever after language — up to 80 points, and 12 months opens the Canadian
+              Experience Class. Counts TEER 0–3 work in Canada. Overrides the total from your work history.
+            </p>
+          </div>
+          <div>
             <Label htmlFor="foreign_experience_months">Foreign work experience (months)</Label>
             <Input
               id="foreign_experience_months"
@@ -223,9 +239,7 @@ export function CrsProfileForm({
               value={Number(values.foreign_experience_months ?? 0)}
               onChange={(e) => set("foreign_experience_months", Number(e.target.value))}
             />
-            <p className="mt-1 text-xs text-muted-foreground">
-              Skilled work outside Canada. Canadian experience comes from your work history.
-            </p>
+            <p className="mt-1 text-xs text-muted-foreground">Skilled work outside Canada.</p>
           </div>
           <div>
             <Label htmlFor="canadian_study_credential">Canadian post-secondary credential</Label>

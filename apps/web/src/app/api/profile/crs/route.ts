@@ -86,9 +86,11 @@ export async function POST(request: Request) {
     if (Number.isFinite(n)) update.spouse_canadian_experience_years = Math.min(50, Math.max(0, Math.round(n)));
   }
 
-  if ("foreign_experience_months" in body) {
-    const n = Number(body.foreign_experience_months);
-    if (Number.isFinite(n)) update.foreign_experience_months = Math.max(0, Math.round(n));
+  for (const field of ["foreign_experience_months", "canadian_experience_months"]) {
+    if (field in body) {
+      const n = Number(body[field]);
+      if (Number.isFinite(n)) update[field] = Math.max(0, Math.round(n));
+    }
   }
 
   if ("canadian_study_credential" in body) {
