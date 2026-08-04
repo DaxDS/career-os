@@ -1,37 +1,54 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
-export async function POST(
-  _request: Request,
-  { params }: { params: { id: string } }
-) {
+export const runtime = "nodejs";
+
+/**
+ * Mark an approved application as submitted by the user.
+ *
+ * This route used to hand off to a Playwright worker that filled in and submitted the
+ * employer's form. That cannot run here — serverless functions have no browser — and
+ * the worker was never deployed, so every call returned 503.
+ *
+ * Rather than fake it, the flow is honest: the tailored documents are ready, the user
+ * applies on the employer's site, and we record that it happened. Nothing is submitted
+ * on anyone's behalf.
+ */
+export async function POST(_request: Request, { params }: { params: { id: string } }) {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const agentUrl = process.env.AGENT_SERVICE_URL || "http://localhost:8000";
-  const agentSecret = process.env.AGENT_API_SECRET || "";
+  const { data: application, error: loadError } = await supabase
+    .from("applications")
+    .select("id, status, job_id, jobs(url, title, company)")
+    .eq("id", params.id)
+    .eq("user_id", user.id)
+    .single();
 
-  try {
-    const response = await fetch(`${agentUrl}/graphs/dispatch`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(agentSecret ? { "X-Agent-Secret": agentSecret } : {}),
-      },
-      body: JSON.stringify({ user_id: user.id, application_id: params.id }),
-    });
-    const payload = await response.json();
-    if (!response.ok) {
-      return NextResponse.json({ error: payload.detail || "Dispatch failed" }, { status: response.status });
-    }
-    return NextResponse.json(payload.result);
-  } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Agent unavailable" },
-      { status: 503 }
-    );
+  if (loadError || !application) {
+    return NextResponse.json({ error: "Application not found" }, { status: 404 });
   }
+
+  const { error: updateError } = await supabase
+    .from("applications")
+    .update({ status: "sent", updated_at: new Date().toISOString() })
+    .eq("id", params.id)
+    .eq("user_id", user.id);
+
+  if (updateError) {
+    return NextResponse.json({ error: updateError.message }, { status: 500 });
+  }
+
+  const job = (application as { jobs?: { url?: string; title?: string; company?: string } }).jobs;
+
+  return NextResponse.json({
+    status: "recorded",
+    job_url: job?.url ?? null,
+    message:
+      "Marked as applied. CareerOS does not submit applications for you — open the posting, " +
+      "attach your tailored documents, and apply directly.",
+  });
 }
