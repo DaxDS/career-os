@@ -294,6 +294,23 @@ export function calculateCrs(p: CrsProfile): CrsResult {
   };
 }
 
+/**
+ * Coarse proficiency band for a set of CLB scores.
+ *
+ * The profiles table predates per-ability scoring and still carries
+ * language_en / language_fr enums that the job-matching code reads. Deriving them from
+ * the CLB numbers keeps that code working without asking the user the same question in
+ * two different vocabularies.
+ */
+export function proficiencyFromClb(scores: LanguageScores): string {
+  const min = minAbility(scores);
+  if (min >= 10) return "native";
+  if (min >= 7) return "advanced";
+  if (min >= 4) return "intermediate";
+  if (min >= 1) return "basic";
+  return "none";
+}
+
 /** Age in whole years at a reference date. */
 export function ageFrom(dateOfBirth: string | null, on: Date = new Date()): number | null {
   if (!dateOfBirth) return null;
