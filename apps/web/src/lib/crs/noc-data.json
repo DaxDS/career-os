@@ -1,0 +1,201 @@
+{
+  "_generated_by": "scripts/gen_draw_snapshot.py \u2014 do not edit by hand",
+  "sourceUrl": "https://www.statcan.gc.ca/en/subjects/standard/noc/2021/indexV1",
+  "nocVersion": "2021",
+  "unitGroups": [
+    {
+      "code": "10010",
+      "title": "Financial managers",
+      "teer": 0,
+      "exampleTitles": [
+        "Controller",
+        "Director of finance",
+        "Treasurer"
+      ]
+    },
+    {
+      "code": "20010",
+      "title": "Engineering managers",
+      "teer": 0,
+      "exampleTitles": [
+        "Engineering director",
+        "Plant engineering manager"
+      ]
+    },
+    {
+      "code": "21220",
+      "title": "Cybersecurity specialists",
+      "teer": 1,
+      "exampleTitles": [
+        "Information security analyst",
+        "SOC analyst",
+        "Cybersecurity consultant"
+      ]
+    },
+    {
+      "code": "21222",
+      "title": "Information systems testing technicians",
+      "teer": 2,
+      "exampleTitles": [
+        "QA analyst",
+        "Software tester",
+        "Test automation specialist"
+      ]
+    },
+    {
+      "code": "21223",
+      "title": "Database analysts and data administrators",
+      "teer": 1,
+      "exampleTitles": [
+        "Database administrator",
+        "DBA",
+        "Data administrator"
+      ]
+    },
+    {
+      "code": "21230",
+      "title": "Computer systems developers and programmers",
+      "teer": 2,
+      "exampleTitles": [
+        "Software developer",
+        "Programmer analyst",
+        "Application developer"
+      ]
+    },
+    {
+      "code": "21231",
+      "title": "Software engineers and designers",
+      "teer": 1,
+      "exampleTitles": [
+        "Software engineer",
+        "Backend developer",
+        "Full-stack developer"
+      ]
+    },
+    {
+      "code": "21232",
+      "title": "Software developers and programmers",
+      "teer": 2,
+      "exampleTitles": [
+        "Software developer",
+        "Web developer",
+        "Mobile app developer"
+      ]
+    },
+    {
+      "code": "21233",
+      "title": "Web designers",
+      "teer": 2,
+      "exampleTitles": [
+        "UI designer",
+        "Front-end developer",
+        "Web designer"
+      ]
+    },
+    {
+      "code": "21234",
+      "title": "Web developers and programmers",
+      "teer": 2,
+      "exampleTitles": [
+        "Web developer",
+        "Full-stack web developer"
+      ]
+    },
+    {
+      "code": "21300",
+      "title": "Civil engineers",
+      "teer": 1,
+      "exampleTitles": [
+        "Structural engineer",
+        "Transportation engineer"
+      ]
+    },
+    {
+      "code": "21310",
+      "title": "Electrical and electronics engineers",
+      "teer": 1,
+      "exampleTitles": [
+        "Electrical engineer",
+        "Electronics engineer",
+        "Power systems engineer"
+      ]
+    },
+    {
+      "code": "31100",
+      "title": "Specialists in clinical and laboratory medicine",
+      "teer": 1,
+      "exampleTitles": [
+        "Cardiologist",
+        "Radiologist",
+        "Psychiatrist"
+      ]
+    },
+    {
+      "code": "31301",
+      "title": "Registered nurses and registered psychiatric nurses",
+      "teer": 1,
+      "exampleTitles": [
+        "RN",
+        "Registered nurse",
+        "ICU nurse"
+      ]
+    },
+    {
+      "code": "32101",
+      "title": "Licensed practical nurses",
+      "teer": 2,
+      "exampleTitles": [
+        "LPN",
+        "Licensed practical nurse"
+      ]
+    },
+    {
+      "code": "41200",
+      "title": "University professors and lecturers",
+      "teer": 1,
+      "exampleTitles": [
+        "Professor",
+        "Lecturer",
+        "Assistant professor"
+      ]
+    },
+    {
+      "code": "62020",
+      "title": "Food service supervisors",
+      "teer": 2,
+      "exampleTitles": [
+        "Restaurant supervisor",
+        "Kitchen supervisor"
+      ]
+    },
+    {
+      "code": "63200",
+      "title": "Cooks",
+      "teer": 3,
+      "exampleTitles": [
+        "Line cook",
+        "Prep cook",
+        "Sous chef"
+      ]
+    },
+    {
+      "code": "72106",
+      "title": "Welders and related machine operators",
+      "teer": 2,
+      "exampleTitles": [
+        "Welder",
+        "Production welder",
+        "Structural welder"
+      ]
+    },
+    {
+      "code": "75110",
+      "title": "Transport truck drivers",
+      "teer": 3,
+      "exampleTitles": [
+        "Long-haul truck driver",
+        "Delivery driver"
+      ]
+    }
+  ]
+}

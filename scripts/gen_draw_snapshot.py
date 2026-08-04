@@ -72,6 +72,26 @@ def main() -> None:
     OUT.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     print(f"wrote {OUT.relative_to(ROOT)}  ({len(live)} live, {len(dormant)} dormant)")
 
+    noc_raw = load_json("noc_2021.json")
+    noc_out = ROOT / "apps" / "web" / "src" / "lib" / "crs" / "noc-data.json"
+    noc_payload = {
+        "_generated_by": "scripts/gen_draw_snapshot.py — do not edit by hand",
+        "sourceUrl": noc_raw.get("source_url"),
+        "nocVersion": noc_raw.get("noc_version"),
+        "unitGroups": [
+            {
+                "code": g["code"],
+                "title": g["title"],
+                "teer": g["teer"],
+                "exampleTitles": g.get("example_titles", []),
+            }
+            for g in noc_raw.get("unit_groups", [])
+        ],
+    }
+    noc_out.parent.mkdir(parents=True, exist_ok=True)
+    noc_out.write_text(json.dumps(noc_payload, indent=2) + "\n", encoding="utf-8")
+    print(f"wrote {noc_out.relative_to(ROOT)}  ({len(noc_payload['unitGroups'])} unit groups)")
+
     draws_raw = load_json("draws.json")
     engine_payload = {
         "_generated_by": "scripts/gen_draw_snapshot.py — do not edit by hand",

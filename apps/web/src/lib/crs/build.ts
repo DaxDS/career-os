@@ -62,9 +62,12 @@ export async function buildPathwayReport(
   const canadianMonthsByNoc: Record<string, number> = {};
 
   for (const wh of history) {
-    const months =
-      (wh.months_canadian_experience as number | null) ??
-      monthsBetween(wh.start_date, wh.end_date, Boolean(wh.is_current));
+    // months_canadian_experience is NOT NULL DEFAULT 0, so `?? computed` would never
+    // fall through — 0 is not nullish. Dates win when present; the stored figure is
+    // only a fallback for rows that predate date capture.
+    const fromDates = monthsBetween(wh.start_date, wh.end_date, Boolean(wh.is_current));
+    const stored = typeof wh.months_canadian_experience === "number" ? wh.months_canadian_experience : 0;
+    const months = fromDates > 0 ? fromDates : stored;
     const country = String(wh.country ?? "CA").toUpperCase();
     if (country === "CA" || country === "CANADA") {
       canadianMonths += months;
