@@ -27,7 +27,24 @@
       "orEmail": "Ou",
       "notConfigured": "Supabase n'est pas configuré. Ajoutez NEXT_PUBLIC_SUPABASE_URL et NEXT_PUBLIC_SUPABASE_ANON_KEY dans .env.local (local) ou les variables Vercel (production).",
       "confirmEmail": "Vérifiez votre courriel pour confirmer le compte, puis continuez l'intégration. Si la confirmation est désactivée dans Supabase, connectez-vous directement."
-    }
+    },
+    "forgotPassword": "Mot de passe oublié ?",
+    "forgotTitle": "Réinitialiser votre mot de passe",
+    "forgotDescription": "Saisissez votre courriel et nous vous enverrons un lien pour définir un nouveau mot de passe.",
+    "sendResetLink": "Envoyer le lien",
+    "sending": "Envoi…",
+    "resetEmailSent": "Si un compte existe pour ce courriel, un lien de réinitialisation est en route. Vérifiez votre boîte de réception et vos pourriels.",
+    "backToLogin": "Retour à la connexion",
+    "resetTitle": "Choisir un nouveau mot de passe",
+    "resetDescription": "Saisissez un nouveau mot de passe pour votre compte.",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le nouveau mot de passe",
+    "updatePassword": "Mettre à jour le mot de passe",
+    "updating": "Mise à jour…",
+    "passwordsDoNotMatch": "Ces mots de passe ne correspondent pas.",
+    "passwordTooShort": "Utilisez au moins 8 caractères.",
+    "passwordUpdated": "Mot de passe mis à jour. Vous pouvez maintenant vous connecter.",
+    "resetLinkInvalid": "Ce lien de réinitialisation est invalide ou a expiré. Demandez-en un nouveau."
   },
   "billing": {
     "title": "Forfait et facturation",

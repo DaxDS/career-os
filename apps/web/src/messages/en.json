@@ -27,7 +27,24 @@
       "orEmail": "Or",
       "notConfigured": "Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local (local) or Vercel env vars (production).",
       "confirmEmail": "Check your email to confirm your account, then continue to onboarding. If confirmation is disabled in Supabase, try logging in directly."
-    }
+    },
+    "forgotPassword": "Forgot your password?",
+    "forgotTitle": "Reset your password",
+    "forgotDescription": "Enter your email and we'll send you a link to set a new password.",
+    "sendResetLink": "Send reset link",
+    "sending": "Sending…",
+    "resetEmailSent": "If an account exists for that email, a reset link is on its way. Check your inbox and spam folder.",
+    "backToLogin": "Back to log in",
+    "resetTitle": "Choose a new password",
+    "resetDescription": "Enter a new password for your account.",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "updatePassword": "Update password",
+    "updating": "Updating…",
+    "passwordsDoNotMatch": "Those passwords don't match.",
+    "passwordTooShort": "Use at least 8 characters.",
+    "passwordUpdated": "Password updated. You can now log in.",
+    "resetLinkInvalid": "This reset link is invalid or has expired. Request a new one."
   },
   "billing": {
     "title": "Plan & billing",

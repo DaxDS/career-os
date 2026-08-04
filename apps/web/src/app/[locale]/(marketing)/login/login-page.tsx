@@ -134,6 +134,11 @@ export default function LoginPage() {
                 required
               />
             </div>
+            <div className="text-right">
+              <Link href="/forgot-password" className="text-sm text-muted-foreground hover:underline">
+                {t("forgotPassword")}
+              </Link>
+            </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             <Button type="submit" className="w-full" disabled={loading || !supabaseConfigured}>
               {loading ? t("signingIn") : t("login")}
