@@ -16,7 +16,18 @@ import { syncVercelEnv } from "./vercel-env-sync.mjs";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SERVER_ENV = join(ROOT, ".env.server");
 
-const SYNC_KEYS = ["ANTHROPIC_API_KEY", "STRIPE_SECRET_KEY", "STRIPE_PRICE_PRO", "STRIPE_WEBHOOK_SECRET"];
+const SYNC_KEYS = [
+  "ANTHROPIC_API_KEY",
+  "STRIPE_SECRET_KEY",
+  "STRIPE_PRICE_PRO",
+  // One-time report price. Omitted here originally, so a sync would silently leave
+  // /api/billing/report-checkout returning 503 in production.
+  "STRIPE_PRICE_REPORT",
+  "STRIPE_WEBHOOK_SECRET",
+  // Required by createAdminClient(); without it the Stripe webhook throws and no
+  // purchase is ever recorded.
+  "SUPABASE_SERVICE_ROLE_KEY",
+];
 
 function loadServerEnv() {
   if (!existsSync(SERVER_ENV)) {
