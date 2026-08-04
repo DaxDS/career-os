@@ -275,11 +275,21 @@ export function PathwayReportView({ report }: { report: PathwayReportData | null
                 Primary NOC {summary.primary_noc} (TEER {summary.primary_teer})
               </p>
             )}
-            {typeof report.permit_runway_days === "number" && (
-              <p className="mt-2 text-amber-700 dark:text-amber-300">
-                Permit expires in {report.permit_runway_days} days.
-              </p>
-            )}
+            {/* Can be negative for an already-expired permit, which rendered as
+                "expires in -56 days". Real profiles hit this. */}
+            {typeof report.permit_runway_days === "number" &&
+              (report.permit_runway_days < 0 ? (
+                <p className="mt-2 font-medium text-destructive">
+                  Your permit expired {Math.abs(report.permit_runway_days)} days ago. Speak to a
+                  licensed RCIC — your options differ once status has lapsed.
+                </p>
+              ) : report.permit_runway_days === 0 ? (
+                <p className="mt-2 font-medium text-destructive">Your permit expires today.</p>
+              ) : (
+                <p className="mt-2 text-amber-700 dark:text-amber-300">
+                  Permit expires in {report.permit_runway_days} days.
+                </p>
+              ))}
           </CardContent>
         </Card>
 
