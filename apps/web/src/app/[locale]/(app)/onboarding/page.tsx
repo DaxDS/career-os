@@ -10,6 +10,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+const MAX_BYTES = 10 * 1024 * 1024;
+const ALLOWED_EXTENSIONS = [".pdf", ".doc", ".docx", ".txt"];
+
+/** Strip path separators and anything exotic; the storage key is built from this. */
+function safeFileName(name: string): string {
+  const base = name.split(/[\\/]/).pop() ?? "resume";
+  return base.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 120) || "resume";
+}
+
 export default function ResumeUploadStep() {
   const t = useTranslations("onboarding.resume");
   const tc = useTranslations("common");
@@ -18,12 +27,32 @@ export default function ResumeUploadStep() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleContinue() {
-    if (!file) {
-      setError("Please upload a resume to continue.");
+  function pickFile(selected: File | null) {
+    setError(null);
+    if (!selected) {
+      setFile(null);
       return;
     }
+    const lower = selected.name.toLowerCase();
+    if (!ALLOWED_EXTENSIONS.some((ext) => lower.endsWith(ext))) {
+      setError("Upload a PDF, Word document, or plain text file.");
+      setFile(null);
+      return;
+    }
+    if (selected.size > MAX_BYTES) {
+      setError("That file is larger than 10 MB. Please upload a smaller file.");
+      setFile(null);
+      return;
+    }
+    if (selected.size === 0) {
+      setError("That file is empty.");
+      setFile(null);
+      return;
+    }
+    setFile(selected);
+  }
 
+  async function handleContinue() {
     setLoading(true);
     setError(null);
 
@@ -33,33 +62,40 @@ export default function ResumeUploadStep() {
     } = await supabase.auth.getUser();
 
     if (!user) {
+      setLoading(false);
       router.push("/login");
       return;
     }
 
-    const path = `${user.id}/${Date.now()}-${file.name}`;
-    const { error: uploadError } = await supabase.storage.from("resumes").upload(path, file);
+    // Upload is optional. It was previously required to continue, which blocked the
+    // entire funnel for anyone without a file to hand — and nothing reads the file
+    // yet, so it gated onboarding for no benefit.
+    if (file) {
+      const path = `${user.id}/${Date.now()}-${safeFileName(file.name)}`;
+      const { error: uploadError } = await supabase.storage.from("resumes").upload(path, file);
 
-    if (uploadError) {
-      setError(uploadError.message);
-      setLoading(false);
-      return;
+      if (uploadError) {
+        setError(uploadError.message);
+        setLoading(false);
+        return;
+      }
+
+      const { error: insertError } = await supabase.from("resumes").insert({
+        user_id: user.id,
+        storage_path: path,
+        file_name: safeFileName(file.name),
+        mime_type: file.type || "application/octet-stream",
+        is_primary: true,
+      });
+
+      if (insertError) {
+        setError(insertError.message);
+        setLoading(false);
+        return;
+      }
     }
 
-    await supabase.from("resumes").insert({
-      user_id: user.id,
-      storage_path: path,
-      file_name: file.name,
-      mime_type: file.type,
-      is_primary: true,
-    });
-
-    await supabase
-      .from("profiles")
-      .update({ onboarding_step: 1 })
-      .eq("id", user.id);
-
-    // Phase 2: agent resume_parser will populate work_history from this file
+    await supabase.from("profiles").update({ onboarding_step: 1 }).eq("id", user.id);
     router.push("/onboarding/work-history");
   }
 
@@ -72,18 +108,26 @@ export default function ResumeUploadStep() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="resume">Resume file</Label>
+            <Label htmlFor="resume">Resume file (optional)</Label>
             <Input
               id="resume"
               type="file"
               accept=".pdf,.doc,.docx,.txt,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
-              onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+              onChange={(e) => pickFile(e.target.files?.[0] ?? null)}
             />
-            <p className="text-xs text-muted-foreground">{t("uploadHint")}</p>
+            <p className="text-xs text-muted-foreground">
+              PDF, Word or text, up to 10 MB. We store it for your own reference — you will still
+              enter your work history on the next step, so you can skip this and continue.
+            </p>
+            {file && (
+              <p className="text-xs text-muted-foreground">
+                Selected: {file.name} ({Math.round(file.size / 1024)} KB)
+              </p>
+            )}
           </div>
           {error && <p className="text-sm text-destructive">{error}</p>}
           <Button onClick={handleContinue} disabled={loading}>
-            {loading ? tc("loading") : tc("continue")}
+            {loading ? tc("loading") : file ? tc("continue") : "Skip for now"}
           </Button>
         </CardContent>
       </Card>
