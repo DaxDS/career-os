@@ -19,7 +19,11 @@
  *    since that response becomes a document a real employer receives.
  */
 import { buildBaseResume } from "../src/lib/tailoring/build-base-resume";
-import { extractJsonObject, normalizeTailoredResume } from "../src/lib/tailoring/claude-tailor";
+import {
+  buildCoverLetterPrompt,
+  extractJsonObject,
+  normalizeTailoredResume,
+} from "../src/lib/tailoring/claude-tailor";
 import type { BaseResume } from "../src/lib/tailoring/resume-types";
 
 let passed = 0;
@@ -145,6 +149,68 @@ check(
   "fabricated experience from the model is discarded when the base had none",
   Array.isArray(hallucinatedAgainstEmptyBase.experience) && hallucinatedAgainstEmptyBase.experience.length === 0,
   `got ${JSON.stringify(hallucinatedAgainstEmptyBase.experience)} — the model's output must not override a known-empty base`
+);
+
+// --- buildCoverLetterPrompt: fabrication instructions are actually present -----
+
+const jobWithNoc = {
+  title: "Software Developer",
+  company: "Acme Corp",
+  city: "Toronto",
+  province: "ON",
+  noc_code: "21232",
+  teer_level: 1,
+} as const;
+
+const promptWithStatusAndJd = buildCoverLetterPrompt(
+  { summary: "Base summary", experience: [{ title: "Analyst", employer: "Acme", bullets: ["Did things."] }] },
+  { ...jobWithNoc, raw_jd: "We are a fintech startup building payment infrastructure for small businesses." },
+  { full_name: "Jordan Lee", status: "pgwp" }
+);
+
+check(
+  "cover letter prompt never asserts an unconditional LMIA exemption",
+  !/do not require (a )?(new )?LMIA/i.test(promptWithStatusAndJd),
+  "the old instruction told the model to claim LMIA-exempt status regardless of the job's actual requirements"
+);
+check(
+  "cover letter prompt explicitly forbids LMIA claims when status is known",
+  promptWithStatusAndJd.includes("Do not make any claim about LMIA requirements"),
+  "this is the safety instruction that must survive any future edit to this prompt"
+);
+check(
+  "cover letter prompt no longer asks for a merely 'plausible' company detail",
+  !promptWithStatusAndJd.toLowerCase().includes("plausible"),
+  "'plausible' invites confident invention rather than restricting to real information"
+);
+check(
+  "cover letter prompt restricts company detail to the JD excerpt when one exists",
+  promptWithStatusAndJd.includes("Do not invent anything about Acme Corp that is not stated in that excerpt")
+);
+check(
+  "cover letter prompt includes the applicant's real status when present",
+  promptWithStatusAndJd.includes("pgwp status")
+);
+
+const promptWithNoJdOrExperience = buildCoverLetterPrompt(
+  { summary: "Entry-level summary", experience: [] },
+  { ...jobWithNoc, raw_jd: null },
+  { full_name: "Jordan Lee", status: null }
+);
+
+check(
+  "cover letter prompt forbids inventing a company detail when no JD text exists",
+  promptWithNoJdOrExperience.includes("do not invent one"),
+  "with no raw_jd, there is nothing real to reference — the prompt must say so, not stay silent"
+);
+check(
+  "cover letter prompt forbids inventing experience when the candidate has none",
+  promptWithNoJdOrExperience.includes("The candidate has no recorded work experience yet. Do not invent any")
+);
+check(
+  "cover letter prompt does not crash or leave 'undefined' when status is absent",
+  !promptWithNoJdOrExperience.includes("undefined"),
+  promptWithNoJdOrExperience
 );
 
 // --- report ------------------------------------------------------------------

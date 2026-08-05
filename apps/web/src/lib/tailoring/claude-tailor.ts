@@ -122,18 +122,51 @@ ${experienceInstruction} Do not prepend labels like "Tailored for". Document eac
   return normalizeTailoredResume(extractJsonObject(raw), base);
 }
 
-export async function coverLetterWithClaude(
-  tailored: TailoredResume,
+/**
+ * Builds the cover-letter prompt. Pure and exported so its content can be tested
+ * directly — prompt wording is where the fabrication risk actually lives, and
+ * reading it by eye is exactly how the LMIA-exemption instruction below survived one
+ * full audit pass before being caught on a second, closer read.
+ *
+ * Two fabrication risks fixed here, both the Claude-path counterpart of what was
+ * already found and fixed in local-prepare.ts's templateCoverLetter:
+ *
+ * 1. The previous wording — "plausible detail... do not invent press releases" —
+ *    forbade exactly one kind of invention while implicitly inviting any other kind
+ *    that merely sounded credible. Restricted to only what the JD excerpt actually
+ *    contains.
+ * 2. The previous wording — "mention they do not require LMIA... if appropriate" —
+ *    asked the model to judge LMIA exemption with no real signal to judge it from.
+ *    jobs.lmia_flag and work_auth_required exist as columns but the discovery
+ *    pipeline never populates either, so "appropriate" had nothing behind it but the
+ *    model's own confidence. Replaced with the applicant's own self-reported status
+ *    only, exactly as the template path was fixed.
+ */
+export function buildCoverLetterPrompt(
+  tailored: Pick<TailoredResume, "summary" | "experience">,
   job: JobContext,
   profile: ProfileContext
-): Promise<CoverLetterResult> {
-  const client = getClient();
+): string {
   const company = job.company || "the company";
   const jdExcerpt = (job.raw_jd || "").slice(0, 2000);
   const keyExperience = tailored.experience.slice(0, 2);
 
-  const prompt = `Write a cover letter ≤250 words for this Canadian job application.
-Reference ONE specific, plausible detail about ${company} or the role (sector, location, or team focus — do not invent press releases).
+  const specificDetailInstruction = jdExcerpt
+    ? `You may reference one detail actually present in the JD excerpt below (sector, location, team focus) if it helps. Do not invent anything about ${company} that is not stated in that excerpt.`
+    : `No real detail about ${company} is available beyond its name and location — do not invent one. Keep the letter general rather than fabricating specifics.`;
+
+  const experienceInstruction =
+    keyExperience.length === 0
+      ? "The candidate has no recorded work experience yet. Do not invent any — write from their education, skills, and interest in the role instead."
+      : "";
+
+  const statusInstruction = profile.status
+    ? `The applicant holds ${profile.status.replace(/_/g, " ")} status in Canada — you may state this fact only. Do not make any claim about LMIA requirements or work-authorization exemptions for this specific job; that has not been verified.`
+    : "";
+
+  return `Write a cover letter ≤250 words for this Canadian job application.
+${specificDetailInstruction}
+${experienceInstruction}
 ${CANADIAN_TAILORING_RULES}
 
 Job: ${job.title} at ${company}
@@ -143,9 +176,18 @@ JD excerpt: ${jdExcerpt || `${job.title} role in ${job.city}, ${job.province}.`}
 Resume summary: ${tailored.summary}
 Key experience: ${JSON.stringify(keyExperience)}
 Applicant name: ${profile.full_name || "Applicant"}
-Work authorization: ${profile.status || "valid Canadian work permit"} — mention they do not require LMIA for this role if appropriate.
+${statusInstruction}
 
 Return JSON: {"full_text": "...", "word_count": N}`;
+}
+
+export async function coverLetterWithClaude(
+  tailored: TailoredResume,
+  job: JobContext,
+  profile: ProfileContext
+): Promise<CoverLetterResult> {
+  const client = getClient();
+  const prompt = buildCoverLetterPrompt(tailored, job, profile);
 
   const message = await client.messages.create({
     model: MODEL,
