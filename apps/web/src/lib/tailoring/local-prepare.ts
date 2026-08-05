@@ -31,22 +31,44 @@ export type PrepareResult = {
 
 function templateTailor(base: BaseResume, job: JobRow): TailoredResume {
   const noc = job.noc_code || "NOC";
-  return {
-    ...base,
-    summary: `${base.full_name} targets ${job.title} roles (NOC ${noc}, TEER ${job.teer_level ?? "—"}) with Canadian experience mapped to published pathway criteria.`,
-    changes_made: [
-      { section: "summary", reason: `Refocused summary for ${job.title} at ${job.company}.` },
-      { section: "experience", reason: `Highlighted duties aligned to NOC ${noc} requirements.` },
-    ],
-  };
+  const hasExperience = base.experience.length > 0;
+
+  // Both claims below previously asserted regardless of whether there was any
+  // recorded experience to back them — see buildBaseResume for the matching fix on
+  // the fabricated-job side of this same problem.
+  const summary = hasExperience
+    ? `${base.full_name} targets ${job.title} roles (NOC ${noc}, TEER ${job.teer_level ?? "—"}), with experience relevant to the published pathway criteria for this occupation.`
+    : `${base.full_name} is targeting ${job.title} roles (NOC ${noc}, TEER ${job.teer_level ?? "—"}) in Canada.`;
+
+  const changes_made = [{ section: "summary", reason: `Refocused summary for ${job.title} at ${job.company}.` }];
+  if (hasExperience) {
+    changes_made.push({
+      section: "experience",
+      reason: `Highlighted duties aligned to NOC ${noc} requirements.`,
+    });
+  }
+
+  return { ...base, summary, changes_made };
 }
 
 function templateCoverLetter(profile: ProfileRow, job: JobRow): string {
   const name = profile.full_name || "Applicant";
+
+  // Previously claimed "recent Canadian experience maps to NOC X" and "no LMIA
+  // needed for this role" unconditionally, for every applicant and every job. The
+  // first is unverifiable from what the tailoring pipeline actually knows; the
+  // second requires per-job authorization data (jobs.lmia_flag /
+  // work_auth_required) that the discovery pipeline never populates — asserting it
+  // was a guess dressed as a fact in a document going to a real employer. Both are
+  // now stated only when there is something real to point to.
+  const statusLine = profile.status
+    ? ` I hold ${profile.status.replace(/_/g, " ")} status in Canada.`
+    : "";
+
   return [
     "Dear Hiring Manager,",
     "",
-    `I am applying for the ${job.title} position at ${job.company} in ${job.city}, ${job.province}. My recent Canadian experience maps to NOC ${job.noc_code}, and I hold valid work authorization for this role without requiring a new LMIA.`,
+    `I am applying for the ${job.title} position at ${job.company} in ${job.city}, ${job.province}.${statusLine}`,
     "",
     `I am interested in ${job.company}'s work and believe my background fits the TEER ${job.teer_level ?? "1"} requirements listed in the posting. I would welcome the opportunity to discuss how I can contribute to your team.`,
     "",
@@ -149,12 +171,19 @@ export async function prepareApplicationLocally(
   let coverLetter: string;
 
   if (useClaude) {
+    // Each call falls back independently. The two calls were previously in one try
+    // block, so a transient failure on the second (cheaper, cover-letter) call
+    // discarded a perfectly good result from the first — downgrading both to
+    // templates because of a fault in one.
     try {
       tailored = await tailorWithClaude(base, job, profileRow);
+    } catch {
+      tailored = templateTailor(base, job);
+    }
+    try {
       const letter = await coverLetterWithClaude(tailored, job, profileRow);
       coverLetter = letter.full_text;
     } catch {
-      tailored = templateTailor(base, job);
       coverLetter = templateCoverLetter(profileRow, job);
     }
   } else {

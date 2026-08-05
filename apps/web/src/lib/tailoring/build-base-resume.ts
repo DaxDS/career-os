@@ -45,31 +45,26 @@ function formatDates(start?: string | null, end?: string | null, isCurrent?: boo
 
 export function buildBaseResume(profile: ProfileRow, workHistory: WorkRow[]): BaseResume {
   const name = profile.full_name || "Applicant";
-  const experience =
-    workHistory.length > 0
-      ? workHistory.map((row) => {
-          const employer = row.employer || "Employer";
-          const location = [row.province, row.country].filter(Boolean).join(", ");
-          return {
-            title: row.title,
-            employer,
-            dates: formatDates(row.start_date, row.end_date, row.is_current),
-            location,
-            bullets: bulletsFromDuties(row.duties_text, row.title, employer),
-          };
-        })
-      : [
-          {
-            title: "Software Developer",
-            employer: "Canadian employer",
-            dates: "",
-            location: [profile.city, profile.province].filter(Boolean).join(", "),
-            bullets: [
-              "Built and maintained web applications using modern JavaScript frameworks.",
-              "Collaborated with product and QA on releases for Canadian users.",
-            ],
-          },
-        ];
+
+  // A user can complete onboarding with zero work-history rows — the step has no
+  // minimum. This previously fell back to a fabricated "Software Developer at
+  // Canadian employer" job with invented bullets, which then flowed into the
+  // generated resume as if it were the user's real history, and was handed to
+  // Claude as "source of truth — do not invent employers or metrics." Inventing the
+  // truth before telling the model not to invent past it defeats the instruction.
+  // Empty experience is honest; a fabricated job is resume fraud committed on the
+  // user's behalf without their knowledge.
+  const experience = workHistory.map((row) => {
+    const employer = row.employer || "Employer";
+    const location = [row.province, row.country].filter(Boolean).join(", ");
+    return {
+      title: row.title,
+      employer,
+      dates: formatDates(row.start_date, row.end_date, row.is_current),
+      location,
+      bullets: bulletsFromDuties(row.duties_text, row.title, employer),
+    };
+  });
 
   const skills = workHistory
     .map((row) => row.mapped_noc_code)

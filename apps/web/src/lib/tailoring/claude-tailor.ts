@@ -25,7 +25,9 @@ function getClient(): Anthropic {
   return new Anthropic({ apiKey: key });
 }
 
-function extractJsonObject(raw: string): unknown {
+// Exported for direct regression testing — parsing LLM output is the most fragile
+// part of this pipeline and deserves tests independent of a live API call.
+export function extractJsonObject(raw: string): unknown {
   const start = raw.indexOf("{");
   const end = raw.lastIndexOf("}") + 1;
   if (start === -1 || end <= start) {
@@ -34,13 +36,27 @@ function extractJsonObject(raw: string): unknown {
   return JSON.parse(raw.slice(start, end));
 }
 
-function normalizeTailoredResume(data: unknown, base: BaseResume): TailoredResume {
+export function normalizeTailoredResume(data: unknown, base: BaseResume): TailoredResume {
   const parsed = data as Partial<TailoredResume>;
+
+  // If the base resume has no real work history, the model is told in the prompt not
+  // to invent any — but a prompt instruction is not an enforcement mechanism, and
+  // models do not always comply. This is the code-level backstop: when we
+  // independently know there is no real experience, no amount of confident-looking
+  // output from the model is allowed to introduce any. The prompt reduces how often
+  // this path is needed; it does not replace it.
+  const experience =
+    base.experience.length === 0
+      ? []
+      : Array.isArray(parsed.experience) && parsed.experience.length > 0
+        ? parsed.experience
+        : base.experience;
+
   return {
     full_name: parsed.full_name || base.full_name,
     contact: parsed.contact ?? base.contact,
     summary: parsed.summary || base.summary,
-    experience: Array.isArray(parsed.experience) && parsed.experience.length > 0 ? parsed.experience : base.experience,
+    experience,
     education: parsed.education ?? base.education,
     skills: parsed.skills ?? base.skills,
     changes_made: Array.isArray(parsed.changes_made) ? parsed.changes_made : [],
@@ -74,6 +90,11 @@ export async function tailorWithClaude(
     skills?: string[];
   };
 
+  const experienceInstruction =
+    base.experience.length === 0
+      ? "The base resume has NO work experience entries. Do not invent any — leave the experience array empty. Write the summary and skills from education and stated skills only. A fabricated job here is resume fraud committed on this person's behalf."
+      : "Rewrite bullets to emphasize skills relevant to this posting. Do not add roles, employers, or bullets beyond what is listed below.";
+
   const prompt = `Tailor this resume for the job below. Return ONLY valid JSON with fields:
 full_name, contact, summary, experience (array of {title, employer, dates, location, bullets}), education, skills, changes_made (array of {section, reason}).
 
@@ -83,12 +104,12 @@ NOC: ${job.noc_code} TEER ${job.teer_level}
 Requirements: ${JSON.stringify((parsed.requirements || []).slice(0, 8))}
 Skills sought: ${JSON.stringify(parsed.skills || [])}
 
-Base resume (source of truth — do not invent employers or metrics):
+Base resume (source of truth — do not invent employers, roles, or metrics beyond this):
 ${JSON.stringify(base, null, 2).slice(0, 8000)}
 
 Candidate status in Canada: ${profile.status || "work permit holder"}
 
-Rewrite bullets to emphasize skills relevant to this posting. Reorder or rephrase; do not prepend labels like "Tailored for". Document each meaningful edit in changes_made.`;
+${experienceInstruction} Do not prepend labels like "Tailored for". Document each meaningful edit in changes_made.`;
 
   const message = await client.messages.create({
     model: MODEL,
