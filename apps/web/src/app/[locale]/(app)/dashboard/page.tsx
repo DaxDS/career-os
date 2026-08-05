@@ -7,10 +7,13 @@ import {
   DashboardTopMatches,
 } from "@/components/dashboard/dashboard-preview";
 import type { PathwayReportData } from "@/components/pathways/pathway-report";
+import { buildPathwayReport } from "@/lib/crs/build";
 import { MATCH_SELECT, mapMatchRows } from "@/lib/map-match-rows";
 import { createClient } from "@/lib/supabase/server";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+
+export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const t = await getTranslations("dashboard");
@@ -24,7 +27,7 @@ export default async function DashboardPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("onboarding_completed, match_score_threshold")
+    .select("onboarding_completed, match_score_threshold, crs_profile_completed")
     .eq("id", user.id)
     .single();
 
@@ -63,15 +66,18 @@ export default async function DashboardPage() {
 
   const topMatches = mapMatchRows(matchRows);
 
-  const { data: pathwayRow } = await supabase
-    .from("pathway_reports")
-    .select("report_json")
-    .eq("user_id", user.id)
-    .order("generated_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-
-  const pathwayReport = (pathwayRow?.report_json ?? null) as PathwayReportData | null;
+  // Computed live rather than read from pathway_reports. That table is only ever
+  // written by /api/pathways/generate as a best-effort archive — /pathways itself
+  // was already fixed to compute live for the same reason: depending on the archive
+  // left a fully-completed profile with nothing to show whenever a write had never
+  // landed. Confirmed against production data — the one real account with a complete
+  // CRS profile had zero archived rows, so this card was silently blank for exactly
+  // the user it exists to serve.
+  let pathwayReport: PathwayReportData | null = null;
+  if (profile.crs_profile_completed) {
+    const built = await buildPathwayReport(supabase, user.id);
+    pathwayReport = (built.report as PathwayReportData | null) ?? null;
+  }
 
   const { data: recentActivity } = await supabase
     .from("activity_log")

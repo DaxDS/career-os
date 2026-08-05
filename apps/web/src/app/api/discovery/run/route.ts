@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { logActivity } from "@/lib/activity-log";
 import { searchJobBank } from "@/lib/jobs/jobbank";
 import { scoreJobForPr } from "@/lib/jobs/score";
 import { profileToCrs } from "@/lib/crs/report";
@@ -69,8 +70,22 @@ export async function POST() {
     const keywords = (targets.length ? targets : DEFAULT_KEYWORDS).slice(0, 3);
     const location = profile.province ? String(profile.province) : "Canada";
 
+    await logActivity(user.id, "discovery_started", `Searching Job Bank for ${keywords.join(", ")}`, {
+      keywords,
+      location,
+    });
+
     const listings = await searchJobBank(keywords, location, 12);
     if (listings.length === 0) {
+      // Logged as an outcome, not silence. Job Bank scraping is regex against markup
+      // we do not control and has already rotted once — a run that quietly returns
+      // nothing is indistinguishable from a broken scraper unless it is recorded.
+      await logActivity(
+        user.id,
+        "discovery_completed",
+        `No postings returned for ${keywords.join(", ")}`,
+        { keywords, location, found: 0 }
+      );
       return NextResponse.json({
         discovered: 0,
         matched: 0,
@@ -147,10 +162,18 @@ export async function POST() {
       matched += 1;
     }
 
+    await logActivity(
+      user.id,
+      "discovery_completed",
+      `Found ${listings.length} postings, scored ${matched} into your feed`,
+      { keywords, location, found: listings.length, matched }
+    );
+
     return NextResponse.json({ discovered: listings.length, matched });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Discovery failed";
     console.error("[discovery]", message);
+    await logActivity(user.id, "discovery_failed", "Job discovery failed", { error: message });
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

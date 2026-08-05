@@ -30,6 +30,8 @@ export interface ActivityEntry {
 const ACTION_ICONS: Record<string, LucideIcon> = {
   discovery_started: Play,
   discovery_completed: CheckCircle2,
+  discovery_failed: XCircle,
+  application_marked_sent: Send,
   source_searched: Search,
   noc_classified: MapPin,
   jobs_filtered: Filter,

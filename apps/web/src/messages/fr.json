@@ -310,7 +310,9 @@
       "dispatch_blocked": "Envoi bloqué",
       "dispatch_failed": "Envoi échoué",
       "application_approved": "Candidature approuvée",
-      "application_rejected": "Candidature rejetée"
+      "application_rejected": "Candidature rejetée",
+      "discovery_failed": "Échec de la recherche d'emplois",
+      "application_marked_sent": "Candidature marquée comme envoyée"
     }
   },
   "dashboard": {

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { logActivity } from "@/lib/activity-log";
 
 export const runtime = "nodejs";
 
@@ -43,6 +44,15 @@ export async function POST(_request: Request, { params }: { params: { id: string
   }
 
   const job = (application as { jobs?: { url?: string; title?: string; company?: string } }).jobs;
+
+  await logActivity(
+    user.id,
+    "application_marked_sent",
+    job?.title
+      ? `Marked as applied: ${job.title}${job.company ? ` at ${job.company}` : ""}`
+      : "Marked an application as applied",
+    { application_id: params.id, job_url: job?.url ?? null }
+  );
 
   return NextResponse.json({
     status: "recorded",

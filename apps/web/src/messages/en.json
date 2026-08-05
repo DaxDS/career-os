@@ -310,7 +310,9 @@
       "dispatch_blocked": "Dispatch blocked",
       "dispatch_failed": "Dispatch failed",
       "application_approved": "Application approved",
-      "application_rejected": "Application rejected"
+      "application_rejected": "Application rejected",
+      "discovery_failed": "Job discovery failed",
+      "application_marked_sent": "Application marked as sent"
     }
   },
   "dashboard": {
