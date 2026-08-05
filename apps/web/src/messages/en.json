@@ -91,8 +91,8 @@
       "prBadge": "CRS 522 after 12 months",
       "overallScore": "+40",
       "overallLabel": "CRS points from 12 months here",
-      "atsScore": "+6",
-      "atsLabel": "Margin over recent CEC cut-off",
+      "cecMarginScore": "+6",
+      "cecMarginLabel": "Margin over recent CEC cut-off",
       "nocCode": "NOC 21231 · TEER 1",
       "nocLabel": "Opens Canadian Experience Class",
       "caption": "One number and one reason. Twelve months in this role takes your CRS from 482 to 522, which clears the recent Canadian Experience Class cut-off of 516 by 6 points."

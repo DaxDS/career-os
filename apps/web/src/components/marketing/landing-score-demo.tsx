@@ -25,8 +25,8 @@ export function LandingScoreDemo() {
             <span className="text-xs text-muted-foreground">{t("overallLabel")}</span>
           </div>
           <div className="flex flex-col gap-0.5 rounded-lg border border-border bg-background px-3 py-2.5">
-            <strong className="text-base">{t("atsScore")}</strong>
-            <span className="text-xs text-muted-foreground">{t("atsLabel")}</span>
+            <strong className="text-base">{t("cecMarginScore")}</strong>
+            <span className="text-xs text-muted-foreground">{t("cecMarginLabel")}</span>
           </div>
           <div className="flex flex-col gap-0.5 rounded-lg border border-primary/40 bg-background px-3 py-2.5">
             <strong className="text-base text-primary">{t("nocCode")}</strong>
