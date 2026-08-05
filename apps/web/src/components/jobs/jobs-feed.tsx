@@ -22,10 +22,15 @@ export function JobsFeed({ initialMatches }: JobsFeedProps) {
       const res = await fetch("/api/discovery/run", { method: "POST" });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Discovery failed");
-      const stats = data.result || data.stats || {};
-      setMessage(
-        `Found ${stats.found ?? 0} listings · ${stats.matches_created ?? 0} new matches · ${stats.filtered_ineligible ?? 0} filtered (ineligible)`
-      );
+      // /api/discovery/run returns { discovered, matched } — this previously read
+      // stats.found / stats.matches_created / stats.filtered_ineligible, none of
+      // which the route has ever sent, so every run reported "Found 0 listings"
+      // regardless of what actually happened.
+      if (data.message) {
+        setMessage(data.message);
+      } else {
+        setMessage(`Found ${data.discovered ?? 0} listings · ${data.matched ?? 0} scored and added to your feed`);
+      }
       window.location.reload();
     } catch (e) {
       setError(e instanceof Error ? e.message : "Discovery failed");
@@ -55,7 +60,7 @@ export function JobsFeed({ initialMatches }: JobsFeedProps) {
         <div className="rounded-xl border border-dashed p-12 text-center">
           <p className="text-muted-foreground">No matches yet.</p>
           <p className="mt-2 text-sm text-muted-foreground">
-            Click &quot;Run discovery&quot; to search Job Bank, JSearch, and Adzuna for your target titles.
+            Click &quot;Run discovery&quot; to search Job Bank for your target titles.
           </p>
         </div>
       ) : (

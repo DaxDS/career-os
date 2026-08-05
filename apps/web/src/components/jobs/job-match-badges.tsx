@@ -1,4 +1,4 @@
-import type { PathwayFlags } from "@careeros/shared";
+import type { PathwayFlags, PrDeltaFlags } from "@careeros/shared";
 import { Badge } from "@/components/ui/badge";
 
 export interface JobBadgeFields {
@@ -34,8 +34,36 @@ export function JobWageBadge({
   return <Badge variant="outline">Near regional median</Badge>;
 }
 
-export function JobPathwayBadges({ flags }: { flags: PathwayFlags }) {
+/**
+ * Renders whichever pathway shape is actually present on the row.
+ *
+ * Real discovery-created matches carry PrDeltaFlags (unlocked_categories,
+ * cec_eligible). The marketing fixtures and seed-demo-data still carry the legacy
+ * PathwayFlags (ee_eligible, pnp_streams). Both are optional-field interfaces, so a
+ * row can be checked for either shape without a runtime tag — this was previously
+ * only checking the legacy shape, so every real match rendered zero pathway badges.
+ */
+export function JobPathwayBadges({ flags }: { flags: PathwayFlags & PrDeltaFlags }) {
   const badges: React.ReactNode[] = [];
+
+  if (flags.unlocked_categories?.length) {
+    flags.unlocked_categories.slice(0, 2).forEach((cat) =>
+      badges.push(
+        <Badge key={cat.id} variant="secondary">
+          {cat.label} live
+        </Badge>
+      )
+    );
+  }
+  if (flags.cec_eligible) badges.push(<Badge key="cec">Opens CEC</Badge>);
+  if (flags.dormant_but_eligible?.length) {
+    badges.push(
+      <Badge key="dormant" variant="outline">
+        {flags.dormant_but_eligible[0]} — dormant
+      </Badge>
+    );
+  }
+
   if (flags.ee_eligible) badges.push(<Badge key="ee">EE TEER 0–3</Badge>);
   (flags.ee_categories || []).slice(0, 2).forEach((cat) =>
     badges.push(
@@ -52,6 +80,7 @@ export function JobPathwayBadges({ flags }: { flags: PathwayFlags }) {
     )
   );
   if (flags.aip_relevant) badges.push(<Badge key="aip">AIP relevant</Badge>);
+
   return <>{badges}</>;
 }
 
@@ -60,7 +89,7 @@ export function JobMatchBadges({
   pathway_flags,
 }: {
   job: JobBadgeFields;
-  pathway_flags: PathwayFlags;
+  pathway_flags: PathwayFlags & PrDeltaFlags;
 }) {
   const nocLowConfidence = (job.noc_confidence ?? 1) < 0.7;
 

@@ -1,4 +1,4 @@
-import type { PathwayFlags, ScoreBreakdown } from "@careeros/shared";
+import type { PathwayFlags, PrDeltaFlags, ScoreBreakdown } from "@careeros/shared";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { JobMatchBadges } from "@/components/jobs/job-match-badges";
 import { PrepareApplicationButton } from "@/components/jobs/prepare-button";
@@ -7,7 +7,7 @@ export interface JobMatchRow {
   match_id: string;
   match_score: number;
   score_breakdown: ScoreBreakdown;
-  pathway_flags: PathwayFlags;
+  pathway_flags: PathwayFlags & PrDeltaFlags;
   status: string;
   job: {
     id: string;
@@ -28,6 +28,9 @@ export interface JobMatchRow {
 
 export function JobMatchCard({ row }: { row: JobMatchRow }) {
   const gaps = row.score_breakdown.gaps || [];
+  // score.ts writes a single explanatory sentence rather than a gaps list — this was
+  // being computed and stored on every real match, then never rendered anywhere.
+  const verdict = row.score_breakdown.verdict;
 
   return (
     <Card>
@@ -56,6 +59,12 @@ export function JobMatchCard({ row }: { row: JobMatchRow }) {
         </div>
       </CardHeader>
       <CardContent className="space-y-3">
+        {verdict && (
+          <div className="rounded-md bg-muted/50 p-3 text-sm">
+            <p className="mb-1 font-medium">What this role does for your PR odds</p>
+            <p className="text-muted-foreground">{verdict}</p>
+          </div>
+        )}
         {gaps.length > 0 && (
           <div className="rounded-md bg-muted/50 p-3 text-sm">
             <p className="mb-1 font-medium">Gap analysis</p>

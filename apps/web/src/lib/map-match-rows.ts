@@ -1,5 +1,5 @@
 import type { JobMatchRow } from "@/components/jobs/job-match-card";
-import type { PathwayFlags, ScoreBreakdown } from "@careeros/shared";
+import type { PathwayFlags, PrDeltaFlags, ScoreBreakdown } from "@careeros/shared";
 
 type RawMatchRow = {
   id: string;
@@ -17,7 +17,7 @@ export function mapMatchRows(rows: RawMatchRow[] | null | undefined): JobMatchRo
       match_id: m.id,
       match_score: Number(m.match_score),
       score_breakdown: (m.score_breakdown || {}) as ScoreBreakdown,
-      pathway_flags: (m.pathway_flags || {}) as PathwayFlags,
+      pathway_flags: (m.pathway_flags || {}) as PathwayFlags & PrDeltaFlags,
       status: m.status,
       job: m.jobs as JobMatchRow["job"],
     }));
