@@ -71,6 +71,21 @@ export default function ResumeUploadStep() {
     // entire funnel for anyone without a file to hand — and nothing reads the file
     // yet, so it gated onboarding for no benefit.
     if (file) {
+      // A user who goes Back and re-uploads must not end up with two rows both
+      // flagged primary — the database enforces at most one now, so this insert
+      // would otherwise fail outright on a second upload. Replace, not accumulate:
+      // unset and physically delete the previous primary first.
+      const { data: previous } = await supabase
+        .from("resumes")
+        .select("id, storage_path")
+        .eq("user_id", user.id)
+        .eq("is_primary", true)
+        .maybeSingle();
+
+      if (previous) {
+        await supabase.from("resumes").update({ is_primary: false }).eq("id", previous.id);
+      }
+
       const path = `${user.id}/${Date.now()}-${safeFileName(file.name)}`;
       const { error: uploadError } = await supabase.storage.from("resumes").upload(path, file);
 
@@ -92,6 +107,12 @@ export default function ResumeUploadStep() {
         setError(insertError.message);
         setLoading(false);
         return;
+      }
+
+      // Best-effort cleanup — an orphaned old file costs storage, not correctness or
+      // security, so failure here should not block onboarding.
+      if (previous?.storage_path) {
+        await supabase.storage.from("resumes").remove([previous.storage_path]).catch(() => {});
       }
     }
 
@@ -116,8 +137,8 @@ export default function ResumeUploadStep() {
               onChange={(e) => pickFile(e.target.files?.[0] ?? null)}
             />
             <p className="text-xs text-muted-foreground">
-              PDF, Word or text, up to 10 MB. We store it for your own reference — you will still
-              enter your work history on the next step, so you can skip this and continue.
+              PDF, Word or text, up to 10 MB. Nothing reads it automatically yet — you&apos;ll enter
+              your work history yourself on the next step, so this is optional and you can skip it.
             </p>
             {file && (
               <p className="text-xs text-muted-foreground">
