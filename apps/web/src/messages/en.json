@@ -233,7 +233,16 @@
       "light": "Light",
       "dark": "Dark",
       "system": "System"
-    }
+    },
+    "deleteConfirmTitle": "Delete your account?",
+    "deleteConfirmBody": "This permanently deletes your profile, work history, resumes, job matches, applications and reports. It cannot be undone.",
+    "deleteConfirmPrompt": "Type DELETE to confirm",
+    "deleteConfirmWord": "DELETE",
+    "deleteConfirmCta": "Permanently delete",
+    "cancel": "Cancel",
+    "exportHint": "Downloads everything we hold about you as a JSON file.",
+    "exportDownload": "Download JSON",
+    "deleting": "Deleting…"
   },
   "onboarding": {
     "title": "Set up your profile",

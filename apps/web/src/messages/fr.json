@@ -233,7 +233,16 @@
       "light": "Clair",
       "dark": "Sombre",
       "system": "Système"
-    }
+    },
+    "deleteConfirmTitle": "Supprimer votre compte ?",
+    "deleteConfirmBody": "Cela supprime définitivement votre profil, votre parcours professionnel, vos CV, vos correspondances d'emploi, vos candidatures et vos rapports. Cette action est irréversible.",
+    "deleteConfirmPrompt": "Tapez DELETE pour confirmer",
+    "deleteConfirmWord": "DELETE",
+    "deleteConfirmCta": "Supprimer définitivement",
+    "cancel": "Annuler",
+    "exportHint": "Télécharge toutes vos données dans un fichier JSON.",
+    "exportDownload": "Télécharger le JSON",
+    "deleting": "Suppression…"
   },
   "onboarding": {
     "title": "Configurez votre profil",
