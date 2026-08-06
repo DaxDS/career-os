@@ -82,7 +82,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center px-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>{t("loginTitle")}</CardTitle>
+          <CardTitle as="h1" className="text-2xl">{t("loginTitle")}</CardTitle>
           <CardDescription>{t("loginDescription")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -119,6 +119,7 @@ export default function LoginPage() {
               <Input
                 id="email"
                 type="email"
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -129,6 +130,7 @@ export default function LoginPage() {
               <Input
                 id="password"
                 type="password"
+                autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required

@@ -44,7 +44,9 @@
     "passwordsDoNotMatch": "Those passwords don't match.",
     "passwordTooShort": "Use at least 8 characters.",
     "passwordUpdated": "Password updated. You can now log in.",
-    "resetLinkInvalid": "This reset link is invalid or has expired. Request a new one."
+    "resetLinkInvalid": "This reset link is invalid or has expired. Request a new one.",
+    "passwordHint": "At least 8 characters.",
+    "signupTrust": "Free to start — no credit card. Your data is stored in Canada and you can export or delete it at any time."
   },
   "billing": {
     "title": "Plan & billing",

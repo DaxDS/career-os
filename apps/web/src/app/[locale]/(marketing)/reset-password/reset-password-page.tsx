@@ -68,7 +68,7 @@ export default function ResetPasswordPage() {
     <div className="flex min-h-screen items-center justify-center px-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>{t("resetTitle")}</CardTitle>
+          <CardTitle as="h1" className="text-2xl">{t("resetTitle")}</CardTitle>
           <CardDescription>{t("resetDescription")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

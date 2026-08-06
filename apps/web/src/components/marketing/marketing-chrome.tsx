@@ -20,13 +20,13 @@ export function MarketingHeader() {
           </span>
         </Link>
         <nav className="flex items-center gap-2 sm:gap-4">
-          <Link href="/pricing" className="hidden text-sm text-muted-foreground hover:text-foreground sm:inline">
+          <Link href="/pricing" className="hidden items-center py-2 text-sm text-muted-foreground hover:text-foreground sm:inline-flex">
             {t("nav.pricing")}
           </Link>
-          <Link href="/login" className="hidden text-sm font-medium text-primary hover:underline sm:inline">
+          <Link href="/login" className="hidden items-center py-2 text-sm font-medium text-primary hover:underline sm:inline-flex">
             {t("nav.demo")}
           </Link>
-          <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">
+          <Link href="/privacy" className="inline-flex items-center py-2 text-sm text-muted-foreground hover:text-foreground">
             {t("nav.privacy")}
           </Link>
           <Link
@@ -64,14 +64,14 @@ export function MarketingFooter() {
           </div>
           <div>
             <p className="text-sm font-medium">{t("footer.product")}</p>
-            <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+            <ul className="mt-1 text-sm text-muted-foreground">
               <li>
-                <Link href="/pricing" className="hover:text-foreground">
+                <Link href="/pricing" className="inline-flex min-h-[2.75rem] items-center hover:text-foreground">
                   {t("nav.pricing")}
                 </Link>
               </li>
               <li>
-                <Link href="/signup" className="hover:text-foreground">
+                <Link href="/signup" className="inline-flex min-h-[2.75rem] items-center hover:text-foreground">
                   {t("nav.signup")}
                 </Link>
               </li>
@@ -79,14 +79,14 @@ export function MarketingFooter() {
           </div>
           <div>
             <p className="text-sm font-medium">{t("footer.legal")}</p>
-            <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+            <ul className="mt-1 text-sm text-muted-foreground">
               <li>
-                <Link href="/privacy" className="hover:text-foreground">
+                <Link href="/privacy" className="inline-flex min-h-[2.75rem] items-center hover:text-foreground">
                   {t("footer.privacy")}
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="hover:text-foreground">
+                <Link href="/terms" className="inline-flex min-h-[2.75rem] items-center hover:text-foreground">
                   {t("footer.terms")}
                 </Link>
               </li>

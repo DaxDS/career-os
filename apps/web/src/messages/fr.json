@@ -44,7 +44,9 @@
     "passwordsDoNotMatch": "Ces mots de passe ne correspondent pas.",
     "passwordTooShort": "Utilisez au moins 8 caractères.",
     "passwordUpdated": "Mot de passe mis à jour. Vous pouvez maintenant vous connecter.",
-    "resetLinkInvalid": "Ce lien de réinitialisation est invalide ou a expiré. Demandez-en un nouveau."
+    "resetLinkInvalid": "Ce lien de réinitialisation est invalide ou a expiré. Demandez-en un nouveau.",
+    "passwordHint": "Au moins 8 caractères.",
+    "signupTrust": "Gratuit pour commencer — aucune carte de crédit. Vos données sont stockées au Canada et vous pouvez les exporter ou les supprimer à tout moment."
   },
   "billing": {
     "title": "Forfait et facturation",

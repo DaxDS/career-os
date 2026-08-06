@@ -49,7 +49,7 @@ export default function ForgotPasswordPage() {
     <div className="flex min-h-screen items-center justify-center px-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>{t("forgotTitle")}</CardTitle>
+          <CardTitle as="h1" className="text-2xl">{t("forgotTitle")}</CardTitle>
           <CardDescription>{t("forgotDescription")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

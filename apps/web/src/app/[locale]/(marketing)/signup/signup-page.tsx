@@ -94,7 +94,7 @@ export default function SignupPage() {
     <div className="flex min-h-screen items-center justify-center px-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>{t("signupTitle")}</CardTitle>
+          <CardTitle as="h1" className="text-2xl">{t("signupTitle")}</CardTitle>
           <CardDescription>{t("signupDescription")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -128,6 +128,7 @@ export default function SignupPage() {
               <Label htmlFor="fullName">{t("fullName")}</Label>
               <Input
                 id="fullName"
+                autoComplete="name"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 required
@@ -137,6 +138,7 @@ export default function SignupPage() {
               <Label htmlFor="email">{t("email")}</Label>
               <Input
                 id="email"
+                autoComplete="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -147,12 +149,16 @@ export default function SignupPage() {
               <Label htmlFor="password">{t("password")}</Label>
               <Input
                 id="password"
+                autoComplete="new-password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 minLength={8}
                 required
               />
+              {/* Stated up front rather than surfaced as a browser rejection after
+                  the user has already committed to a password. */}
+              <p className="text-xs text-muted-foreground">{t("passwordHint")}</p>
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
             {message && <p className="text-sm text-emerald-700">{message}</p>}
@@ -160,6 +166,11 @@ export default function SignupPage() {
               {loading ? t("creatingAccount") : t("signup")}
             </Button>
           </form>
+
+          {/* This form asks for the starting point of someone's immigration profile
+              and previously carried no reassurance at all about cost, data residency
+              or reversibility. */}
+          <p className="text-xs leading-relaxed text-muted-foreground">{t("signupTrust")}</p>
 
           <p className="text-center text-sm text-muted-foreground">
             {t("hasAccount")}{" "}

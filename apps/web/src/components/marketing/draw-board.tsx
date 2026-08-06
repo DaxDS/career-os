@@ -41,7 +41,12 @@ export function DrawBoard() {
         </p>
 
         <div className="grid gap-6 lg:grid-cols-[3fr_2fr]">
-          <div className="rounded-xl border border-border bg-card p-5 sm:p-6">
+          {/* min-w-0 is load-bearing: grid items default to min-width:auto, so this
+              card refused to shrink below the 26rem min-width of the table inside it.
+              The track resolved to 450px inside a 343px container and the whole page
+              scrolled sideways on mobile — the overflow-x-auto wrapper never got the
+              chance to scroll because nothing above it would give up width. */}
+          <div className="min-w-0 rounded-xl border border-border bg-card p-5 sm:p-6">
             <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
               <span
                 aria-hidden="true"
@@ -87,7 +92,7 @@ export function DrawBoard() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-amber-500/40 bg-amber-500/5 p-5 sm:p-6">
+          <div className="min-w-0 rounded-xl border border-amber-500/40 bg-amber-500/5 p-5 sm:p-6">
             <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
               <span
                 aria-hidden="true"

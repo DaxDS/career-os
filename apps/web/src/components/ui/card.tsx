@@ -19,11 +19,18 @@ const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 );
 CardHeader.displayName = "CardHeader";
 
-const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => (
-    <h3 ref={ref} className={cn("font-semibold leading-none tracking-tight", className)} {...props} />
-  )
-);
+/**
+ * Defaults to h3, which is right inside a page that already has an h1. Pages where the
+ * card *is* the page — the auth screens — need to render this as the h1 instead, or
+ * the document has no top-level heading at all: bad for screen-reader navigation and
+ * for search engines.
+ */
+const CardTitle = React.forwardRef<
+  HTMLHeadingElement,
+  React.HTMLAttributes<HTMLHeadingElement> & { as?: "h1" | "h2" | "h3" }
+>(({ className, as: Tag = "h3", ...props }, ref) => (
+  <Tag ref={ref} className={cn("font-semibold leading-none tracking-tight", className)} {...props} />
+));
 CardTitle.displayName = "CardTitle";
 
 const CardDescription = React.forwardRef<
