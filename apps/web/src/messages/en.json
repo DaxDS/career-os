@@ -23,7 +23,6 @@
     "signingIn": "Signing in…",
     "creatingAccount": "Creating account…",
     "dev": {
-      "hint": "Demo account (prefilled) — PGWP profile with 5 sample matches",
       "orEmail": "Or",
       "notConfigured": "Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local (local) or Vercel env vars (production).",
       "confirmEmail": "Check your email to confirm your account, then continue to onboarding. If confirmation is disabled in Supabase, try logging in directly."

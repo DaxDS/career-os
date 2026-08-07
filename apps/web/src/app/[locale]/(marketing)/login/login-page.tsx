@@ -7,9 +7,8 @@ import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { getAuthCallbackUrl } from "@/lib/app-url";
-import { DEV_CREDENTIALS, isDemoLoginEnabled, isSupabaseConfigured } from "@/lib/dev-credentials";
+import { isSupabaseConfigured } from "@/lib/dev-credentials";
 import { safeRedirect } from "@/lib/safe-redirect";
-import { DevCredentialsHint } from "@/components/auth/dev-credentials-hint";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,9 +22,8 @@ export default function LoginPage() {
   // Validated: an unchecked ?redirect= made this an open redirect off your own domain.
   const redirect = safeRedirect(searchParams.get("redirect"));
   const configError = searchParams.get("error");
-  const demoLogin = isDemoLoginEnabled();
-  const [email, setEmail] = useState<string>(demoLogin ? DEV_CREDENTIALS.email : "");
-  const [password, setPassword] = useState<string>(demoLogin ? DEV_CREDENTIALS.password : "");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -86,8 +84,6 @@ export default function LoginPage() {
           <CardDescription>{t("loginDescription")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {demoLogin && <DevCredentialsHint label={ta("hint")} />}
-
           {!supabaseConfigured && (
             <p className="text-sm text-destructive">
               {configError === "supabase_not_configured" ? ta("notConfigured") : ta("notConfigured")}

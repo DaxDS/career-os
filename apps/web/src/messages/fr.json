@@ -23,7 +23,6 @@
     "signingIn": "Connexion…",
     "creatingAccount": "Création du compte…",
     "dev": {
-      "hint": "Compte démo (prérempli) — profil PTPD avec 5 correspondances",
       "orEmail": "Ou",
       "notConfigured": "Supabase n'est pas configuré. Ajoutez NEXT_PUBLIC_SUPABASE_URL et NEXT_PUBLIC_SUPABASE_ANON_KEY dans .env.local (local) ou les variables Vercel (production).",
       "confirmEmail": "Vérifiez votre courriel pour confirmer le compte, puis continuez l'intégration. Si la confirmation est désactivée dans Supabase, connectez-vous directement."

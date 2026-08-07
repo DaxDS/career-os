@@ -6,8 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { getAuthCallbackUrl } from "@/lib/app-url";
-import { DEV_CREDENTIALS, isDemoLoginEnabled, isSupabaseConfigured } from "@/lib/dev-credentials";
-import { DevCredentialsHint } from "@/components/auth/dev-credentials-hint";
+import { isSupabaseConfigured } from "@/lib/dev-credentials";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,10 +18,9 @@ export default function SignupPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const plan = searchParams.get("plan");
-  const demoLogin = isDemoLoginEnabled();
-  const [email, setEmail] = useState<string>(demoLogin ? DEV_CREDENTIALS.email : "");
-  const [password, setPassword] = useState<string>(demoLogin ? DEV_CREDENTIALS.password : "");
-  const [fullName, setFullName] = useState<string>(demoLogin ? DEV_CREDENTIALS.fullName : "");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -98,8 +96,6 @@ export default function SignupPage() {
           <CardDescription>{t("signupDescription")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {demoLogin && <DevCredentialsHint label={ta("hint")} />}
-
           {!supabaseConfigured && (
             <p className="text-sm text-destructive">{ta("notConfigured")}</p>
           )}
