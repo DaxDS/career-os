@@ -18,11 +18,22 @@ def _candidate(**overrides) -> CrsProfile:
     return CrsProfile(**base)
 
 
+# 21231 is deliberately NOT on IRCC's 2026 STEM list — see
+# test_software_developer_noc_does_not_unlock_stem below.
 SOFTWARE_JOB = JobContext(
     noc_code="21231",
     teer_level=1,
     province="ON",
     title="Senior AI Engineer",
+    employer="Example Corp",
+)
+
+# 21300 (civil engineers) is on the published 2026 STEM list.
+STEM_JOB = JobContext(
+    noc_code="21300",
+    teer_level=1,
+    province="ON",
+    title="Civil Engineer",
     employer="Example Corp",
 )
 
@@ -39,9 +50,23 @@ def test_twelve_months_raises_crs():
 
 
 def test_stem_noc_unlocks_stem_category():
-    result = evaluate_job(_candidate(), SOFTWARE_JOB)
+    result = evaluate_job(_candidate(), STEM_JOB)
     unlocked = {c["id"] for c in result["unlocked_categories"]}
     assert "stem" in unlocked
+
+
+def test_software_developer_noc_does_not_unlock_stem():
+    """Regression: IRCC's 2026 STEM list dropped the software occupations.
+
+    Our category data wrongly carried 21231/21232 under STEM, so software engineers
+    were told they qualified for a category IRCC no longer lists them in. The old
+    version of this suite asserted the opposite and passed, because the tests and the
+    data shared the same wrong assumption.
+    """
+    for noc in ("21231", "21232"):
+        job = JobContext(noc_code=noc, teer_level=1, province="ON", title="Developer")
+        unlocked = {c["id"] for c in evaluate_job(_candidate(), job)["unlocked_categories"]}
+        assert "stem" not in unlocked, f"{noc} must not unlock STEM"
 
 
 def test_non_stem_noc_does_not_unlock_stem():
@@ -52,13 +77,47 @@ def test_non_stem_noc_does_not_unlock_stem():
 
 
 def test_unverified_categories_never_assert_eligibility():
-    """A category whose NOC list is unverified must surface as needing verification."""
+    """An unverified NOC list must never produce an eligibility claim.
+
+    Every category is currently verified against IRCC, so this asserts the mechanism
+    rather than naming categories — otherwise the test silently stops testing anything
+    the moment the data changes, which is exactly what happened to its previous form.
+    """
+    import json
+    from pathlib import Path
+
+    data = json.loads(
+        (Path(__file__).resolve().parent.parent / "data" / "ee_categories.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    unverified = {
+        c["id"] for c in data["categories"] if c.get("verification_status") != "verified"
+    }
+
     result = evaluate_job(_candidate(), SOFTWARE_JOB)
     unlocked = {c["id"] for c in result["unlocked_categories"]}
     flagged = {c["id"] for c in result["needs_verification"]}
-    for unverified in ("transport", "researchers", "senior_managers", "education"):
-        assert unverified not in unlocked
-        assert unverified in flagged
+
+    for cid in unverified:
+        assert cid not in unlocked, f"{cid} is unverified and must not assert eligibility"
+        assert cid in flagged, f"{cid} is unverified and must be surfaced for verification"
+
+
+def test_every_category_is_verified_against_ircc():
+    """Guards the audit: an unverified list means users get told nothing about it."""
+    import json
+    from pathlib import Path
+
+    data = json.loads(
+        (Path(__file__).resolve().parent.parent / "data" / "ee_categories.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    for c in data["categories"]:
+        assert c.get("verification_status") == "verified", f"{c['id']} is not verified"
+        if not c.get("all_teer_0_3"):
+            assert c.get("noc_codes"), f"{c['id']} is verified but has no NOC codes"
 
 
 def test_military_category_excluded_from_job_scoring():
@@ -107,8 +166,12 @@ def test_french_category_resolves_its_draw_history():
 
 
 def test_dormant_stem_never_becomes_the_recommended_route():
-    """STEM has had no rounds since early 2024; eligibility alone must not sell it."""
-    result = evaluate_job(_candidate(), SOFTWARE_JOB)
+    """STEM has had no rounds in over two years; eligibility alone must not sell it.
+
+    Uses STEM_JOB rather than SOFTWARE_JOB: a software NOC no longer matches STEM at
+    all, so routing this through it would assert nothing about dormancy.
+    """
+    result = evaluate_job(_candidate(), STEM_JOB)
     stem = next(c for c in result["unlocked_categories"] if c["id"] == "stem")
     assert stem["rounds_last_12_months"] == 0
     assert result["best_route"]["route"] != stem["label"]

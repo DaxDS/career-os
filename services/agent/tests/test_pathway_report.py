@@ -9,6 +9,7 @@ def test_disclaimer_present():
 
 
 def test_evaluate_pathways_stem_noc():
-    flags = evaluate_pathways("21231", 1, "ON")
+    # See test_pathways.py — 21300 is on the published 2026 STEM list; 21231 is not.
+    flags = evaluate_pathways("21300", 1, "ON")
     assert flags["ee_eligible"] is True
     assert "stem" in flags["ee_categories"]

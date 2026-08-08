@@ -1,13 +1,27 @@
 {
   "schema_version": "2.0.0",
   "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations/category-based-selection.html",
-  "last_verified": "2026-08-03",
+  "last_verified": "2026-08-08",
   "description": "Express Entry category-based draw definitions for 2026. Versioned — update when IRCC publishes changes.",
   "disclaimer": "Informational only. Not immigration advice. Verify against current IRCC publications.",
   "changes_from_2025": {
-    "removed": ["agriculture"],
-    "added": ["transport", "physicians", "senior_managers", "researchers", "military"],
-    "retained": ["french_proficiency", "healthcare", "stem", "trades", "education"],
+    "removed": [
+      "agriculture"
+    ],
+    "added": [
+      "transport",
+      "physicians",
+      "senior_managers",
+      "researchers",
+      "military"
+    ],
+    "retained": [
+      "french_proficiency",
+      "healthcare",
+      "stem",
+      "trades",
+      "education"
+    ],
     "rule_change": "Minimum work experience for category eligibility increased from 6 months to 12 months, accumulated within the previous 3 years. Need not be continuous."
   },
   "eligibility_rules": {
@@ -16,7 +30,7 @@
     "must_be_continuous": false
   },
   "verification_legend": {
-    "verified": "NOC list transcribed from IRCC's published list and checked.",
+    "verified": "NOC list transcribed from IRCC's published category-based selection page and checked against it on the recorded verified_on date.",
     "unverified": "Category confirmed to exist for 2026, but the NOC list here is incomplete or not yet checked against IRCC. Code must NOT assert eligibility from an unverified list — surface it as 'needs verification' instead."
   },
   "categories": [
@@ -27,14 +41,22 @@
       "verification_status": "verified",
       "requires_canadian_experience": false,
       "noc_codes": [
-        "20010", "20011", "20012", "21100", "21101", "21102", "21103", "21109",
-        "21110", "21111", "21112", "21120", "21200", "21201", "21202", "21203",
-        "21210", "21211", "21220", "21221", "21222", "21223", "21230", "21231",
-        "21232", "21233", "21234", "21300", "21301", "21310", "21311", "21320",
-        "21321", "21322", "21330", "21331", "21332", "21390", "21399"
+        "20011",
+        "22300",
+        "21300",
+        "21220",
+        "22310",
+        "21310",
+        "21331",
+        "21321",
+        "63100",
+        "22301",
+        "21301"
       ],
       "min_teer": 0,
-      "max_teer": 3
+      "max_teer": 5,
+      "verified_on": "2026-08-08",
+      "verified_from": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations/category-based-selection.html"
     },
     {
       "id": "healthcare",
@@ -43,15 +65,48 @@
       "verification_status": "verified",
       "requires_canadian_experience": false,
       "noc_codes": [
-        "30010", "31100", "31101", "31102", "31103", "31110", "31111", "31112",
-        "31120", "31121", "31200", "31201", "31202", "31203", "31204", "31209",
-        "31300", "31301", "31302", "31303", "32100", "32101", "32102", "32103",
-        "32104", "32109", "32110", "32111", "32112", "32120", "32121", "32122",
-        "32123", "32124", "32129", "32200", "32201", "32209", "33100", "33101",
-        "33102", "33103", "33109"
+        "32104",
+        "31112",
+        "32123",
+        "31201",
+        "32111",
+        "31110",
+        "31121",
+        "31102",
+        "32101",
+        "32201",
+        "33101",
+        "32120",
+        "32121",
+        "32122",
+        "33102",
+        "31302",
+        "31300",
+        "31203",
+        "31111",
+        "32129",
+        "31209",
+        "32109",
+        "32102",
+        "31120",
+        "33103",
+        "32124",
+        "31303",
+        "31202",
+        "31200",
+        "31301",
+        "32103",
+        "42201",
+        "41300",
+        "31100",
+        "31101",
+        "41301",
+        "31103"
       ],
       "min_teer": 0,
-      "max_teer": 3
+      "max_teer": 5,
+      "verified_on": "2026-08-08",
+      "verified_from": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations/category-based-selection.html"
     },
     {
       "id": "trades",
@@ -60,84 +115,136 @@
       "verification_status": "verified",
       "requires_canadian_experience": false,
       "noc_codes": [
-        "72010", "72011", "72013", "72014", "72020", "72021", "72022", "72023",
-        "72024", "72025", "72100", "72101", "72102", "72103", "72104", "72105",
-        "72106", "72200", "72201", "72300", "72301", "72302", "72310", "72311",
-        "72320", "72400", "72401", "72402", "72403", "72404", "72405", "72406",
-        "72410", "72411", "72420", "72421", "72422", "72423", "72500", "72501",
-        "72600", "72601", "72604", "72999", "73100", "73101", "73102", "73110",
-        "73111", "73112", "73113", "73200", "73201", "73202", "73209", "73300",
-        "73301", "73310", "73311", "73400", "73401", "73402"
+        "82021",
+        "73113",
+        "73112",
+        "73110",
+        "73100",
+        "72999",
+        "72501",
+        "72422",
+        "72402",
+        "72401",
+        "72400",
+        "72320",
+        "72311",
+        "72310",
+        "72302",
+        "72300",
+        "72201",
+        "72200",
+        "72106",
+        "72102",
+        "72100",
+        "70011",
+        "70010",
+        "63201",
+        "22303"
       ],
-      "min_teer": 2,
-      "max_teer": 3
+      "min_teer": 0,
+      "max_teer": 5,
+      "verified_on": "2026-08-08",
+      "verified_from": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations/category-based-selection.html"
     },
     {
       "id": "education",
       "label": "Education",
-      "description": "Education occupations. Includes university professors and lecturers, post-secondary teaching and research assistants, and school teachers.",
-      "verification_status": "unverified",
+      "description": "Education occupations: school teachers, early childhood educators, teacher assistants and instructors of persons with disabilities. University professors and post-secondary research assistants belong to the researchers category, not this one.",
+      "verification_status": "verified",
       "requires_canadian_experience": false,
-      "noc_codes": ["41200", "41201", "41210", "41220", "41221", "42202", "43100"],
+      "noc_codes": [
+        "43100",
+        "42203",
+        "42202",
+        "41221",
+        "41220"
+      ],
       "min_teer": 0,
-      "max_teer": 3,
-      "verification_note": "Confirmed as a renewed 2026 category. Re-check the exact NOC list against IRCC before asserting eligibility."
+      "max_teer": 5,
+      "verified_on": "2026-08-08",
+      "verified_from": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations/category-based-selection.html"
     },
     {
       "id": "transport",
       "label": "Transport",
       "description": "Transport occupations. Newly introduced for 2026.",
-      "verification_status": "unverified",
+      "verification_status": "verified",
       "requires_canadian_experience": false,
-      "noc_codes": [],
+      "noc_codes": [
+        "72600",
+        "72410",
+        "72404",
+        "22313"
+      ],
       "min_teer": 0,
-      "max_teer": 3,
-      "verification_note": "Confirmed as a new 2026 category. The 2025 transport NOC list was retired with the category redesign; do not reuse it. Needs the published 2026 list."
+      "max_teer": 5,
+      "verified_on": "2026-08-08",
+      "verified_from": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations/category-based-selection.html"
     },
     {
       "id": "physicians",
       "label": "Physicians with Canadian work experience",
       "description": "Medical doctors with Canadian work experience. Newly introduced for 2026.",
-      "verification_status": "unverified",
+      "verification_status": "verified",
       "requires_canadian_experience": true,
-      "noc_codes": ["31100", "31101", "31102"],
+      "noc_codes": [
+        "31102",
+        "31101",
+        "31100"
+      ],
       "min_teer": 0,
-      "max_teer": 1,
-      "verification_note": "Confirmed as a new 2026 category requiring Canadian work experience. Re-check the exact NOC list against IRCC."
+      "max_teer": 5,
+      "verified_on": "2026-08-08",
+      "verified_from": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations/category-based-selection.html"
     },
     {
       "id": "senior_managers",
       "label": "Senior managers with Canadian work experience",
       "description": "Senior managers in construction, transportation, production, utilities, financial, communications and other business services, with Canadian work experience.",
-      "verification_status": "unverified",
+      "verification_status": "verified",
       "requires_canadian_experience": true,
-      "noc_codes": [],
+      "noc_codes": [
+        "00015",
+        "00014",
+        "00013",
+        "00012"
+      ],
       "min_teer": 0,
-      "max_teer": 0,
-      "verification_note": "Confirmed as a new 2026 category requiring Canadian work experience. Needs the published NOC 00-series list."
+      "max_teer": 5,
+      "verified_on": "2026-08-08",
+      "verified_from": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations/category-based-selection.html"
     },
     {
       "id": "researchers",
       "label": "Researchers with Canadian work experience",
       "description": "Researchers with Canadian work experience. Newly introduced for 2026.",
-      "verification_status": "unverified",
+      "verification_status": "verified",
       "requires_canadian_experience": true,
-      "noc_codes": [],
+      "noc_codes": [
+        "41201",
+        "41200"
+      ],
       "min_teer": 0,
-      "max_teer": 1,
-      "verification_note": "Confirmed as a new 2026 category requiring Canadian work experience. Needs the published NOC list."
+      "max_teer": 5,
+      "verified_on": "2026-08-08",
+      "verified_from": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations/category-based-selection.html"
     },
     {
       "id": "military",
       "label": "Skilled military recruits",
       "description": "Skilled military recruits with a Canadian Armed Forces job offer.",
-      "verification_status": "unverified",
+      "verification_status": "verified",
       "requires_canadian_experience": false,
-      "noc_codes": [],
+      "noc_codes": [
+        "43204",
+        "42102",
+        "40042"
+      ],
       "min_teer": 0,
       "max_teer": 5,
-      "verification_note": "Eligibility is driven by a Canadian Armed Forces job offer rather than by NOC alone. Not inferable from a job posting; exclude from job-level scoring.",
-      "exclude_from_job_scoring": true
+      "exclude_from_job_scoring": true,
+      "verified_on": "2026-08-08",
+      "verified_from": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations/category-based-selection.html"
     },
     {
       "id": "french_proficiency",

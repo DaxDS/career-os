@@ -1,24 +1,24 @@
 {
   "_generated_by": "scripts/gen_draw_snapshot.py \u2014 do not edit by hand",
-  "asOf": "2026-08-03",
+  "asOf": "2026-08-08",
   "sourceUrl": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/express-entry/submit-profile/rounds-invitations.html",
   "windowMonths": 12,
   "live": [
     {
       "id": "cec",
       "label": "Canadian Experience Class",
-      "rounds": 12,
-      "itas": 45250,
-      "lastDrawn": "2026-07-21",
+      "rounds": 13,
+      "itas": 48250,
+      "lastDrawn": "2026-08-05",
       "typicalCutoff": 516
     },
     {
       "id": "french",
       "label": "French-language proficiency",
-      "rounds": 8,
-      "itas": 40500,
-      "lastDrawn": "2026-07-22",
-      "typicalCutoff": 409
+      "rounds": 9,
+      "itas": 45500,
+      "lastDrawn": "2026-08-06",
+      "typicalCutoff": 399
     },
     {
       "id": "healthcare",
@@ -31,10 +31,10 @@
     {
       "id": "pnp",
       "label": "Provincial Nominee Program",
-      "rounds": 14,
-      "itas": 6450,
-      "lastDrawn": "2026-07-20",
-      "typicalCutoff": 730
+      "rounds": 15,
+      "itas": 6957,
+      "lastDrawn": "2026-08-04",
+      "typicalCutoff": 744
     },
     {
       "id": "trades",
@@ -59,6 +59,14 @@
       "itas": 662,
       "lastDrawn": "2026-06-24",
       "typicalCutoff": 196
+    },
+    {
+      "id": "transport",
+      "label": "Transport",
+      "rounds": 1,
+      "itas": 300,
+      "lastDrawn": "2026-08-07",
+      "typicalCutoff": 470
     },
     {
       "id": "military",
@@ -113,14 +121,6 @@
     {
       "id": "stem",
       "label": "STEM",
-      "rounds": 0,
-      "itas": 0,
-      "lastDrawn": null,
-      "typicalCutoff": null
-    },
-    {
-      "id": "transport",
-      "label": "Transport",
       "rounds": 0,
       "itas": 0,
       "lastDrawn": null,
