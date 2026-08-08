@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { PasswordRecoveryRedirect } from "@/components/auth/password-recovery-redirect";
 
 type Locale = (typeof routing.locales)[number];
 
@@ -26,6 +27,9 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+    <NextIntlClientProvider messages={messages}>
+      <PasswordRecoveryRedirect />
+      {children}
+    </NextIntlClientProvider>
   );
 }
