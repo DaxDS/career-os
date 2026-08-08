@@ -28,6 +28,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const supabaseConfigured = isSupabaseConfigured();
+  const googleEnabled = process.env.NEXT_PUBLIC_ENABLE_GOOGLE_AUTH === "true";
 
   async function handleEmailLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -90,24 +91,31 @@ export default function LoginPage() {
             </p>
           )}
 
-          <Button
-            type="button"
-            variant="outline"
-            className="w-full"
-            onClick={handleGoogleLogin}
-            disabled={loading || !supabaseConfigured}
-          >
-            {t("continueWithGoogle")}
-          </Button>
+          {/* Supabase reports google:false on this project, so this button errored for
+              every user who pressed it. Gated rather than deleted: enable the provider
+              in Supabase, set NEXT_PUBLIC_ENABLE_GOOGLE_AUTH=true, and it returns. */}
+          {googleEnabled && (
+            <>
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={handleGoogleLogin}
+                disabled={loading || !supabaseConfigured}
+              >
+                {t("continueWithGoogle")}
+              </Button>
 
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-card px-2 text-muted-foreground">{ta("orEmail")}</span>
-            </div>
-          </div>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-card px-2 text-muted-foreground">{ta("orEmail")}</span>
+                </div>
+              </div>
+            </>
+          )}
 
           <form onSubmit={handleEmailLogin} className="space-y-4">
             <div className="space-y-2">
