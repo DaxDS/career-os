@@ -13,6 +13,7 @@
  */
 
 import reference from "./reference-data.json";
+import type { ProvincialOutlook } from "./provinces";
 import {
   ageFrom,
   calculateCrs,
@@ -282,18 +283,34 @@ export interface NextMove {
   detail: string;
 }
 
-export function nextMoves(crs: CrsResult, canadianMonths: number, hasNomination: boolean): NextMove[] {
+export function nextMoves(
+  crs: CrsResult,
+  canadianMonths: number,
+  hasNomination: boolean,
+  outlook?: ProvincialOutlook
+): NextMove[] {
   const moves: NextMove[] = [];
   const b = crs.breakdown;
 
   if (!hasNomination) {
+    // Name the province and stream. "Pursue a provincial nomination" is advice nobody
+    // can act on — the actionable unit is "Alberta Express Entry Stream, no job offer
+    // required, health care is a named pathway".
+    const best = outlook?.matches.find((m) => m.streams.some((s) => s.fit === "strong"));
+    const stream = best?.streams.find((s) => s.fit === "strong");
+
     moves.push({
-      action: "Pursue a provincial nomination",
+      action: stream ? `Apply to ${best!.name}: ${stream.label}` : "Pursue a provincial nomination",
       points: 600,
-      effort: "high",
-      detail:
-        "A nomination adds 600 CRS points and effectively guarantees an invitation. This is the single " +
-        "largest lever available and outweighs every other action combined.",
+      effort: stream?.requiresJobOffer === false ? "medium" : "high",
+      detail: stream
+        ? `A nomination adds 600 CRS points and effectively guarantees an invitation. ` +
+          `Your strongest published route is ${best!.program} — ${stream.label}. ` +
+          stream.reasons.join(" ")
+        : "A nomination adds 600 CRS points and effectively guarantees an invitation. No province " +
+          "currently publishes a stream you clear outright, so the realistic paths are a qualifying " +
+          "job offer or moving into an occupation a province is actively inviting. See the provincial " +
+          "breakdown below for which is closest.",
     });
   }
 

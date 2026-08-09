@@ -28,6 +28,27 @@ export interface NextMove {
   detail: string;
 }
 
+export interface StreamMatch {
+  id: string;
+  label: string;
+  fit: "strong" | "possible" | "conditional" | "blocked";
+  expressEntryAligned: boolean;
+  requiresJobOffer: boolean;
+  reasons: string[];
+  blockers: string[];
+  sourceUrl: string;
+}
+
+export interface ProvinceMatch {
+  code: string;
+  name: string;
+  program: string;
+  programNote: string | null;
+  sourceUrl: string;
+  fit: "strong" | "possible" | "conditional" | "blocked";
+  streams: StreamMatch[];
+}
+
 export interface PathwayReportData {
   generated_at?: string;
   disclaimer?: string;
@@ -59,7 +80,33 @@ export interface PathwayReportData {
   permit_runway_days?: number;
   arranged_employment_note?: string;
   draws_metadata?: { last_verified?: string; source_url?: string };
+  provincial_outlook?: {
+    matches: ProvinceMatch[];
+    unverified: Array<{ code: string; name: string; program: string; sourceUrl: string }>;
+    nationalContext: {
+      pnp_allocations_2026: number;
+      supplemental_breakdown: { licensed_physicians: number; francophone_outside_quebec: number };
+      quebec_note: string;
+      source_url: string;
+    };
+    lastVerified: string;
+    disclaimer: string;
+  };
 }
+
+const FIT_LABEL: Record<string, string> = {
+  strong: "Best fit",
+  possible: "Possible",
+  conditional: "Conditional",
+  blocked: "Not open to you",
+};
+
+const FIT_VARIANT: Record<string, "default" | "secondary" | "outline"> = {
+  strong: "default",
+  possible: "secondary",
+  conditional: "outline",
+  blocked: "outline",
+};
 
 const BREAKDOWN_LABELS: Record<string, string> = {
   age: "Age",
@@ -230,6 +277,81 @@ export function PathwayReportView({ report }: { report: PathwayReportData | null
                 <p className="mt-1 text-sm text-muted-foreground">{m.detail}</p>
               </div>
             ))}
+          </CardContent>
+        </Card>
+      )}
+
+      {report.provincial_outlook && report.provincial_outlook.matches.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Where in Canada you have a route</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-5">
+            <p className="text-sm text-muted-foreground">
+              Provinces nominate from a fixed pool —{" "}
+              {report.provincial_outlook.nationalContext.pnp_allocations_2026.toLocaleString()} nominations
+              nationwide for 2026. Streams are ranked by how close you are to them today, based on your
+              occupation, language and experience.
+            </p>
+
+            {report.provincial_outlook.matches.map((p) => (
+              <div key={p.code} className="rounded-lg border border-border/60 p-4">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <p className="font-medium">{p.name}</p>
+                  <Badge variant={FIT_VARIANT[p.fit]}>{FIT_LABEL[p.fit]}</Badge>
+                </div>
+                <p className="text-xs text-muted-foreground">{p.program}</p>
+                {p.programNote && <p className="mt-2 text-sm text-muted-foreground">{p.programNote}</p>}
+
+                <div className="mt-3 space-y-3">
+                  {p.streams.map((s) => (
+                    <div key={s.id} className="border-t border-border/40 pt-3">
+                      <div className="flex flex-wrap items-baseline gap-2">
+                        <p className="text-sm font-medium">{s.label}</p>
+                        {s.expressEntryAligned && (
+                          <Badge variant="secondary" className="text-xs">
+                            +600 CRS
+                          </Badge>
+                        )}
+                        {!s.requiresJobOffer && (
+                          <Badge variant="secondary" className="text-xs">
+                            No job offer
+                          </Badge>
+                        )}
+                      </div>
+                      {s.reasons.length > 0 && (
+                        <ul className="mt-1 space-y-1 text-sm text-muted-foreground">
+                          {s.reasons.map((r, i) => (
+                            <li key={i}>{r}</li>
+                          ))}
+                        </ul>
+                      )}
+                      {s.blockers.length > 0 && (
+                        <ul className="mt-1 space-y-1 text-sm text-amber-700 dark:text-amber-500">
+                          {s.blockers.map((bl, i) => (
+                            <li key={i}>{bl}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {report.provincial_outlook.unverified.length > 0 && (
+              <p className="text-sm text-muted-foreground">
+                Not assessed here:{" "}
+                {report.provincial_outlook.unverified.map((u) => u.name).join(", ")}. These provinces run
+                nominee programs, but we have not verified their current stream criteria, so we make no claim
+                about them either way — check the province directly.
+              </p>
+            )}
+
+            <p className="text-xs text-muted-foreground">
+              {report.provincial_outlook.nationalContext.quebec_note} Provincial criteria verified{" "}
+              {report.provincial_outlook.lastVerified}. {report.provincial_outlook.disclaimer}
+            </p>
           </CardContent>
         </Card>
       )}

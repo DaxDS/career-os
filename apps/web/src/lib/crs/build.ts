@@ -11,6 +11,8 @@ import {
   profileToCrs,
   referenceMetadata,
 } from "./report";
+import { minAbility } from "./grid";
+import { provincialOutlook } from "./provinces";
 
 /**
  * Build a PR pathway report from a user's stored profile and work history.
@@ -113,6 +115,17 @@ export async function buildPathwayReport(
   });
   const gaps = gapAnalysis(crs.total, landscape, eligibility);
 
+  // Which province, which stream, which occupation — the part a 600-point line
+  // about "pursue a nomination" never answered.
+  const outlook = provincialOutlook({
+    noc: primaryNoc,
+    teer: primaryTeer,
+    minClb: minAbility(crsProfile.firstLanguage),
+    canadianMonths,
+    currentProvince: (profile.province as string | null) ?? null,
+    hasNomination: Boolean(profile.has_provincial_nomination),
+  });
+
   const report: Record<string, unknown> = {
     generated_at: new Date().toISOString(),
     disclaimer: DISCLAIMER,
@@ -148,7 +161,8 @@ export async function buildPathwayReport(
     },
     eligibility,
     gap_analysis: gaps,
-    next_moves: nextMoves(crs, canadianMonths, Boolean(profile.has_provincial_nomination)),
+    next_moves: nextMoves(crs, canadianMonths, Boolean(profile.has_provincial_nomination), outlook),
+    provincial_outlook: outlook,
     arranged_employment_note:
       "IRCC removed arranged-employment CRS points on 2025-03-25. A job offer adds no points on its own; " +
       "its value is the Canadian experience and category or provincial eligibility it unlocks.",

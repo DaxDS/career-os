@@ -8,6 +8,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EDUCATION_LABELS, EDUCATION_ORDER } from "@/lib/crs/grid";
+import {
+  TEST_META,
+  convertAll,
+  type EnglishTest,
+  type FrenchTest,
+} from "@/lib/crs/language-conversion";
 
 export interface CrsProfileValues {
   date_of_birth: string;
@@ -37,42 +43,70 @@ export interface CrsProfileValues {
 
 const ABILITIES = ["reading", "writing", "listening", "speaking"] as const;
 
-const CLB_HELP =
-  "Enter your CLB level per ability (0-12). IELTS and CELPIP results convert to CLB — " +
-  "your test report or IRCC's conversion chart gives the number.";
+const ENGLISH_TESTS: EnglishTest[] = ["clb", "celpip", "ielts", "pte"];
+const FRENCH_TESTS: FrenchTest[] = ["none", "tef", "tcf", "nclc"];
 
+/**
+ * Raw test scores in, CLB out.
+ *
+ * IRCC's own calculator asks for test results and converts internally. Asking for CLB
+ * directly — as this form used to — pushes a lookup onto the user in the largest
+ * scoring factor after age, which is exactly where a transcription slip is most
+ * expensive. The converted level is shown live so the number is never a black box.
+ */
 function LanguageRow({
   prefix,
+  test,
   values,
   onChange,
-  disabled,
 }: {
   prefix: "clb_en" | "nclc_fr" | "spouse_clb";
+  test: EnglishTest | FrenchTest;
   values: Record<string, number>;
   onChange: (field: string, value: number) => void;
-  disabled?: boolean;
 }) {
+  const meta = TEST_META[test];
+  if (!meta) return null;
+
+  const raw = {
+    reading: values[`${prefix}_reading`] ?? 0,
+    writing: values[`${prefix}_writing`] ?? 0,
+    listening: values[`${prefix}_listening`] ?? 0,
+    speaking: values[`${prefix}_speaking`] ?? 0,
+  };
+  const converted = convertAll(test, raw);
+  const isDirect = test === "clb" || test === "nclc" || test === "celpip";
+  const unit = prefix === "nclc_fr" ? "NCLC" : "CLB";
+
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-      {ABILITIES.map((ability) => {
-        const field = `${prefix}_${ability}`;
-        return (
-          <div key={field}>
-            <Label htmlFor={field} className="text-xs capitalize text-muted-foreground">
-              {ability}
-            </Label>
-            <Input
-              id={field}
-              type="number"
-              min={0}
-              max={12}
-              disabled={disabled}
-              value={values[field] ?? 0}
-              onChange={(e) => onChange(field, Number(e.target.value))}
-            />
-          </div>
-        );
-      })}
+    <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {ABILITIES.map((ability) => {
+          const field = `${prefix}_${ability}`;
+          return (
+            <div key={field}>
+              <Label htmlFor={field} className="text-xs capitalize text-muted-foreground">
+                {ability}
+              </Label>
+              <Input
+                id={field}
+                type="number"
+                min={meta.min}
+                max={meta.max}
+                step={meta.step}
+                value={values[field] ?? 0}
+                onChange={(e) => onChange(field, Number(e.target.value))}
+              />
+              {!isDirect && (
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {unit} {converted[ability]}
+                </p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <p className="text-xs text-muted-foreground">{meta.hint}</p>
     </div>
   );
 }
@@ -88,6 +122,19 @@ export function CrsProfileForm({
   const [open, setOpen] = useState(!completed);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Stored values are already CLB/NCLC levels, so "I know my levels" is the only
+  // default that reads them back correctly.
+  const [englishTest, setEnglishTest] = useState<EnglishTest>("clb");
+  // Defaults to "none" — the form used to demand four French scores from everyone,
+  // including the majority who have never sat a French test. But someone who already
+  // saved French levels must not have them silently zeroed on their next save, so an
+  // existing score reopens the section as a direct NCLC entry.
+  const [frenchTest, setFrenchTest] = useState<FrenchTest>(() =>
+    ABILITIES.some((a) => Number((initial as Record<string, number>)[`nclc_fr_${a}`] ?? 0) > 0)
+      ? "nclc"
+      : "none"
+  );
+  const [spouseTest, setSpouseTest] = useState<EnglishTest>("clb");
   const [values, setValues] = useState<Record<string, unknown>>({
     date_of_birth: initial.date_of_birth ?? "",
     education_level: initial.education_level ?? "",
@@ -108,6 +155,19 @@ export function CrsProfileForm({
   });
 
   const set = (field: string, value: unknown) => setValues((v) => ({ ...v, [field]: value }));
+
+  /**
+   * Clear the row when the test changes. A "9" is CLB 9 on one scale and an IELTS
+   * band 9 on another — carrying the number across would quietly rescore the user.
+   */
+  const changeTest = <T,>(prefix: string, setter: (t: T) => void) => (test: T) => {
+    setter(test);
+    setValues((v) => {
+      const next = { ...v };
+      for (const ability of ABILITIES) next[`${prefix}_${ability}`] = 0;
+      return next;
+    });
+  };
   const hasSpouse = Boolean(values.has_accompanying_spouse);
 
   async function save() {
@@ -115,6 +175,25 @@ export function CrsProfileForm({
     setError(null);
     try {
       const payload = { ...values };
+
+      // The API and the CRS engine speak CLB/NCLC. Whatever test the user picked,
+      // convert here so raw IELTS bands never reach the scoring grid as if they
+      // were levels — a 7.0 band is CLB 9, and storing it as CLB 7 costs real points.
+      const toLevels = (prefix: string, test: EnglishTest | FrenchTest) => {
+        const converted = convertAll(test, {
+          reading: Number(values[`${prefix}_reading`] ?? 0),
+          writing: Number(values[`${prefix}_writing`] ?? 0),
+          listening: Number(values[`${prefix}_listening`] ?? 0),
+          speaking: Number(values[`${prefix}_speaking`] ?? 0),
+        });
+        for (const ability of ABILITIES) payload[`${prefix}_${ability}`] = converted[ability];
+      };
+
+      toLevels("clb_en", englishTest);
+      // "none" converts to all zeros, which is what an untested applicant scores.
+      toLevels("nclc_fr", frenchTest);
+      toLevels("spouse_clb", spouseTest);
+
       if (!payload.date_of_birth) delete payload.date_of_birth;
       if (!payload.education_level) delete payload.education_level;
       if (!payload.spouse_education_level) delete payload.spouse_education_level;
@@ -200,19 +279,64 @@ export function CrsProfileForm({
           </div>
         </div>
 
-        <div>
-          <Label className="text-sm font-semibold">English (CLB per ability)</Label>
-          <p className="mb-2 text-xs text-muted-foreground">{CLB_HELP}</p>
-          <LanguageRow prefix="clb_en" values={values as Record<string, number>} onChange={set} />
+        <div className="space-y-2">
+          <Label htmlFor="english-test" className="text-sm font-semibold">
+            English test
+          </Label>
+          <select
+            id="english-test"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+            value={englishTest}
+            onChange={(e) => changeTest<EnglishTest>("clb_en", setEnglishTest)(e.target.value as EnglishTest)}
+          >
+            {ENGLISH_TESTS.map((t) => (
+              <option key={t} value={t}>
+                {TEST_META[t]?.label}
+              </option>
+            ))}
+          </select>
+          <p className="text-xs text-muted-foreground">
+            Enter the scores exactly as they appear on your report — we convert them to CLB the
+            same way IRCC does.
+          </p>
+          <LanguageRow
+            prefix="clb_en"
+            test={englishTest}
+            values={values as Record<string, number>}
+            onChange={set}
+          />
         </div>
 
-        <div>
-          <Label className="text-sm font-semibold">French (NCLC per ability)</Label>
-          <p className="mb-2 text-xs text-muted-foreground">
-            Leave at 0 if you have no French test. NCLC 7+ across all four unlocks French-category draws, which
-            have had the lowest cut-offs of any route.
-          </p>
-          <LanguageRow prefix="nclc_fr" values={values as Record<string, number>} onChange={set} />
+        <div className="space-y-2">
+          <Label htmlFor="french-test" className="text-sm font-semibold">
+            French test
+          </Label>
+          <select
+            id="french-test"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+            value={frenchTest}
+            onChange={(e) => changeTest<FrenchTest>("nclc_fr", setFrenchTest)(e.target.value as FrenchTest)}
+          >
+            <option value="none">I haven&apos;t taken a French test</option>
+            {FRENCH_TESTS.filter((t) => t !== "none").map((t) => (
+              <option key={t} value={t}>
+                {TEST_META[t]?.label}
+              </option>
+            ))}
+          </select>
+          {frenchTest === "none" ? (
+            <p className="text-xs text-muted-foreground">
+              Nothing to enter. Worth knowing: French draws have had the lowest cut-offs of any
+              route — 391 in the most recent round, against 516 for the Canadian Experience Class.
+            </p>
+          ) : (
+            <LanguageRow
+              prefix="nclc_fr"
+              test={frenchTest}
+              values={values as Record<string, number>}
+              onChange={set}
+            />
+          )}
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
@@ -312,9 +436,28 @@ export function CrsProfileForm({
                 />
               </div>
             </div>
-            <div>
-              <Label className="text-sm">Their English (CLB per ability)</Label>
-              <LanguageRow prefix="spouse_clb" values={values as Record<string, number>} onChange={set} />
+            <div className="space-y-2">
+              <Label htmlFor="spouse-test" className="text-sm">
+                Their English test
+              </Label>
+              <select
+                id="spouse-test"
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                value={spouseTest}
+                onChange={(e) => changeTest<EnglishTest>("spouse_clb", setSpouseTest)(e.target.value as EnglishTest)}
+              >
+                {ENGLISH_TESTS.map((t) => (
+                  <option key={t} value={t}>
+                    {TEST_META[t]?.label}
+                  </option>
+                ))}
+              </select>
+              <LanguageRow
+                prefix="spouse_clb"
+                test={spouseTest}
+                values={values as Record<string, number>}
+                onChange={set}
+              />
             </div>
           </div>
         )}

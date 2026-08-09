@@ -1,0 +1,239 @@
+{
+  "schema_version": "1.0.0",
+  "last_verified": "2026-08-08",
+  "disclaimer": "Informational only. Provincial criteria change without notice and several provinces publish intake-by-intake. Verify against the province's own page before acting.",
+  "national_context": {
+    "pnp_allocations_2026": 43999,
+    "atlantic_immigration_program_allocations_2026": 3315,
+    "supplemental_spaces_2026": 10000,
+    "supplemental_breakdown": {
+      "licensed_physicians": 5000,
+      "francophone_outside_quebec": 5000
+    },
+    "no_pnp": ["QC", "NU"],
+    "quebec_note": "Under the Canada-Quebec Accord, Quebec selects its own economic immigrants. There is no Quebec PNP and a Quebec destination cannot be chosen through Express Entry.",
+    "source_url": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/transition-binders/deputy-minister-2026/economic-immigration.html",
+    "verified_on": "2026-08-08"
+  },
+  "verification_legend": {
+    "verified": "Stream criteria read from the province's own published page on the recorded date.",
+    "unverified": "The province operates a PNP, but its streams have not been checked against the province's page. Code must NOT assert eligibility from an unverified entry — surface it as 'check directly' instead."
+  },
+  "provinces": [
+    {
+      "code": "ON",
+      "name": "Ontario",
+      "program": "Ontario Immigrant Nominee Program (OINP)",
+      "verification_status": "verified",
+      "verified_on": "2026-08-08",
+      "source_url": "https://www.ontario.ca/page/ontario-immigrant-nominee-program-oinp",
+      "program_note": "Ontario has closed every other OINP stream. The Workforce Priority stream is the only route currently published as open, and it is job-offer led — the Human Capital and Masters/PhD Graduate streams that once let candidates apply without an employer are gone.",
+      "streams": [
+        {
+          "id": "on_workforce_priority",
+          "label": "Ontario Workforce Priority Stream",
+          "requires_job_offer": true,
+          "express_entry_aligned": true,
+          "ee_note": "Express Entry alignment applies to TEER 0-3 applicants who opt in; a nomination then adds 600 CRS points.",
+          "teer_eligible": [0, 1, 2, 3, 4, 5],
+          "min_clb_by_group": { "teer_0_3": 6, "teer_0_3_trades": 5, "teer_4_5": 4 },
+          "min_education": "Post-secondary credential of at least one year for TEER 0-3 (non-trades); secondary school for trades and TEER 4-5.",
+          "min_experience_note": "TEER 0-3: 6 months consecutive full-time in the offered position, or 2 years cumulative in the NOC, or 3 months for recent Ontario graduates. TEER 4-5: 9 months cumulative full-time within 2 years.",
+          "occupation_note": "All NOC occupations across every TEER are eligible; the constraint is the job offer, not the occupation.",
+          "job_offer_exception": "Self-employed physicians may apply without a job offer if they hold an OHIP billing number and membership in the College of Physicians and Surgeons of Ontario.",
+          "source_url": "https://www.ontario.ca/page/ontario-workforce-priority-stream"
+        }
+      ]
+    },
+    {
+      "code": "BC",
+      "name": "British Columbia",
+      "program": "BC Provincial Nominee Program (BC PNP)",
+      "verification_status": "verified",
+      "verified_on": "2026-08-08",
+      "source_url": "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program",
+      "program_note": "BC no longer runs general skilled-worker draws. In 2026 it invites almost exclusively within named sectors — childcare, health, education, veterinary care and construction trades — plus a small high-wage 'economic impact' route. A strong profile in an unlisted occupation is not being invited at any score.",
+      "streams": [
+        {
+          "id": "bc_skilled_worker",
+          "label": "Skills Immigration — Skilled Worker (EEBC option available)",
+          "requires_job_offer": true,
+          "express_entry_aligned": true,
+          "ee_note": "The Express Entry BC (EEBC) option requires an existing profile in the federal pool.",
+          "teer_eligible": [0, 1, 2, 3],
+          "targeted_sectors": [
+            { "id": "childcare", "label": "Care — childcare", "last_invited": "2026-08-06", "invitations": 183, "min_score": 102 },
+            { "id": "health", "label": "Care — health", "last_invited": "2026-08-06", "invitations": 124, "min_score": 84 },
+            { "id": "education", "label": "Care — education", "last_invited": "2026-08-06", "invitations": null, "min_score": 68 },
+            { "id": "veterinary", "label": "Care — veterinary", "last_invited": "2026-08-06", "invitations": 6, "min_score": 72 },
+            { "id": "construction", "label": "Build — construction trades", "last_invited": "2026-08-06", "invitations": 187, "min_score": 88 }
+          ],
+          "general_route_note": "Outside the targeted sectors, the High Economic Impact route required a job offer paying roughly $62/hour and $125,000/year, or a BC PNP score of 138, at the 2026-04-22 round.",
+          "source_url": "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program/invitations-to-apply"
+        },
+        {
+          "id": "bc_health_authority",
+          "label": "Skills Immigration — Health Authority",
+          "requires_job_offer": true,
+          "express_entry_aligned": true,
+          "teer_eligible": [0, 1, 2, 3, 4, 5],
+          "occupation_note": "For candidates with an offer from one of BC's public health authorities. TEER level is not the constraint; the employer is.",
+          "source_url": "https://www.welcomebc.ca/immigrate-to-b-c/about-the-bc-provincial-nominee-program"
+        }
+      ]
+    },
+    {
+      "code": "AB",
+      "name": "Alberta",
+      "program": "Alberta Advantage Immigration Program (AAIP)",
+      "verification_status": "verified",
+      "verified_on": "2026-08-08",
+      "source_url": "https://www.alberta.ca/alberta-advantage-immigration-program",
+      "program_note": "Alberta runs the most accessible no-job-offer route in the country: the Alberta Express Entry Stream draws directly from the federal pool, with dedicated pathways for health care, technology and policing.",
+      "streams": [
+        {
+          "id": "ab_express_entry",
+          "label": "Alberta Express Entry Stream",
+          "requires_job_offer": false,
+          "express_entry_aligned": true,
+          "ee_note": "Alberta searches the federal Express Entry pool and issues notifications of interest. You cannot apply directly — you must already have an active profile.",
+          "teer_eligible": [0, 1, 2, 3],
+          "priority_sectors": ["health care", "technology", "policing"],
+          "occupation_note": "Dedicated pathways exist for health care, technology and police occupations. Other occupations are selected against Alberta's stated provincial priorities.",
+          "source_url": "https://www.alberta.ca/alberta-advantage-immigration-program"
+        },
+        {
+          "id": "ab_opportunity",
+          "label": "Alberta Opportunity Stream",
+          "requires_job_offer": true,
+          "express_entry_aligned": false,
+          "ee_note": "Base stream — a nomination here leads to a direct PR application, not 600 CRS points.",
+          "teer_eligible": [0, 1, 2, 3, 4, 5],
+          "occupation_note": "For candidates already working in Alberta on a valid work permit.",
+          "source_url": "https://www.alberta.ca/alberta-advantage-immigration-program"
+        },
+        {
+          "id": "ab_rural_renewal",
+          "label": "Rural Renewal Stream",
+          "requires_job_offer": true,
+          "express_entry_aligned": false,
+          "teer_eligible": [0, 1, 2, 3, 4, 5],
+          "occupation_note": "Requires a job offer from an employer in a designated rural Alberta community, plus a community endorsement letter.",
+          "source_url": "https://www.alberta.ca/alberta-advantage-immigration-program"
+        },
+        {
+          "id": "ab_tourism_hospitality",
+          "label": "Tourism and Hospitality Stream",
+          "requires_job_offer": true,
+          "express_entry_aligned": false,
+          "teer_eligible": [0, 1, 2, 3, 4, 5],
+          "occupation_note": "Restricted to the tourism and hospitality sector.",
+          "source_url": "https://www.alberta.ca/alberta-advantage-immigration-program"
+        }
+      ]
+    },
+    {
+      "code": "SK",
+      "name": "Saskatchewan",
+      "program": "Saskatchewan Immigrant Nominee Program (SINP)",
+      "verification_status": "verified",
+      "verified_on": "2026-08-08",
+      "source_url": "https://www.saskatchewan.ca/residents/moving-to-saskatchewan/live-in-saskatchewan/by-immigrating/saskatchewan-immigrant-nominee-program",
+      "program_note": "Saskatchewan keeps a no-job-offer route open, but it is gated by an Excluded Occupation List and by 2026 sector caps: 15% of nominations for food service and accommodation, 5% for trucking, 5% for retail trade.",
+      "sector_caps_2026": [
+        { "sector": "Food service and accommodation", "share": 0.15, "nominations": 714 },
+        { "sector": "Trucking", "share": 0.05, "nominations": 238 },
+        { "sector": "Retail trade", "share": 0.05, "nominations": 238 }
+      ],
+      "streams": [
+        {
+          "id": "sk_iswl_express_entry",
+          "label": "International Skilled Worker — Saskatchewan Express Entry",
+          "requires_job_offer": false,
+          "express_entry_aligned": true,
+          "teer_eligible": [0, 1, 2, 3],
+          "min_points_sinp_grid": 60,
+          "min_education": "Post-secondary education or training comparable to at least one year of Canadian study.",
+          "occupation_note": "Your occupation must not appear on the SINP Excluded Occupation List, which applies to this sub-category and to Occupations In-Demand. Excluded occupations may still qualify under the Employment Offer sub-category with a registered employer.",
+          "source_url": "https://www.saskatchewan.ca/residents/moving-to-saskatchewan/live-in-saskatchewan/by-immigrating/saskatchewan-immigrant-nominee-program/browse-sinp-programs/applicants-international-skilled-workers/international-skilled-worker-saskatchewan-express-entry"
+        },
+        {
+          "id": "sk_iswl_occupations_in_demand",
+          "label": "International Skilled Worker — Occupations In-Demand",
+          "requires_job_offer": false,
+          "express_entry_aligned": false,
+          "ee_note": "Base stream — leads to a direct PR application rather than 600 CRS points, and does not require a federal Express Entry profile.",
+          "teer_eligible": [0, 1, 2, 3],
+          "min_points_sinp_grid": 60,
+          "occupation_note": "Subject to the same Excluded Occupation List as the Express Entry sub-category.",
+          "source_url": "https://www.saskatchewan.ca/residents/moving-to-saskatchewan/live-in-saskatchewan/by-immigrating/saskatchewan-immigrant-nominee-program/browse-sinp-programs/applicants-international-skilled-workers/international-skilled-worker-occupations-in-demand"
+        },
+        {
+          "id": "sk_iswl_employment_offer",
+          "label": "International Skilled Worker — Employment Offer",
+          "requires_job_offer": true,
+          "express_entry_aligned": false,
+          "teer_eligible": [0, 1, 2, 3],
+          "occupation_note": "The route for occupations excluded from the other two sub-categories. Requires an employer approved through an Employer Position Assessment.",
+          "source_url": "https://www.saskatchewan.ca/residents/moving-to-saskatchewan/live-in-saskatchewan/by-immigrating/saskatchewan-immigrant-nominee-program/browse-sinp-programs/applicants-international-skilled-workers/international-skilled-worker-with-employment-offer"
+        }
+      ]
+    },
+    {
+      "code": "MB",
+      "name": "Manitoba",
+      "program": "Manitoba Provincial Nominee Program (MPNP)",
+      "verification_status": "unverified",
+      "source_url": "https://immigratemanitoba.com/",
+      "streams": []
+    },
+    {
+      "code": "NS",
+      "name": "Nova Scotia",
+      "program": "Nova Scotia Nominee Program (NSNP)",
+      "verification_status": "unverified",
+      "source_url": "https://novascotiaimmigration.com/",
+      "streams": []
+    },
+    {
+      "code": "NB",
+      "name": "New Brunswick",
+      "program": "New Brunswick Provincial Nominee Program (NBPNP)",
+      "verification_status": "unverified",
+      "source_url": "https://www.welcomenb.ca/",
+      "streams": []
+    },
+    {
+      "code": "PE",
+      "name": "Prince Edward Island",
+      "program": "PEI Provincial Nominee Program (PEI PNP)",
+      "verification_status": "unverified",
+      "source_url": "https://www.princeedwardisland.ca/en/topic/office-of-immigration",
+      "streams": []
+    },
+    {
+      "code": "NL",
+      "name": "Newfoundland and Labrador",
+      "program": "Newfoundland and Labrador Provincial Nominee Program (NLPNP)",
+      "verification_status": "unverified",
+      "source_url": "https://www.gov.nl.ca/immigration/",
+      "streams": []
+    },
+    {
+      "code": "YT",
+      "name": "Yukon",
+      "program": "Yukon Nominee Program (YNP)",
+      "verification_status": "unverified",
+      "source_url": "https://yukon.ca/en/immigrate-yukon",
+      "streams": []
+    },
+    {
+      "code": "NT",
+      "name": "Northwest Territories",
+      "program": "Northwest Territories Nominee Program (NTNP)",
+      "verification_status": "unverified",
+      "source_url": "https://www.iti.gov.nt.ca/en/services/nominee-program",
+      "streams": []
+    }
+  ]
+}
